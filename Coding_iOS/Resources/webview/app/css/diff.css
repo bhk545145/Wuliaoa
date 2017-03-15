@@ -1,0 +1,105 @@
+* {
+  box-sizing:border-box;
+}
+html {
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+  font: 1rem/1.42 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+}
+.diff {
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+}
+.diff .image-add {
+  background-color:  #eaffea;
+}
+.diff .image-delete {
+  background-color:  #ffecec;
+}
+.diff > table {
+  width: 100%;
+  background-color: #fff;
+  border-collapse: separate;
+  tab-size: 8;
+  border-spacing: 0px;
+}
+.diff .diff-line-num {
+  width: 24px;
+  padding: 0 5px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  line-height: 18px;
+  color: rgba(0,0,0,0.3);
+  vertical-align: top;
+  text-align: right;
+  border-right: 1px solid #eee;
+  font-size: 12px;
+  cursor: pointer;
+}
+.diff .diff-line-num:before {
+  content: attr(line-data);
+}
+.diff .diff-line-num .gi {
+  color: rgba(0,0,0,0.3);
+  border-color: #c1e9c1;
+}
+.diff .diff-line-num .gd {
+  color: rgba(0,0,0,0.3);
+  border-color: #f1c0c0;
+}
+.diff .diff-line-code {
+  width: 100%;
+  padding: 0 10px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.diff td.diff-line-code.gi:before {
+  content: "+";
+}
+.diff td.diff-line-code.gd:before {
+  content: "-";
+}
+.diff td.diff-line-code.ge:before {
+  content: "\00a0";
+}
+.diff pre {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-family: Consolas, Menlo, "Liberation Mono", Courier, monospace !important;
+  font-size: 12px;
+}
+.diff .gi {
+  color: #000;
+  background: #eaffea;
+  border-color: #c1e9c1;
+}
+.diff .gd {
+  color: #000;
+  background-color: #ffecec;
+  border-color: #f1c0c0;
+}
+.diff .gc {
+  color: #999;
+  background: #eaf2f5;
+}
+.diff .header {
+  font-family: '微软雅黑', 'Helvetica Neue', sans-serif, SimHei;
+}
+.diff .header .diff-header > a {
+  display: none;
+}
