@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FF4F9431CD7FDFF5F8EB5708563D3737EC92EE33",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "FF4F9431CD7FDFF5F8EB5708563D3737EC92EE33" : 9223372036854775807,
+    "C22F6FD53B72929060FFDE157C06984F59166B6D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "304B168E-99C3-4988-AAFB-6A1514FA20C4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "FF4F9431CD7FDFF5F8EB5708563D3737EC92EE33" : "Wuliaoa\/",
+    "C22F6FD53B72929060FFDE157C06984F59166B6D" : "Wuliaoa-iOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ShoppingGuide",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ShoppingGuide.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/smartcong\/Wuliaoa-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C22F6FD53B72929060FFDE157C06984F59166B6D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bhk545145\/Wuliaoa.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FF4F9431CD7FDFF5F8EB5708563D3737EC92EE33"
+    }
+  ]
+}

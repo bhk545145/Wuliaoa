@@ -7,12 +7,18 @@
 //
 
 #import "LYChannelController.h"
-#import "LYDetailController.h"
+#import "IWHomeDetailTableViewController.h"
 #import "LYNetworkTool.h"
 #import "LYItem.h"
 #import "MJExtension.h"
 #import "LYItemCell.h"
 #import "MJRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "IWStatus.h"
+#import "IWStatusFrame.h"
+#import "MJExtension.h"
+#import "IWStatusCell.h"
+#import "IWPhoto.h"
 
 static NSString * const HomeCell = @"HomeCell";
 
@@ -23,14 +29,18 @@ static NSString * const HomeCell = @"HomeCell";
  */
 @property (nonatomic, copy) NSString *next_url;
 
-/**
- *  item数组
- */
-@property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) NSMutableArray *statusFrames;
 
 @end
 
 @implementation LYChannelController
+- (NSMutableArray *)statusFrames
+{
+    if (_statusFrames == nil) {
+        _statusFrames = [NSMutableArray array];
+    }
+    return _statusFrames;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,17 +81,36 @@ static NSString * const HomeCell = @"HomeCell";
     
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:urlString parameters:nil success:^(id  _Nullable responseObject) {
         
-        NSArray *dictArr = responseObject[@"data"][@"items"];
-        
-        NSMutableArray *items = [LYItem mj_objectArrayWithKeyValuesArray:dictArr];
-        if(type == 0) { // 下拉刷新
-            weakSelf.items = items;
-        } else  {   // 上拉加载
-            [weakSelf.items addObjectsFromArray:items];
+        // Tell MJExtension what type model will be contained in IWPhoto.
+        [IWStatus mj_setupObjectClassInArray:^NSDictionary *{
+            return @{@"images" : [IWPhoto class]};
+        }];
+        // 将字典数组转为模型数组(里面放的就是IWStatus模型)
+        NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+        // 创建frame模型对象
+        NSMutableArray *statusFrameArray = [NSMutableArray array];
+        for (IWStatus *status in statusArray) {
+            IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
+            // 传递微博模型数据
+            statusFrame.status = status;
+            [statusFrameArray addObject:statusFrame];
         }
-    
-        weakSelf.next_url = responseObject[@"data"][@"paging"][@"next_url"];;
-        
+
+        if(type == 0) { // 下拉刷新
+            // 将最新的数据追加到旧数据的最前面
+            // 旧数据: self.statusFrames
+            // 新数据: statusFrameArray
+            NSMutableArray *tempArray = [NSMutableArray array];
+            // 添加statusFrameArray的所有元素 添加到 tempArray中
+            [tempArray addObjectsFromArray:statusFrameArray];
+            // 添加self.statusFrames的所有元素 添加到 tempArray中
+            [tempArray addObjectsFromArray:self.statusFrames];
+            weakSelf.statusFrames = tempArray;
+        } else  {   // 上拉加载
+            // 添加新数据到旧数据的后面
+            [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
+        }
+
         // 刷新表格
         [weakSelf.tableView reloadData];
         
@@ -98,7 +127,9 @@ static NSString * const HomeCell = @"HomeCell";
  */
 - (void)loadNewInfo {
     // 拼接参数
-    NSString *urlString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@", self.channesID];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"count"] = @10;
+    NSString *urlString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@", params[@"count"]];
     
     [self loadItemInfo:urlString withType:0];
 }
@@ -119,42 +150,51 @@ static NSString * const HomeCell = @"HomeCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.items.count;
+    return self.statusFrames.count;
 }
 
 // 返回对应的单元格视图
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    LYItemCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeCell];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;    // 取消选中样式
-    LYItem *item = self.items[indexPath.row];
-    cell.item = item;   // 设置数据源
+    // 1.创建cell
+    IWStatusCell *cell = [IWStatusCell cellWithTableView:tableView];
+    
+    // 2.传递frame模型
+    cell.statusFrame = self.statusFrames[indexPath.row];
     return cell;
 }
 
-#pragma mark - Table view delgate
-
-// 单元格的点击事件处理
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    LYDetailController *detailVc = [[LYDetailController alloc] init];
-    detailVc.item = self.items[indexPath.row];
-    [self.navigationController pushViewController:detailVc animated:YES];
-    
+#pragma mark - 代理方法
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    IWStatusFrame *statusFrame = self.statusFrames[indexPath.row];
+    return statusFrame.cellHeight;
 }
 
-
-#pragma mark - lazy load
-
-- (NSMutableArray *)items {
-    
-    if(!_items) {
-        
-        _items = [NSMutableArray array];
-        
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    static UIAccelerationValue _oldOffset;
+    if (_oldOffset > -64) {
+        if (scrollView.contentOffset.y > _oldOffset) {//如果当前位移大于缓存位移，说明scrollView向上滑动
+            [UIView animateWithDuration:1.5 animations:^{
+                self.tabBarController.tabBar.hidden = YES;
+            }];
+            
+        }else{
+            [UIView animateWithDuration:1.5 animations:^{
+                self.tabBarController.tabBar.hidden = NO;
+            }];
+        }
     }
     
-    return _items;
+    _oldOffset = scrollView.contentOffset.y;//将当前位移变成缓存位移
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    IWHomeDetailTableViewController *detailView = [[IWHomeDetailTableViewController alloc]init];
+    IWStatusFrame *statusFrame = self.statusFrames[indexPath.row];
+    detailView.statusFrame = statusFrame;
+    [self.navigationController pushViewController:detailView animated:YES];
+}
+
 
 @end

@@ -12,7 +12,9 @@
 #import "UIView+MRExtension.h"
 #import "UIImage+MRExtension.h"
 #import "UIBarButtonItem+MRExtension.h"
+#import "UIImage+MJ.h"
 #import "MRConst.h"
+#import "IWCommon.h"
 
 #ifdef DEBUG    // 测试阶段
 
