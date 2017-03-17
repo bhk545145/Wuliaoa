@@ -129,20 +129,36 @@ static NSString * const HomeCell = @"HomeCell";
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"count"] = @10;
-    NSString *urlString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@", params[@"count"]];
+    static NSString *URLString;
+    if (self.statusFrames.count) {
+        IWStatusFrame *statusFrame = self.statusFrames[0];
+        // 加载ID比since_id大的微博
+        params[@"sinceid"] = statusFrame.status.id;
+        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@",params[@"sinceid"]];
+    }else{
+        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
+    }
     
-    [self loadItemInfo:urlString withType:0];
+    [self loadItemInfo:URLString withType:0];
 }
 
 /**
  *  上拉加载
  */
 - (void)loadMoreInfo {
-    if(self.next_url != nil && ![self.next_url isEqual:[NSNull null]]) {
-        [self loadItemInfo:self.next_url withType:1];
-    }else {
-        MRLog(@"null");
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"count"] = @5;
+    static NSString *URLString;
+    if (self.statusFrames.count) {
+        IWStatusFrame *statusFrame = [self.statusFrames lastObject];
+        // 加载ID <= max_id的微博
+        long long maxId = [statusFrame.status.id longLongValue];
+        params[@"maxId"] = @(maxId);
+        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@",params[@"count"],params[@"maxId"]];
+    }else{
+        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
     }
+    [self loadItemInfo:URLString withType:1];
 }
 
 
