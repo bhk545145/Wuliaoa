@@ -24,6 +24,8 @@
 #import "LYEditInfoViewController.h"
 #import "LYDetailController.h"
 #import "LYProductDetailController.h"
+#import "IWOAuthViewController.h"
+#import "IWAccountTool.h"
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>
 
@@ -189,7 +191,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
      __weak typeof(self) weakSelf = self;
     
     // 判断是否登录
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    IWAccount *account = [IWAccountTool account];
+    if(account) {
         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction *editAc = [UIAlertAction actionWithTitle:@"编辑资料" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -205,6 +208,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
             weakSelf.type = 0;
             [weakSelf.headerView changeStatus];
             [weakSelf inspectStatus];
+            [IWAccountTool deleteFiel];
         }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alertVc dismissViewControllerAnimated:YES completion:nil];
@@ -253,7 +257,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 
 // 根据登录状态判断是否显示footerView
 - (void)inspectStatus {
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    IWAccount *account = [IWAccountTool account];
+    if(account) {
         // 刷新收藏
         [self loadLikeLoad];
         self.tableView.tableFooterView = nil;

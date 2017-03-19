@@ -10,6 +10,9 @@
 #import "LYNetworkTool.h"
 #import "MJExtension.h"
 #import "LYUser.h"
+#import "IWAccount.h"
+#import "IWAccountTool.h"
+#import "IWWeiboTool.h"
 #import "SVProgressHUD.h"
 
 @interface LYLoginViewController ()<UITextFieldDelegate>
@@ -47,28 +50,24 @@
     __weak typeof(self) weakSelf = self;
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"mobile"] = self.phoneNum.text;
+    params[@"phone"] = self.phoneNum.text;
     params[@"password"] = self.pwd.text;
+    params[@"device"] = [IWWeiboTool iphoneType];
     
-    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:@"http://api.dantangapp.com/v1/account/signin" parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
         
-        NSString *status = responseObject[@"message"];
-        if([status isEqualToString:@"OK"]) {
-            
+        IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"]];
+        int isLongin = [responseObject[@"status"] intValue];
+        if (isLongin == 1) {
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-            LYUser *user = [LYUser mj_objectWithKeyValues:responseObject[@"data"]];
-            
-            if(weakSelf.block) {
-                weakSelf.block(user);
-            }
-            
+            [IWAccountTool saveAccount:account];
+            [IWWeiboTool chooseTabBarController];
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"登录失败"];
+        }
             // 退出登录界面
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
-            
-        }else {
-            
-            [SVProgressHUD showErrorWithStatus:@"登录失败"];
-        }
+
     } failure:^(NSError * _Nullable error) {
         
          [SVProgressHUD showErrorWithStatus:@"登录失败"];

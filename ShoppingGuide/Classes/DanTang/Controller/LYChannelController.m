@@ -50,6 +50,7 @@ static NSString * const HomeCell = @"HomeCell";
     
     // 刷新
     [self.tableView.mj_header beginRefreshing];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNewInfo) name:PROBE_DEVICES_CHANGED object:nil];
 }
 
 /**
@@ -65,11 +66,6 @@ static NSString * const HomeCell = @"HomeCell";
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     // 给表格视图添加上拉加载
     self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInfo)];
-    
-    // 注册单元格
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LYItemCell class]) bundle:nil] forCellReuseIdentifier:HomeCell];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight = LYHomeCellHeight;
 }
 
 /**

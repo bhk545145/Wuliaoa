@@ -14,6 +14,7 @@
 #import "IWAccountTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "IWWeiboTool.h"
+#import "LYNetworkTool.h"
 //选择相册
 #import "LHGroupViewController.h"
 #import "LHCollectionViewController.h"
@@ -129,27 +130,23 @@
     }
     
     // 关闭
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)sendStatusWithoutImage
 {
-    // 1.创建请求管理对象
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    // 2.封装请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
     params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
-    // 3.发送请求
-    [mgr POST:IWArticleURL parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:IWArticleURL parameters:params success:^(id  _Nullable responseObject) {
         [MBProgressHUD showSuccess:@"发送成功"];
         //通知首页刷新
         [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+    } failure:^(NSError * _Nullable error) {
         [MBProgressHUD showSuccess:@"发送失败"];
     }];
 }
@@ -187,7 +184,8 @@
 
 - (void)cancel
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - toolbar代理

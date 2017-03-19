@@ -8,6 +8,7 @@
 
 #import "LYDanTangController.h"
 #import "LYSearchController.h"
+#import "IWComposeViewController.h"
 #import "LYChannelController.h"
 #import "LYNetworkTool.h"
 #import "LYChannels.h"
@@ -53,7 +54,8 @@
  */
 - (void)setNav {
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Feed_SearchBtn_18x18_"] style:UIBarButtonItemStylePlain target:self action:@selector(search)];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Feed_SearchBtn_18x18_"] style:UIBarButtonItemStylePlain target:self action:@selector(search)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
@@ -196,9 +198,11 @@
 /**
  *  搜索点击
  */
-- (void)search {
-    LYSearchController *searchVc = [[LYSearchController alloc] init];
-    [self.navigationController pushViewController:searchVc animated:YES];
+- (void)add {
+//    LYSearchController *searchVc = [[LYSearchController alloc] init];
+//    [self.navigationController pushViewController:searchVc animated:YES];
+    IWComposeViewController *compose = [[IWComposeViewController alloc] init];
+    [self.navigationController pushViewController:compose animated:YES];
 }
 
 #pragma mark - <UIScrollViewDelegate>
