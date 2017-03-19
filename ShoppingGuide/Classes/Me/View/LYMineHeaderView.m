@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "LYNetworkTool.h"
 #import "LYUser.h"
+#import "IWAccount.h"
+#import "IWAccountTool.h"
 
 @interface LYMineHeaderView ()
 
@@ -49,22 +51,14 @@
 
 // 根据登录状态修改用户信息
 - (void)changeStatus {
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
-        
-        NSData *image_data = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatar_image"];
-        if(image_data == nil) {
-        NSString *imageUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatar_url"];
-            [self.iconButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
-        }else {
-            [self.iconButton setBackgroundImage:[UIImage imageWithData:image_data] forState:UIControlStateNormal];
-        }
-        
-        NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:@"nickname"];
+    IWAccount *account = [IWAccountTool account];
+    if(account) {
+        NSString *imageUrl = account.avatar;
+        [self.iconButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
+        NSString *name = account.nickname;
         self.nameLabel.text = name;
     }else {
-        
         [self.iconButton setBackgroundImage:[UIImage imageNamed:@"Me_AvatarPlaceholder_75x75_"] forState:UIControlStateNormal];
-        
         self.nameLabel.text = @"登录";
     }
 }

@@ -38,13 +38,7 @@
         
         LYLoginViewController *loginVc = [[LYLoginViewController alloc] init];
         loginVc.block = ^(LYUser *user) {
-            
-            // 保存登录状态
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.avatar_url forKey:@"avatar_url"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:@"nickname"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
+        
             // 发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
         };

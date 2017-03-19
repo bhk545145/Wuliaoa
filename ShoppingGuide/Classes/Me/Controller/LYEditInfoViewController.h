@@ -10,7 +10,7 @@
 
 @interface LYEditInfoViewController : LYBaseViewController
 
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSString *imageURL;
 
 @property (nonatomic, copy) NSString *name;
 

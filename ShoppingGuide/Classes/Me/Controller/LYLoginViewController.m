@@ -44,6 +44,27 @@
     self.phoneNum.delegate = self;
     self.pwd.delegate = self;
 }
+- (IBAction)codeUp:(UIButton *)sender {
+    [self hidenKeyboard];
+    
+    NSString *userNameStr = self.phoneNum.text;
+    
+    // 3.发送请求
+    NSString *sendLoginCodeURL = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/sms/sendLoginSecurityCode/%@",userNameStr];
+    [[LYNetworkTool sharedNetworkTool]loadDataInfoPost:sendLoginCodeURL parameters:nil success:^(id  _Nullable responseObject) {
+        [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+    } failure:^(NSError * _Nullable error) {
+        [SVProgressHUD showSuccessWithStatus:@"发送失败"];
+    }];
+
+}
+
+//隐藏键盘的方法
+-(void)hidenKeyboard
+{
+    [self.phoneNum resignFirstResponder];
+    [self.pwd resignFirstResponder];
+}
 
 - (IBAction)loginIn:(UIButton *)sender {
     
@@ -51,16 +72,18 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
-    params[@"password"] = self.pwd.text;
+    params[@"code"] = self.pwd.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     
-    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
-        
+    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWCodeLoginURl parameters:params success:^(id  _Nullable responseObject) {
+        IWLog(@"登录信息——————%@",responseObject);
         IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"]];
         int isLongin = [responseObject[@"status"] intValue];
         if (isLongin == 1) {
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
             [IWAccountTool saveAccount:account];
+            // 发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
             [IWWeiboTool chooseTabBarController];
         }else{
             [SVProgressHUD showSuccessWithStatus:@"登录失败"];

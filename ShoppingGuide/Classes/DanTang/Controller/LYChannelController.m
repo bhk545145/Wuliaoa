@@ -122,6 +122,7 @@ static NSString * const HomeCell = @"HomeCell";
  *  下拉刷新
  */
 - (void)loadNewInfo {
+    
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"count"] = @10;
@@ -130,9 +131,23 @@ static NSString * const HomeCell = @"HomeCell";
         IWStatusFrame *statusFrame = self.statusFrames[0];
         // 加载ID比since_id大的微博
         params[@"sinceid"] = statusFrame.status.id;
-        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@",params[@"sinceid"]];
+        if (self.channesID == 1) {
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@",params[@"sinceid"]];
+        }else if(self.channesID == 2){
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@&type=PICTURE",params[@"sinceid"]];
+        }else{
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@&type=JOKE",params[@"sinceid"]];
+        }
+        
     }else{
-        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
+        if (self.channesID == 1) {
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
+        }else if(self.channesID == 2){
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?type=PICTURE",params[@"count"]];
+        }else{
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?type=JOKE",params[@"count"]];
+        }
+        
     }
     
     [self loadItemInfo:URLString withType:0];
@@ -150,9 +165,16 @@ static NSString * const HomeCell = @"HomeCell";
         // 加载ID <= max_id的微博
         long long maxId = [statusFrame.status.id longLongValue];
         params[@"maxId"] = @(maxId);
-        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@",params[@"count"],params[@"maxId"]];
+        
+        if (self.channesID == 1) {
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@",params[@"count"],params[@"maxId"]];
+        }else if(self.channesID == 2){
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@&type=PICTURE",params[@"count"],params[@"maxId"]];
+        }else{
+            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@&type=JOKE",params[@"count"],params[@"maxId"]];
+        }
     }else{
-        URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
+        
     }
     [self loadItemInfo:URLString withType:1];
 }

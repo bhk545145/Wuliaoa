@@ -24,8 +24,9 @@
 #import "LYEditInfoViewController.h"
 #import "LYDetailController.h"
 #import "LYProductDetailController.h"
-#import "IWOAuthViewController.h"
 #import "IWAccountTool.h"
+#import "IWAccount.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>
 
@@ -199,16 +200,14 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
             [weakSelf editInfo];
         }];
         UIAlertAction *loginOut = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            // 改变登录状态
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             // 清空数据
+            [IWAccountTool deleteFiel];
             weakSelf.products = nil;
             weakSelf.themes = nil;
             weakSelf.type = 0;
             [weakSelf.headerView changeStatus];
             [weakSelf inspectStatus];
-            [IWAccountTool deleteFiel];
+            
         }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alertVc dismissViewControllerAnimated:YES completion:nil];
@@ -220,15 +219,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     }else {
         LYLoginViewController *loginVc = [[LYLoginViewController alloc] init];
         loginVc.block = ^(LYUser *user) {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.avatar_url]]];
-            [weakSelf.headerView.iconButton setBackgroundImage:image forState:UIControlStateNormal];
-            weakSelf.headerView.nameLabel.text = user.nickname;
-           
-            // 保存登录状态
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.avatar_url forKey:@"avatar_url"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:@"nickname"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+
+
             // 登录成功重新请求数据以及刷新视图
             [weakSelf loadLikeLoad];
             [weakSelf inspectStatus];
@@ -242,15 +234,10 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 // 编辑资料
 - (void)editInfo {
     LYEditInfoViewController *editVc = [[LYEditInfoViewController alloc] init];
-    NSData *image_data = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatar_image"];
-    if(image_data == nil) {
-        NSString *image_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatar_url"];
-        editVc.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image_url]]];
-    }else {
-        editVc.image = [UIImage imageWithData:image_data];
-    }
-    NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:@"nickname"];
-       editVc.name = name;
+    IWAccount *account = [IWAccountTool account];
+    editVc.imageURL = account.avatar;
+    NSString *name = account.nickname;
+    editVc.name = name;
     MRNavigationController *nav = [[MRNavigationController alloc] initWithRootViewController:editVc];
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
@@ -294,13 +281,6 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     
     // 重新请求数据
     [self loadLikeLoad];
-//    NSDictionary *info = [notif userInfo];
-//    NSString *type = info[@"type"];
-//    if([type isEqualToString:@"like"]) {
-//        
-//    }else {
-//        
-//    }
 }
 
 // 商品点赞通知回调

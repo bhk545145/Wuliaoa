@@ -31,6 +31,13 @@
 
         self.nickname = [decoder decodeObjectForKey:@"nickname"];
         self.id = [decoder decodeObjectForKey:@"id"];
+        self.phone = [decoder decodeObjectForKey:@"phone"];
+        self.email = [decoder decodeObjectForKey:@"email"];
+        self.password = [decoder decodeObjectForKey:@"password"];
+        self.sex = [decoder decodeObjectForKey:@"sex"];
+        self.avatar = [decoder decodeObjectForKey:@"avatar"];
+        self.type = [decoder decodeObjectForKey:@"type"];
+        self.status = [decoder decodeObjectForKey:@"status"];
     }
     return self;
 }
@@ -42,6 +49,13 @@
 {
     [encoder encodeObject:self.nickname forKey:@"nickname"];
     [encoder encodeObject:self.id forKey:@"id"];
+    [encoder encodeObject:self.phone forKey:@"phone"];
+    [encoder encodeObject:self.email forKey:@"email"];
+    [encoder encodeObject:self.password forKey:@"password"];
+    [encoder encodeObject:self.sex forKey:@"sex"];
+    [encoder encodeObject:self.avatar forKey:@"avatar"];
+    [encoder encodeObject:self.type forKey:@"type"];
+    [encoder encodeObject:self.status forKey:@"status"];
 
 }
 @end

@@ -35,7 +35,7 @@
     
     [self setNav];  // 设置导航栏
     self.nickName.text = self.name;
-    self.iconImage.image = self.image;
+    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:self.imageURL]];
     UITapGestureRecognizer *tagGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectIconImage)];
     self.iconImage.userInteractionEnabled = YES;
     [self.iconImage addGestureRecognizer:tagGes];

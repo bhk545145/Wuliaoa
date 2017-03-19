@@ -46,8 +46,8 @@
     if (self) {
         // 1.设置图片
         self.userInteractionEnabled = YES;
-        self.image = [UIImage resizedImageWithName:@"timeline_card_bottom_background"];
-        self.highlightedImage = [UIImage resizedImageWithName:@"timeline_card_bottom_background_highlighted"];
+        self.image = [UIImage resizedImageWithName:@""];
+        self.highlightedImage = [UIImage resizedImageWithName:@""];
         
         // 2.添加按钮
         self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"timeline_icon_retweet" bgImage:@"timeline_card_leftbottom_highlighted"];
@@ -76,7 +76,7 @@
 - (void)setupDivider
 {
     UIImageView *divider = [[UIImageView alloc] init];
-    divider.image = [UIImage imageWithName:@"timeline_card_bottom_line"];
+    divider.image = [UIImage imageWithName:@""];
     [self addSubview:divider];
     [self.dividers addObject:divider];
 }

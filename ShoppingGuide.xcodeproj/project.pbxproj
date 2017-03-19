@@ -20,7 +20,6 @@
 		02A682A81E7BB222008824B2 /* IWTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6829F1E7BB222008824B2 /* IWTitleButton.m */; };
 		02A682A91E7BB222008824B2 /* MessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682A11E7BB222008824B2 /* MessageTextView.m */; };
 		02A682AF1E7BB7DE008824B2 /* IWHomeDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682AE1E7BB7DE008824B2 /* IWHomeDetailTableViewController.m */; };
-		02A682BA1E7BBA27008824B2 /* IWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682B31E7BBA27008824B2 /* IWOAuthViewController.m */; };
 		02A682BB1E7BBA27008824B2 /* IWAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682B61E7BBA27008824B2 /* IWAccount.m */; };
 		02A682BC1E7BBA27008824B2 /* IWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682B91E7BBA27008824B2 /* IWAccountTool.m */; };
 		02A682FB1E7BBA40008824B2 /* LHBrowsingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682C71E7BBA40008824B2 /* LHBrowsingImageView.m */; };
@@ -163,12 +162,10 @@
 		02A682A11E7BB222008824B2 /* MessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTextView.m; sourceTree = "<group>"; };
 		02A682AD1E7BB7DE008824B2 /* IWHomeDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWHomeDetailTableViewController.h; sourceTree = "<group>"; };
 		02A682AE1E7BB7DE008824B2 /* IWHomeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWHomeDetailTableViewController.m; sourceTree = "<group>"; };
-		02A682B21E7BBA27008824B2 /* IWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWOAuthViewController.h; sourceTree = "<group>"; };
-		02A682B31E7BBA27008824B2 /* IWOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWOAuthViewController.m; sourceTree = "<group>"; };
-		02A682B51E7BBA27008824B2 /* IWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWAccount.h; sourceTree = "<group>"; };
-		02A682B61E7BBA27008824B2 /* IWAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWAccount.m; sourceTree = "<group>"; };
-		02A682B81E7BBA27008824B2 /* IWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWAccountTool.h; sourceTree = "<group>"; };
-		02A682B91E7BBA27008824B2 /* IWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWAccountTool.m; sourceTree = "<group>"; };
+		02A682B51E7BBA27008824B2 /* IWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IWAccount.h; path = "../OAuth(授权)/Model/IWAccount.h"; sourceTree = "<group>"; };
+		02A682B61E7BBA27008824B2 /* IWAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IWAccount.m; path = "../OAuth(授权)/Model/IWAccount.m"; sourceTree = "<group>"; };
+		02A682B81E7BBA27008824B2 /* IWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IWAccountTool.h; path = "../OAuth(授权)/Tool/IWAccountTool.h"; sourceTree = "<group>"; };
+		02A682B91E7BBA27008824B2 /* IWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IWAccountTool.m; path = "../OAuth(授权)/Tool/IWAccountTool.m"; sourceTree = "<group>"; };
 		02A682C61E7BBA40008824B2 /* LHBrowsingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHBrowsingImageView.h; sourceTree = "<group>"; };
 		02A682C71E7BBA40008824B2 /* LHBrowsingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHBrowsingImageView.m; sourceTree = "<group>"; };
 		02A682C81E7BBA40008824B2 /* LHCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHCollectionViewController.h; sourceTree = "<group>"; };
@@ -387,43 +384,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02A682B01E7BBA27008824B2 /* OAuth(授权) */ = {
-			isa = PBXGroup;
-			children = (
-				02A682B11E7BBA27008824B2 /* Controller */,
-				02A682B41E7BBA27008824B2 /* Model */,
-				02A682B71E7BBA27008824B2 /* Tool */,
-			);
-			path = "OAuth(授权)";
-			sourceTree = "<group>";
-		};
-		02A682B11E7BBA27008824B2 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				02A682B21E7BBA27008824B2 /* IWOAuthViewController.h */,
-				02A682B31E7BBA27008824B2 /* IWOAuthViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		02A682B41E7BBA27008824B2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				02A682B51E7BBA27008824B2 /* IWAccount.h */,
-				02A682B61E7BBA27008824B2 /* IWAccount.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		02A682B71E7BBA27008824B2 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				02A682B81E7BBA27008824B2 /* IWAccountTool.h */,
-				02A682B91E7BBA27008824B2 /* IWAccountTool.m */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
 		02A682BD1E7BBA40008824B2 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,7 +576,8 @@
 				02A683311E7BBFB7008824B2 /* Controller */,
 				02A683341E7BBFB7008824B2 /* View */,
 			);
-			path = "Compose(发微博)";
+			name = "Compose(发微博)";
+			path = "../Compose(发微博)";
 			sourceTree = "<group>";
 		};
 		02A683311E7BBFB7008824B2 /* Controller */ = {
@@ -694,7 +655,6 @@
 		08FE65DE1D77D25C000DB820 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				02A683301E7BBFB7008824B2 /* Compose(发微博) */,
 				08FE66471D77D6CB000DB820 /* Main */,
 				08FE66761D77D764000DB820 /* 首页 */,
 				08FE66721D77D764000DB820 /* 单品 */,
@@ -902,6 +862,7 @@
 		08FE66761D77D764000DB820 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				02A683301E7BBFB7008824B2 /* Compose(发微博) */,
 				08FE66771D77D764000DB820 /* Controller */,
 				08FE66781D77D764000DB820 /* Model */,
 				08FE66791D77D764000DB820 /* View */,
@@ -979,7 +940,6 @@
 		08FE667A1D77D764000DB820 /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
-				02A682B01E7BBA27008824B2 /* OAuth(授权) */,
 				08FE667B1D77D764000DB820 /* Controller */,
 				08FE667C1D77D764000DB820 /* Model */,
 				08FE667D1D77D764000DB820 /* View */,
@@ -1010,6 +970,8 @@
 		08FE667C1D77D764000DB820 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				02A682B51E7BBA27008824B2 /* IWAccount.h */,
+				02A682B61E7BBA27008824B2 /* IWAccount.m */,
 				08DE72A81D8E8389000D496F /* LYUser.h */,
 				08DE72A91D8E8389000D496F /* LYUser.m */,
 			);
@@ -1019,6 +981,8 @@
 		08FE667D1D77D764000DB820 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				02A682B81E7BBA27008824B2 /* IWAccountTool.h */,
+				02A682B91E7BBA27008824B2 /* IWAccountTool.m */,
 				08F5D2D71D8D427B00EB0BCA /* LYMineHeaderView.h */,
 				08F5D2D81D8D427B00EB0BCA /* LYMineHeaderView.m */,
 				081E88E41D8E4AC400746B38 /* LYMineFooterView.h */,
@@ -1191,7 +1155,6 @@
 				082030051D8845E4004BBA17 /* LYCategoryBottomView.m in Sources */,
 				085590B01D89180900D2876B /* LYCollectionDetailController.m in Sources */,
 				08372CC01D8F9D3600284199 /* LYDetailCollectionViewCell.m in Sources */,
-				02A682BA1E7BBA27008824B2 /* IWOAuthViewController.m in Sources */,
 				0857ADA41D7AA51B007BA264 /* LYNetworkTool.m in Sources */,
 				08DE72AA1D8E8389000D496F /* LYUser.m in Sources */,
 				0857ADB01D7AB5DC007BA264 /* LYChannelController.m in Sources */,

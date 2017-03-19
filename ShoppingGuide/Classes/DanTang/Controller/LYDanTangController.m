@@ -65,19 +65,29 @@
 - (void)loadTitlesViewInfo {
     
     __weak typeof(self)weakSelf = self;
-    // 网络请求地址
-    NSString *url = [NSString stringWithFormat:@"%@%@", BaseAPI, @"v2/channels/preset?gender=1&generation=1"];
-    // 发送网络请求
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:url parameters:nil success:^(id  _Nullable responseObject) {
-        // 将返回的数据转化为对象数组存入当前数组用于设置标题
-        NSArray *dictArray = responseObject[@"data"][@"channels"];
-        weakSelf.channels = [LYChannels mj_objectArrayWithKeyValuesArray:dictArray];
-        // 设置头部标题
-        [weakSelf setUpTitles];
-        // 设置内容视图
-        [weakSelf setContentView];
-        
-    } failure:nil];
+    NSArray *dictArray = @[
+                           @{
+                               @"id":@1,
+                               @"editable":@100,
+                               @"name" : @"推荐"
+                               },
+                           @{
+                               @"id":@2,
+                               @"editable":@101,
+                               @"name" : @"无聊图"
+                               },
+                           @{
+                               @"id":@3,
+                               @"editable":@102,
+                               @"name" : @"段子"
+                               },
+                           
+                           ];
+    weakSelf.channels = [LYChannels mj_objectArrayWithKeyValuesArray:dictArray];
+    // 设置头部标题
+    [weakSelf setUpTitles];
+    // 设置内容视图
+    [weakSelf setContentView];
 }
 
 /**
@@ -196,7 +206,7 @@
 
 
 /**
- *  搜索点击
+ *  发新辣条
  */
 - (void)add {
 //    LYSearchController *searchVc = [[LYSearchController alloc] init];

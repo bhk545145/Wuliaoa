@@ -119,7 +119,7 @@
     self.nameLabel.frame = self.statusFrame.nameLabelF;
     
     // 4.vip
-    if (/*user.mbtype*/1 > 2) {
+    if (/*user.mbtype*//* DISABLES CODE */ (1) > 2) {
         self.vipView.hidden = NO;
         self.vipView.image = [UIImage imageWithName:[NSString stringWithFormat:@"common_icon_membership_level%d", 3/*user.mbrank*/]];
         self.vipView.frame = self.statusFrame.vipViewF;
