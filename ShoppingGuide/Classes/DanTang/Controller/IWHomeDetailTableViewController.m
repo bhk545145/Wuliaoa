@@ -10,6 +10,7 @@
 #import "IWStatus.h"
 #import "IWStatusFrame.h"
 #import "IWStatusCell.h"
+#import "IWCommitCell.h"
 
 #import "LYNetworkTool.h"
 #import "IWAccount.h"
@@ -25,7 +26,7 @@
 
 #define DEBUG_CUSTOM_TYPING_INDICATOR 0
 #define DEBUG_CUSTOM_BOTTOM_VIEW 0
-
+static NSString* commitCell = @"commitCell";
 @interface IWHomeDetailTableViewController (){
     
 }
@@ -63,7 +64,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:UIContentSizeCategoryDidChangeNotification object:nil];
     [self registerClassForTextView:[MessageTextView class]];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IWCommitCell class]) bundle:nil] forCellReuseIdentifier:commitCell];
 
 }
 
@@ -98,9 +99,10 @@
         cell.statusFrame = _statusFrame;
         return cell;
     }else{
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"commitCell"];
+        
+        IWCommitCell *cell = [tableView dequeueReusableCellWithIdentifier:commitCell];
         IWCommit *commit = _commentArray[indexPath.row - 1];
-        cell.textLabel.text = commit.content;
+        cell.commit = commit;
         return cell;
     }
     
@@ -115,7 +117,7 @@
         IWStatusFrame *statusFrame = _statusFrame;
         return statusFrame.cellHeight;
     }else{
-        return 50;
+        return 55;
     }
     
 }
@@ -133,7 +135,8 @@
     NSString *URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/comment/%@",articleId];
 
     [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-        
+        [self getComment];
+        [self.textView resignFirstResponder];
     } failure:^(NSError * _Nullable error) {
         
     }];
@@ -150,12 +153,13 @@
     NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/comment/%@/1/10",articleId];
 
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:params success:^(id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject[@"result"]);
+        IWLog(@"评论————————%@",responseObject[@"result"]);
         _commentArray = [IWCommit mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
         [self.tableView reloadData];
     } failure:^(NSError * _Nullable error) {
         
     }];
 }
+
 
 @end

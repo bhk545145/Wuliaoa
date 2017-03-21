@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		025BA1F41E811E8E0010D7FB /* IWCommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 025BA1F21E811E8E0010D7FB /* IWCommitCell.m */; };
+		025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025BA1F31E811E8E0010D7FB /* IWCommitCell.xib */; };
 		02A6828E1E7BB1EE008824B2 /* IWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682871E7BB1EE008824B2 /* IWPhoto.m */; };
 		02A6828F1E7BB1EE008824B2 /* IWStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682891E7BB1EE008824B2 /* IWStatus.m */; };
 		02A682901E7BB1EE008824B2 /* IWStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6828B1E7BB1EE008824B2 /* IWStatusFrame.m */; };
@@ -137,6 +139,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		025BA1F11E811E8E0010D7FB /* IWCommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWCommitCell.h; sourceTree = "<group>"; };
+		025BA1F21E811E8E0010D7FB /* IWCommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWCommitCell.m; sourceTree = "<group>"; };
+		025BA1F31E811E8E0010D7FB /* IWCommitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IWCommitCell.xib; sourceTree = "<group>"; };
 		02A682861E7BB1EE008824B2 /* IWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWPhoto.h; sourceTree = "<group>"; };
 		02A682871E7BB1EE008824B2 /* IWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWPhoto.m; sourceTree = "<group>"; };
 		02A682881E7BB1EE008824B2 /* IWStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWStatus.h; sourceTree = "<group>"; };
@@ -938,6 +943,9 @@
 				0857ADB61D7AD205007BA264 /* LYItemCell.xib */,
 				080131271D839B54009207F5 /* LYSearchSortView.h */,
 				080131281D839B54009207F5 /* LYSearchSortView.m */,
+				025BA1F11E811E8E0010D7FB /* IWCommitCell.h */,
+				025BA1F21E811E8E0010D7FB /* IWCommitCell.m */,
+				025BA1F31E811E8E0010D7FB /* IWCommitCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1086,6 +1094,7 @@
 				082030021D8840BC004BBA17 /* LYCategoryCollectionCell.xib in Resources */,
 				085590AA1D88F71100D2876B /* LYSeeAllTopicCell.xib in Resources */,
 				08372CC21D8F9D7400284199 /* LYDetailCollectionViewCell.xib in Resources */,
+				025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */,
 				02A6830C1E7BBA40008824B2 /* SVProgressHUD.bundle in Resources */,
 				08DFCD7D1D902AE100DEAF3E /* LYDetailChoiceButtonView.xib in Resources */,
 				0857ADB81D7AD205007BA264 /* LYItemCell.xib in Resources */,
@@ -1175,6 +1184,7 @@
 				08FE666B1D77D6CB000DB820 /* MRConst.m in Sources */,
 				02A682BC1E7BBA27008824B2 /* IWAccountTool.m in Sources */,
 				085590B31D89192400D2876B /* LYCollectionPost.m in Sources */,
+				025BA1F41E811E8E0010D7FB /* IWCommitCell.m in Sources */,
 				08336D621D8DB6EF009C196D /* LYMeSettingController.m in Sources */,
 				08FE66671D77D6CB000DB820 /* MRNavigationController.m in Sources */,
 				08331F981D90366600CE736C /* LYCommentCell.m in Sources */,
