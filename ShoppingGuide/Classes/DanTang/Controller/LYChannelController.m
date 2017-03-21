@@ -102,9 +102,11 @@ static NSString * const HomeCell = @"HomeCell";
             // 添加self.statusFrames的所有元素 添加到 tempArray中
             [tempArray addObjectsFromArray:self.statusFrames];
             weakSelf.statusFrames = tempArray;
-        } else  {   // 上拉加载
+        } else if(type == 1)  {   // 上拉加载
             // 添加新数据到旧数据的后面
             [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
+        }else{
+
         }
 
         // 刷新表格
@@ -138,7 +140,6 @@ static NSString * const HomeCell = @"HomeCell";
         }else{
             URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@&type=JOKE",params[@"sinceid"]];
         }
-        
     }else{
         if (self.channesID == 1) {
             URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
@@ -151,6 +152,8 @@ static NSString * const HomeCell = @"HomeCell";
     }
     
     [self loadItemInfo:URLString withType:0];
+    
+    
 }
 
 /**

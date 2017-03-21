@@ -19,6 +19,7 @@
 #import "IWWeiboTool.h"
 #import "IWCommit.h"
 #import "MJExtension.h"
+#import "IWPhoto.h"
 
 #import "MessageTextView.h"
 
@@ -99,7 +100,6 @@ static NSString* commitCell = @"commitCell";
         cell.statusFrame = _statusFrame;
         return cell;
     }else{
-        
         IWCommitCell *cell = [tableView dequeueReusableCellWithIdentifier:commitCell];
         IWCommit *commit = _commentArray[indexPath.row - 1];
         cell.commit = commit;
@@ -145,21 +145,44 @@ static NSString* commitCell = @"commitCell";
 
 //获取评论
 - (void)getComment{
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.id;
-    params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
     NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/comment/%@/1/10",articleId];
 
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         IWLog(@"评论————————%@",responseObject[@"result"]);
         _commentArray = [IWCommit mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
-        [self.tableView reloadData];
+        [self getarticle];
+        
     } failure:^(NSError * _Nullable error) {
         
     }];
 }
+//根据id获取最新辣条
+- (void)getarticle{
+    NSString *articleId = _statusFrame.status.id;
+    NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/article/%@",articleId];
+    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
+        IWLog(@"最新辣条————————%@",responseObject);
+        // Tell MJExtension what type model will be contained in IWPhoto.
+        [IWStatus mj_setupObjectClassInArray:^NSDictionary *{
+            return @{@"images" : [IWPhoto class]};
+        }];
+        // 将字典数组转为模型数组(里面放的就是IWStatus模型)
+        NSArray *responseObjectArray = [NSArray arrayWithObject:responseObject];
+        NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObjectArray];
+        // 创建frame模型对象
+        for (IWStatus *status in statusArray) {
+            IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
+            // 传递微博模型数据
+            statusFrame.status = status;
+            _statusFrame = statusFrame;
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
 
+}
 
 @end
