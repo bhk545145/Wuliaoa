@@ -50,10 +50,10 @@
         self.highlightedImage = [UIImage resizedImageWithName:@""];
         
         // 2.添加按钮
-        self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"timeline_icon_retweet" bgImage:@"timeline_card_leftbottom_highlighted"];
-        self.commentBtn = [self setupBtnWithTitle:@"评论" image:@"timeline_icon_comment" bgImage:@"timeline_card_middlebottom_highlighted"];
-        self.attitudeBtn = [self setupBtnWithTitle:@"赞" image:@"timeline_icon_unlike" bgImage:@"timeline_card_rightbottom_highlighted"];
-        self.hateBtn = [self setupBtnWithTitle:@"踩" image:@"timeline_icon_unlike" bgImage:@"timeline_card_rightbottom_highlighted"];
+        self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"moreicon_textpage" bgImage:@"timeline_card_leftbottom_highlighted"];
+        self.commentBtn = [self setupBtnWithTitle:@"评论" image:@"commenticon_textpage" bgImage:@"timeline_card_middlebottom_highlighted"];
+        self.attitudeBtn = [self setupBtnWithTitle:@"赞" image:@"digupicon_comment" bgImage:@"digupicon_comment_press"];
+        self.hateBtn = [self setupBtnWithTitle:@"踩" image:@"digdownicon_textpage" bgImage:@"digdownicon_textpage_press"];
         
         // 3.添加分割线
         [self setupDivider];
@@ -97,7 +97,7 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     btn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     btn.adjustsImageWhenHighlighted = NO;
-    [btn setBackgroundImage:[UIImage resizedImageWithName:bgImage] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage resizedImageWithName:bgImage] forState:UIControlStateHighlighted];
     [btn addTarget:self action:@selector(doButton1:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
     

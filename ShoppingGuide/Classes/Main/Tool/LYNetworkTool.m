@@ -94,9 +94,11 @@ static id _instance;
     [mgr POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);
+        [SVProgressHUD showSuccessWithStatus:@"发送失败!"];
     }];
     
     [SVProgressHUD dismiss];
@@ -109,9 +111,11 @@ static id _instance;
     [[AFHTTPSessionManager manager] DELETE:URLString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);
+        [SVProgressHUD showSuccessWithStatus:@"发送失败!"];
     }];
     
     [SVProgressHUD dismiss];

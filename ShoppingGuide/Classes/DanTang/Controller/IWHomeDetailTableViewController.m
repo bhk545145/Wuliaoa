@@ -11,11 +11,13 @@
 #import "IWStatusFrame.h"
 #import "IWStatusCell.h"
 
-#import "AFNetworking.h"
+#import "LYNetworkTool.h"
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "IWWeiboTool.h"
+#import "IWCommit.h"
+#import "MJExtension.h"
 
 #import "MessageTextView.h"
 
@@ -24,8 +26,11 @@
 #define DEBUG_CUSTOM_TYPING_INDICATOR 0
 #define DEBUG_CUSTOM_BOTTOM_VIEW 0
 
-@interface IWHomeDetailTableViewController ()
+@interface IWHomeDetailTableViewController (){
+    
+}
 @property (nonatomic, strong) NSMutableArray *messages;
+@property (nonatomic, strong) NSArray *commentArray;
 @property (nonatomic, strong) UIWindow *pipWindow;
 @end
 
@@ -68,6 +73,7 @@
     [self.rightButton setTitle:@"发送" forState:UIControlStateNormal];
     
     [self.textInputbar.editorTitle setTextColor:[UIColor whiteColor]];
+    [self getComment];
 }
 
 
@@ -79,7 +85,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 1+ _commentArray.count;
 }
 
 
@@ -92,11 +98,9 @@
         cell.statusFrame = _statusFrame;
         return cell;
     }else{
-        // 1.创建cell
-        IWStatusCell *cell = [IWStatusCell cellWithTableView:tableView];
-        
-        // 2.传递frame模型
-//        cell.statusFrame = _statusFrame;
+        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"commitCell"];
+        IWCommit *commit = _commentArray[indexPath.row - 1];
+        cell.textLabel.text = commit.content;
         return cell;
     }
     
@@ -107,8 +111,13 @@
 #pragma mark - 代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    IWStatusFrame *statusFrame = _statusFrame;
-    return statusFrame.cellHeight;
+    if (indexPath.row == 0) {
+        IWStatusFrame *statusFrame = _statusFrame;
+        return statusFrame.cellHeight;
+    }else{
+        return 50;
+    }
+    
 }
 
 
@@ -116,35 +125,37 @@
 - (void)didPressRightButton:(id)sender
 {
     [self.textView refreshFirstResponder];
-    // 1.创建请求管理对象
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-    [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    // 2.封装请求参数
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
     params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
     NSString *URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/comment/%@",articleId];
-    // 3.发送请求
-    [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBProgressHUD showSuccess:@"评论成功"];
-        //通知首页刷新
-        [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBProgressHUD showSuccess:@"评论失败"];
+    } failure:^(NSError * _Nullable error) {
+        
     }];
-    
-    
     [super didPressRightButton:sender];
 }
 
 //获取评论
+- (void)getComment{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    IWAccount *account = [IWAccountTool account];
+    params[@"userId"] = account.id;
+    params[@"content"] = self.textView.text;
+    NSString *articleId = _statusFrame.status.id;
+    NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/comment/%@/1/10",articleId];
 
+    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:params success:^(id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject[@"result"]);
+        _commentArray = [IWCommit mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        [self.tableView reloadData];
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
 
 @end
