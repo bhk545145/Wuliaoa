@@ -16,9 +16,11 @@
 #import "UIImageView+WebCache.h"
 #import "IWStatus.h"
 #import "IWStatusFrame.h"
+#import "IWStatusToolbar.h"
 #import "MJExtension.h"
 #import "IWStatusCell.h"
 #import "IWPhoto.h"
+
 
 static NSString * const HomeCell = @"HomeCell";
 
@@ -51,6 +53,10 @@ static NSString * const HomeCell = @"HomeCell";
     // 刷新
     [self.tableView.mj_header beginRefreshing];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNewInfo) name:PROBE_DEVICES_CHANGED object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [self.tableView.mj_header beginRefreshing];
 }
 
 /**
@@ -105,8 +111,24 @@ static NSString * const HomeCell = @"HomeCell";
         } else if(type == 1)  {   // 上拉加载
             // 添加新数据到旧数据的后面
             [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
-        }else{
-
+        }else{      //刷新旧数据
+            int i;
+            int x;
+            NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.statusFrames];
+            for (x=0; x<statusFrameArray.count; x++) {
+                IWStatusFrame *info = [statusFrameArray objectAtIndex:x];
+                for (i=0; i<array.count; i++)
+                {
+                    IWStatusFrame *tmp = [array objectAtIndex:i];
+                    if ([tmp.status.id isEqualToString:info.status.id])
+                    {
+                        [array replaceObjectAtIndex:i withObject:info];
+                        break;
+                    }
+                }
+            }
+            [self.statusFrames removeAllObjects];
+            [self.statusFrames addObjectsFromArray:array];
         }
 
         // 刷新表格
@@ -129,29 +151,35 @@ static NSString * const HomeCell = @"HomeCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"count"] = @10;
     static NSString *URLString;
+    static NSString *OldURLString;
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = self.statusFrames[0];
         // 加载ID比since_id大的微博
         params[@"sinceid"] = statusFrame.status.id;
         if (self.channesID == 1) {
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@",params[@"sinceid"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100",IWArticleURL];
         }else if(self.channesID == 2){
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@&type=PICTURE",params[@"sinceid"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=PICTURE",IWArticleURL,params[@"sinceid"]];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE",IWArticleURL];
         }else{
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/100?sinceId=%@&type=JOKE",params[@"sinceid"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=JOKE",IWArticleURL,params[@"sinceid"]];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE",IWArticleURL];
         }
+         [self loadItemInfo:OldURLString withType:2];
     }else{
         if (self.channesID == 1) {
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@",params[@"count"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@",IWArticleURL,params[@"count"]];
         }else if(self.channesID == 2){
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?type=PICTURE",params[@"count"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=PICTURE",IWArticleURL,params[@"count"]];
         }else{
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?type=JOKE",params[@"count"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=JOKE",IWArticleURL,params[@"count"]];
         }
-        
     }
-    
     [self loadItemInfo:URLString withType:0];
+    
+    
+   
     
     
 }
@@ -170,11 +198,11 @@ static NSString * const HomeCell = @"HomeCell";
         params[@"maxId"] = @(maxId);
         
         if (self.channesID == 1) {
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@",params[@"count"],params[@"maxId"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@",IWArticleURL,params[@"count"],params[@"maxId"]];
         }else if(self.channesID == 2){
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@&type=PICTURE",params[@"count"],params[@"maxId"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=PICTURE",IWArticleURL,params[@"count"],params[@"maxId"]];
         }else{
-            URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/article/timeline/1/%@?maxId=%@&type=JOKE",params[@"count"],params[@"maxId"]];
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=JOKE",IWArticleURL,params[@"count"],params[@"maxId"]];
         }
     }else{
         
@@ -198,6 +226,9 @@ static NSString * const HomeCell = @"HomeCell";
     
     // 2.传递frame模型
     cell.statusFrame = self.statusFrames[indexPath.row];
+    cell.statusToolbar.btnblock = ^(){
+        [self loadNewInfo];
+    };
     return cell;
 }
 

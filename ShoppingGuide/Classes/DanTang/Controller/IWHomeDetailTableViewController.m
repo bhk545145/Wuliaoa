@@ -11,6 +11,7 @@
 #import "IWStatusFrame.h"
 #import "IWStatusCell.h"
 #import "IWCommitCell.h"
+#import "IWStatusToolbar.h"
 
 #import "LYNetworkTool.h"
 #import "IWAccount.h"
@@ -98,6 +99,9 @@ static NSString* commitCell = @"commitCell";
         
         // 2.传递frame模型
         cell.statusFrame = _statusFrame;
+        cell.statusToolbar.btnblock = ^(){
+            [self getComment];
+        };
         return cell;
     }else{
         IWCommitCell *cell = [tableView dequeueReusableCellWithIdentifier:commitCell];
@@ -132,7 +136,7 @@ static NSString* commitCell = @"commitCell";
     params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
-    NSString *URLString = [NSString stringWithFormat:@"http://latiao.izanpin.com/api/comment/%@",articleId];
+    NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@",IWAPPURL,articleId];
 
     [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
         [self getComment];
@@ -146,7 +150,7 @@ static NSString* commitCell = @"commitCell";
 //获取评论
 - (void)getComment{
     NSString *articleId = _statusFrame.status.id;
-    NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/comment/%@/1/10",articleId];
+    NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@/1/10",IWAPPURL,articleId];
 
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         IWLog(@"评论————————%@",responseObject[@"result"]);
@@ -160,7 +164,7 @@ static NSString* commitCell = @"commitCell";
 //根据id获取最新辣条
 - (void)getarticle{
     NSString *articleId = _statusFrame.status.id;
-    NSString *URLString = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/article/%@",articleId];
+    NSString *URLString = [NSString stringWithFormat:@"%@/%@",IWArticleURL,articleId];
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         IWLog(@"最新辣条————————%@",responseObject);
         // Tell MJExtension what type model will be contained in IWPhoto.

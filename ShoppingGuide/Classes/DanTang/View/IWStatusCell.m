@@ -19,7 +19,7 @@
 @property (nonatomic, weak) IWStatusTopView *topView;
 
 /** 微博的工具条 */
-@property (nonatomic, weak) IWStatusToolbar *statusToolbar;
+//@property (nonatomic, weak) IWStatusToolbar *statusToolbar;
 @end
 
 @implementation IWStatusCell

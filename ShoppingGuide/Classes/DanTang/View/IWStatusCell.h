@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class IWStatusFrame;
+@class IWStatusToolbar;
 @interface IWStatusCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @property (nonatomic, strong) IWStatusFrame *statusFrame;
+/** 微博的工具条 */
+@property (nonatomic, weak) IWStatusToolbar *statusToolbar;
 @end

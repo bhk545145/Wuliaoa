@@ -1,10 +1,7 @@
-// 0.账号相关
-#define IWAppKey @"1359433872"
-#define IWAppSecret @"37c372aa97a9329fc561947151c1bd38"
-#define IWRedirectURI @"http://ios.itcast.cn"
-#define IWLoginURL [NSString stringWithFormat:@"https://api.weibo.com/oauth2/authorize?client_id=%@&redirect_uri=%@", IWAppKey, IWRedirectURI]
-
-#define IWAPPURL @"http://latiao.izanpin.com/api/"
+/**
+ * API接口
+ */
+#define IWAPPURL @"http://latiao.izanpin.com/api"
 #define IWArticleURL @"http://latiao.izanpin.com/api/article"
 #define IWLoginURl @"http://latiao.izanpin.com/api/user/login"
 #define IWCodeLoginURl @"http://latiao.izanpin.com/api/user/smsLogin"

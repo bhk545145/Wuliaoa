@@ -195,18 +195,22 @@
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
     [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSString *URLString = @"http://latiao.izanpin.com/api/article/";
+    NSString *URLString = [NSString stringWithFormat:@"%@/",IWArticleURL];
     NSString *URLtail;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
     switch (sender.tag) {
-        case 100:
+        case 100:{
             IWLog(@"转发");
+            _btnblock();
             break;
-        case 101:
+        }
+        case 101:{
             IWLog(@"评论");
+            _btnblock();
             break;
-        case 102:
+        }
+        case 102:{
             IWLog(@"赞");
             URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
@@ -214,11 +218,13 @@
             [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
+                _btnblock();
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 IWLog(@"%@",error);
             }];
             break;
-        case 103:
+        }
+        case 103:{
             IWLog(@"踩");
             URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
@@ -227,15 +233,18 @@
             [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {
                 IWLog(@"%@",responseObject);
+                _btnblock();
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 IWLog(@"%@",error);
             }];
             break;
-        default:
+        }
+        default:{
             break;
+        }
     }
+    _btnblock();
 }
-
 
 
 
