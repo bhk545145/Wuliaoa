@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k4n-u5-iRE">
@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-03-22 18:23:50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIz-if-T2a">
-                        <rect key="frame" x="122" y="8" width="104" height="12"/>
+                        <rect key="frame" x="208" y="8" width="104" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -55,11 +55,11 @@
                     <constraint firstItem="k4n-u5-iRE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="CPj-pR-917"/>
                     <constraint firstItem="u3h-7Z-Qp5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="EbW-0y-3rx"/>
                     <constraint firstItem="k4n-u5-iRE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="G3i-3g-ohP"/>
-                    <constraint firstItem="UIz-if-T2a" firstAttribute="centerY" secondItem="FFe-BP-ZpW" secondAttribute="centerY" id="H5v-Pf-FUn"/>
-                    <constraint firstItem="UIz-if-T2a" firstAttribute="leading" secondItem="FFe-BP-ZpW" secondAttribute="trailing" constant="8" symbolic="YES" id="JxT-US-OJ1"/>
+                    <constraint firstItem="UIz-if-T2a" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="JPz-Fj-6WL"/>
                     <constraint firstItem="FFe-BP-ZpW" firstAttribute="leading" secondItem="k4n-u5-iRE" secondAttribute="trailing" constant="8" id="QMp-fe-Wa3"/>
                     <constraint firstItem="FFe-BP-ZpW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="i5c-4L-mha"/>
                     <constraint firstItem="u3h-7Z-Qp5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="35" id="rzf-yr-eAm"/>
+                    <constraint firstItem="UIz-if-T2a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="w9R-T1-9Iq"/>
                     <constraint firstAttribute="trailing" secondItem="FFe-BP-ZpW" secondAttribute="trailing" constant="206" id="wzL-F0-XBe"/>
                 </constraints>
             </tableViewCellContentView>
