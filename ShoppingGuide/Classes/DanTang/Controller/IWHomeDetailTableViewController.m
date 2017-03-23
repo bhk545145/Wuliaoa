@@ -121,7 +121,16 @@ static NSString* commitCell = @"commitCell";
         IWStatusFrame *statusFrame = _statusFrame;
         return statusFrame.cellHeight;
     }else{
-        return 55;
+        // 1.取出这行微博的内容
+        IWCommit *commit = _commentArray[indexPath.row - 1];
+        // 2.计算微博内容大小占据的高度
+        NSString *text = commit.content;
+        CGFloat textHeight  = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(250,MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping].height;
+        // sizeWithFont: 根据字体来算text的宽高
+        // constrainedToSize: 限制算出来的文集的宽度和高度 这里限制宽度为250个像素点
+        // lineBreakMode: 换行的模式
+        // 设置cell的高度
+        return  textHeight < 55 ? 55 : textHeight + 5;
     }
     
 }

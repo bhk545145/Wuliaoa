@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatarimage;
 @property (weak, nonatomic) IBOutlet UILabel *userNamelab;
 @property (weak, nonatomic) IBOutlet UILabel *contentlab;
+@property (weak, nonatomic) IBOutlet UILabel *createTime;
 
 
 @property (nonatomic,strong) IWCommit *commit;

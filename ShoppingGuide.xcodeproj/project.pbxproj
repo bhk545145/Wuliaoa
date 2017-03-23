@@ -115,8 +115,6 @@
 		08FE65C91D77D113000DB820 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65C71D77D113000DB820 /* Main.storyboard */; };
 		08FE65CC1D77D113000DB820 /* ShoppingGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08FE65CA1D77D113000DB820 /* ShoppingGuide.xcdatamodeld */; };
 		08FE65D11D77D113000DB820 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65CF1D77D113000DB820 /* LaunchScreen.storyboard */; };
-		08FE65DA1D77D151000DB820 /* 综合课程设计数据接口.md in Sources */ = {isa = PBXBuildFile; fileRef = 08FE65D81D77D151000DB820 /* 综合课程设计数据接口.md */; };
-		08FE65DB1D77D151000DB820 /* 综合课程设计数据接口详细数据.md in Sources */ = {isa = PBXBuildFile; fileRef = 08FE65D91D77D151000DB820 /* 综合课程设计数据接口详细数据.md */; };
 		08FE65DD1D77D1A8000DB820 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65DC1D77D1A8000DB820 /* Assets.xcassets */; };
 		08FE66621D77D6CB000DB820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE66491D77D6CB000DB820 /* AppDelegate.m */; };
 		08FE66631D77D6CB000DB820 /* NSDate+MRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE664C1D77D6CB000DB820 /* NSDate+MRExtension.m */; };
@@ -339,8 +337,6 @@
 		08FE65CB1D77D113000DB820 /* ShoppingGuide.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingGuide.xcdatamodel; sourceTree = "<group>"; };
 		08FE65D01D77D113000DB820 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08FE65D21D77D113000DB820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08FE65D81D77D151000DB820 /* 综合课程设计数据接口.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "综合课程设计数据接口.md"; sourceTree = "<group>"; };
-		08FE65D91D77D151000DB820 /* 综合课程设计数据接口详细数据.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "综合课程设计数据接口详细数据.md"; sourceTree = "<group>"; };
 		08FE65DC1D77D1A8000DB820 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08FE66481D77D6CB000DB820 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		08FE66491D77D6CB000DB820 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -654,8 +650,6 @@
 		08FE65BE1D77D113000DB820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				08FE65D81D77D151000DB820 /* 综合课程设计数据接口.md */,
-				08FE65D91D77D151000DB820 /* 综合课程设计数据接口详细数据.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1208,7 +1202,6 @@
 				08967C3F1D7E95DF00123932 /* LYActionSheetView.m in Sources */,
 				0857ADA71D7AB37B007BA264 /* LYChannels.m in Sources */,
 				02A682BB1E7BBA27008824B2 /* IWAccount.m in Sources */,
-				08FE65DB1D77D151000DB820 /* 综合课程设计数据接口详细数据.md in Sources */,
 				02A682A51E7BB222008824B2 /* IWStatusCell.m in Sources */,
 				02A683041E7BBA40008824B2 /* MJPhotoBrowser.m in Sources */,
 				08FE66861D77D80D000DB820 /* LYCategoryController.m in Sources */,
@@ -1252,7 +1245,6 @@
 				02A6833E1E7BBFB7008824B2 /* IWPlaceholderTextView.m in Sources */,
 				08372CBD1D8F9CC600284199 /* LYDetailLayout.m in Sources */,
 				02A683011E7BBA40008824B2 /* MBProgressHUD+MJ.m in Sources */,
-				08FE65DA1D77D151000DB820 /* 综合课程设计数据接口.md in Sources */,
 				08FE66641D77D6CB000DB820 /* UIBarButtonItem+MRExtension.m in Sources */,
 				02A6830B1E7BBA40008824B2 /* SVProgressAnimatedView.m in Sources */,
 				08FE66651D77D6CB000DB820 /* UIImage+MRExtension.m in Sources */,

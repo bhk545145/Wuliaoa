@@ -17,5 +17,6 @@
     [self.userAvatarimage sd_setImageWithURL:[NSURL URLWithString:commit.userAvatar]];
     self.userNamelab.text = commit.userName;
     self.contentlab.text = commit.content;
+    self.createTime.text = commit.createTime;
 }
 @end

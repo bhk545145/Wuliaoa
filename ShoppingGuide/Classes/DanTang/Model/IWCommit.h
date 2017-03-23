@@ -38,4 +38,8 @@
  *  评论内容
  */
 @property (nonatomic, copy) NSString *content;
+/**
+ *  评论时间
+ */
+@property (nonatomic, copy) NSString *createTime;
 @end
