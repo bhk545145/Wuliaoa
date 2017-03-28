@@ -67,12 +67,12 @@ static NSString * const collectionCellID = @"collectionCell";
     
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:urlString parameters:nil success:^(id  _Nullable responseObject) {
         
-        NSArray *dicts = responseObject[@"data"][@"items"];
+        NSArray *dicts = responseObject[@"data"][@"result"];
         
         NSMutableArray *pros = [NSMutableArray array];
         
         for (NSDictionary *dic in dicts) {
-            LYProduct *product = [LYProduct mj_objectWithKeyValues:dic[@"data"]];
+            LYProduct *product = [LYProduct mj_objectWithKeyValues:dic];
             [pros addObject:product];
         }
     
@@ -107,7 +107,7 @@ static NSString * const collectionCellID = @"collectionCell";
 // 加载最新
 - (void)loadNewInfo {
     
-    [self loadProductInfoWithURL:@"http://api.dantangapp.com/v2/items?generation=2&gender=1&limit=20&offset=0" AndType:LYLoadTypeNew];
+    [self loadProductInfoWithURL:@"http://api.dataoke.com/index.php?r=goodsLink/ios&type=ios_quan&&appkey=n8dzhqx291&v=2&page=1" AndType:LYLoadTypeNew];
 }
 
 // 加载更多

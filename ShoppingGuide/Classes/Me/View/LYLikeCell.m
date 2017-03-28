@@ -31,7 +31,7 @@
 - (void)setProduct:(LYProduct *)product {
     _product = product;
     
-    self.title.text = product.name;
+    self.title.text = product.D_title;
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:product.cover_image_url]];
 }
 
