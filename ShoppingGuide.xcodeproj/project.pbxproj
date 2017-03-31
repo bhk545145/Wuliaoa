@@ -12,7 +12,6 @@
 		02A6828E1E7BB1EE008824B2 /* IWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682871E7BB1EE008824B2 /* IWPhoto.m */; };
 		02A6828F1E7BB1EE008824B2 /* IWStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682891E7BB1EE008824B2 /* IWStatus.m */; };
 		02A682901E7BB1EE008824B2 /* IWStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6828B1E7BB1EE008824B2 /* IWStatusFrame.m */; };
-		02A682911E7BB1EE008824B2 /* IWUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6828D1E7BB1EE008824B2 /* IWUser.m */; };
 		02A682A21E7BB222008824B2 /* IWPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682931E7BB222008824B2 /* IWPhotosView.m */; };
 		02A682A31E7BB222008824B2 /* IWPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682951E7BB222008824B2 /* IWPhotoView.m */; };
 		02A682A41E7BB222008824B2 /* IWReweetStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682971E7BB222008824B2 /* IWReweetStatusView.m */; };
@@ -146,8 +145,6 @@
 		02A682891E7BB1EE008824B2 /* IWStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWStatus.m; sourceTree = "<group>"; };
 		02A6828A1E7BB1EE008824B2 /* IWStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWStatusFrame.h; sourceTree = "<group>"; };
 		02A6828B1E7BB1EE008824B2 /* IWStatusFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWStatusFrame.m; sourceTree = "<group>"; };
-		02A6828C1E7BB1EE008824B2 /* IWUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWUser.h; sourceTree = "<group>"; };
-		02A6828D1E7BB1EE008824B2 /* IWUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWUser.m; sourceTree = "<group>"; };
 		02A682921E7BB222008824B2 /* IWPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWPhotosView.h; sourceTree = "<group>"; };
 		02A682931E7BB222008824B2 /* IWPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWPhotosView.m; sourceTree = "<group>"; };
 		02A682941E7BB222008824B2 /* IWPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWPhotoView.h; sourceTree = "<group>"; };
@@ -901,8 +898,6 @@
 				02A6828B1E7BB1EE008824B2 /* IWStatusFrame.m */,
 				3C1DF83E1E8013E3002A6439 /* IWCommit.h */,
 				3C1DF83F1E8013E3002A6439 /* IWCommit.m */,
-				02A6828C1E7BB1EE008824B2 /* IWUser.h */,
-				02A6828D1E7BB1EE008824B2 /* IWUser.m */,
 				0857ADA51D7AB37B007BA264 /* LYChannels.h */,
 				0857ADA61D7AB37B007BA264 /* LYChannels.m */,
 				0857ADB11D7ACADB007BA264 /* LYItem.h */,
@@ -1174,7 +1169,6 @@
 				085590AD1D88FDBF00D2876B /* LYSeeAllTopicController.m in Sources */,
 				02A683051E7BBA40008824B2 /* MJPhotoLoadingView.m in Sources */,
 				085590A91D88F71100D2876B /* LYSeeAllTopicCell.m in Sources */,
-				02A682911E7BB1EE008824B2 /* IWUser.m in Sources */,
 				08FE666B1D77D6CB000DB820 /* MRConst.m in Sources */,
 				02A682BC1E7BBA27008824B2 /* IWAccountTool.m in Sources */,
 				085590B31D89192400D2876B /* LYCollectionPost.m in Sources */,

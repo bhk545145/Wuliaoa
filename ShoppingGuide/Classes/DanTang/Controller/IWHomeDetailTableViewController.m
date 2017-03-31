@@ -142,7 +142,7 @@ static NSString* commitCell = @"commitCell";
     [self.textView refreshFirstResponder];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.id;
+    params[@"userId"] = account.user.id;
     params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
     NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@",IWAPPURL,articleId];

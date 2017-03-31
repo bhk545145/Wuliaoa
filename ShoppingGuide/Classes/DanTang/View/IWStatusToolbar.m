@@ -214,7 +214,7 @@
             IWLog(@"赞");
             URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.id;
+            params[@"userId"] = account.user.id;
             [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
@@ -228,7 +228,7 @@
             IWLog(@"踩");
             URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.id;
+            params[@"userId"] = account.user.id;
             
             [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {

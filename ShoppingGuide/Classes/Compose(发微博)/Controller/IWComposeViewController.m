@@ -138,7 +138,7 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.id;
+    params[@"userId"] = account.user.id;
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:IWArticleURL parameters:params success:^(id  _Nullable responseObject) {
@@ -159,7 +159,7 @@
     // 2.封装请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.id;
+    params[@"userId"] = account.user.id;
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     

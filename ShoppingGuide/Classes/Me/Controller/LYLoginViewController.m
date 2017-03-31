@@ -14,7 +14,6 @@
 #import "IWAccountTool.h"
 #import "IWWeiboTool.h"
 #import "SVProgressHUD.h"
-
 @interface LYLoginViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
@@ -72,10 +71,10 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
-    params[@"code"] = self.pwd.text;
+    params[@"password"] = self.pwd.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     
-    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWCodeLoginURl parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
         IWLog(@"登录信息——————%@",responseObject);
         IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"]];
         int isLongin = [responseObject[@"status"] intValue];

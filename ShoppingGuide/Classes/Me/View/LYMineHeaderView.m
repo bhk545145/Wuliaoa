@@ -53,9 +53,9 @@
 - (void)changeStatus {
     IWAccount *account = [IWAccountTool account];
     if(account) {
-        NSString *imageUrl = account.avatar;
+        NSString *imageUrl = account.user.avatar;
         [self.iconButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
-        NSString *name = account.nickname;
+        NSString *name = account.user.nickname;
         self.nameLabel.text = name;
     }else {
         [self.iconButton setBackgroundImage:[UIImage imageNamed:@"Me_AvatarPlaceholder_75x75_"] forState:UIControlStateNormal];
