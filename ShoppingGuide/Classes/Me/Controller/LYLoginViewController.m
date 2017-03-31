@@ -9,7 +9,7 @@
 #import "LYLoginViewController.h"
 #import "LYNetworkTool.h"
 #import "MJExtension.h"
-#import "LYUser.h"
+#import "IWToken.h"
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 #import "IWWeiboTool.h"
@@ -50,7 +50,7 @@
     
     // 3.发送请求
     NSString *sendLoginCodeURL = [NSString stringWithFormat:@"http://wuliaoa.izanpin.com/api/sms/sendLoginSecurityCode/%@",userNameStr];
-    [[LYNetworkTool sharedNetworkTool]loadDataInfoPost:sendLoginCodeURL parameters:nil success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool]loginPost:sendLoginCodeURL parameters:nil success:^(id  _Nullable responseObject) {
         [SVProgressHUD showSuccessWithStatus:@"发送成功"];
     } failure:^(NSError * _Nullable error) {
         [SVProgressHUD showSuccessWithStatus:@"发送失败"];
@@ -71,17 +71,21 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
-    params[@"password"] = self.pwd.text;
+    params[@"code"] = self.pwd.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     
-    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loginPost:IWCodeLoginURl parameters:params success:^(id  _Nullable responseObject) {
         IWLog(@"登录信息——————%@",responseObject);
-        IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"]];
         int isLongin = [responseObject[@"status"] intValue];
         if (isLongin == 1) {
+            IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"][@"user"]];
+            IWToken *token = [IWToken mj_objectWithKeyValues:responseObject[@"result"][@"token"]];
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            IWLog(@"%@",account.nickname);
             [IWAccountTool saveAccount:account];
+            [IWAccountTool saveToken:token];
             // 发送通知
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
             [IWWeiboTool chooseTabBarController];
         }else{

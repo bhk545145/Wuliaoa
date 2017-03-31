@@ -9,6 +9,10 @@
 #import "LYEditInfoViewController.h"
 #import "UIImageView+WebCache.h"
 #import "LYNetworkTool.h"
+#import "IWAccountTool.h"
+#import "IWAccount.h"
+#import "IWToken.h"
+#import "AFNetworking.h"
 
 @interface LYEditInfoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -56,21 +60,68 @@
 
 // 完成
 - (void)finish {
+    //修改昵称
+    [self setNickname];
     // 向服务器上传图片修改资料
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"nickname"] = self.nickName.text;
-    __weak typeof(self) weakSelf = self;
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:@"http://api.dantangapp.com/v1/users/me" parameters:params success:^(id  _Nullable responseObject) {
+    [self setImage];
+}
+
+- (void)setImage{
+    // 1.创建请求管理对象
+    IWToken *token = [IWAccountTool token];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:token.token forHTTPHeaderField:@"token"];
+    
+    IWAccount *account = [IWAccountTool account];
+    NSString *URLtail = [NSString stringWithFormat:@"%@/avatar",account.id];
+    NSString *URLString = [IWUserURL stringByAppendingString:URLtail];
+    
+    // 3.发送请求
+    [mgr POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            UIImage *image = self.iconImage.image;
+            NSData *data = UIImageJPEGRepresentation(image, 0.1);
+            [formData appendPartWithFileData:data name:@"imageFile" fileName:@"" mimeType:@"image/jpeg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self getAccount];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        IWLog(@"%@",error);
+    }];
+}
+
+- (void)getAccount{
+    IWAccount *account = [IWAccountTool account];
+    NSString *URLtail = [NSString stringWithFormat:@"%@",account.id];
+    NSString *URLString = [IWUserURL stringByAppendingString:URLtail];
+    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         // 退出编辑页面
-        [[NSUserDefaults standardUserDefaults] setObject:weakSelf.nickName.text forKey:@"nickname"];
-        [[NSUserDefaults standardUserDefaults] synchronize];    // 立即更新
+        account.avatar = responseObject[@"result"][@"avatar"];
+        account.nickname = responseObject[@"result"][@"nickname"];
+        [IWAccountTool saveAccount:account];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError * _Nullable error) {
         
     }];
 }
 
-// 选择投降
+- (void)setNickname{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    IWAccount *account = [IWAccountTool account];
+    params[@"nickname"] = self.nickName.text;
+    NSString *URLtail = [NSString stringWithFormat:@"%@/nickname",account.id];
+    NSString *URLString = [IWUserURL stringByAppendingString:URLtail];
+    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+// 选择头像
 - (void)selectIconImage {
     self.pic = [[UIImagePickerController alloc] init];
     self.pic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

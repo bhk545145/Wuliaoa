@@ -55,6 +55,7 @@
 		02A6833C1E7BBFB7008824B2 /* IWComposeToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A683361E7BBFB7008824B2 /* IWComposeToolbar.m */; };
 		02A6833D1E7BBFB7008824B2 /* IWImageCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A683381E7BBFB7008824B2 /* IWImageCollectView.m */; };
 		02A6833E1E7BBFB7008824B2 /* IWPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6833A1E7BBFB7008824B2 /* IWPlaceholderTextView.m */; };
+		02C20E5F1E8E059000C5240B /* IWToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C20E5E1E8E059000C5240B /* IWToken.m */; };
 		080131291D839B54009207F5 /* LYSearchSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 080131281D839B54009207F5 /* LYSearchSortView.m */; };
 		0803D7771D7BE96A0087EABF /* LYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803D7761D7BE96A0087EABF /* LYDetailController.m */; };
 		0809682C1D882FB3007E7E59 /* LYThemeCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0809682B1D882FB3007E7E59 /* LYThemeCollectionController.m */; };
@@ -230,6 +231,8 @@
 		02A683381E7BBFB7008824B2 /* IWImageCollectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWImageCollectView.m; sourceTree = "<group>"; };
 		02A683391E7BBFB7008824B2 /* IWPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWPlaceholderTextView.h; sourceTree = "<group>"; };
 		02A6833A1E7BBFB7008824B2 /* IWPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWPlaceholderTextView.m; sourceTree = "<group>"; };
+		02C20E5D1E8E059000C5240B /* IWToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWToken.h; sourceTree = "<group>"; };
+		02C20E5E1E8E059000C5240B /* IWToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWToken.m; sourceTree = "<group>"; };
 		080131271D839B54009207F5 /* LYSearchSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSearchSortView.h; sourceTree = "<group>"; };
 		080131281D839B54009207F5 /* LYSearchSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSearchSortView.m; sourceTree = "<group>"; };
 		0803D7751D7BE96A0087EABF /* LYDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDetailController.h; sourceTree = "<group>"; };
@@ -974,6 +977,8 @@
 			children = (
 				02A682B51E7BBA27008824B2 /* IWAccount.h */,
 				02A682B61E7BBA27008824B2 /* IWAccount.m */,
+				02C20E5D1E8E059000C5240B /* IWToken.h */,
+				02C20E5E1E8E059000C5240B /* IWToken.m */,
 				08DE72A81D8E8389000D496F /* LYUser.h */,
 				08DE72A91D8E8389000D496F /* LYUser.m */,
 			);
@@ -1160,6 +1165,7 @@
 				08372CC01D8F9D3600284199 /* LYDetailCollectionViewCell.m in Sources */,
 				0857ADA41D7AA51B007BA264 /* LYNetworkTool.m in Sources */,
 				08DE72AA1D8E8389000D496F /* LYUser.m in Sources */,
+				02C20E5F1E8E059000C5240B /* IWToken.m in Sources */,
 				0857ADB01D7AB5DC007BA264 /* LYChannelController.m in Sources */,
 				08FE666D1D77D6CB000DB820 /* MRVerticalButton.m in Sources */,
 				02A6831F1E7BBE7F008824B2 /* UIBarButtonItem+MJ.m in Sources */,

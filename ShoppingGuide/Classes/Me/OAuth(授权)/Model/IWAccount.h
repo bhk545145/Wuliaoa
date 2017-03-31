@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface user : NSObject
+
+
+
+@interface IWAccount : NSObject <NSCoding>
 /**
  *  用户昵称
  */
@@ -21,18 +24,7 @@
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *status;
-@end
 
-@interface token : NSObject
-@property (nonatomic, copy) NSString *id;
-@property (nonatomic, copy) NSString *refreshToken;
-@property (nonatomic, copy) NSString *token;
-@property (nonatomic, copy) NSString *userId;
-@end
-
-@interface IWAccount : NSObject <NSCoding>
-@property (nonatomic, strong) user *user;
-@property (nonatomic, strong) token *token;
 
 + (instancetype)accountWithDict:(NSDictionary *)dict;
 - (instancetype)initWithDict:(NSDictionary *)dict;

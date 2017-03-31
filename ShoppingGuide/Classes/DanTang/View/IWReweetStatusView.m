@@ -8,7 +8,6 @@
 
 #import "IWReweetStatusView.h"
 #import "IWStatus.h"
-#import "IWUser.h"
 #import "IWStatusFrame.h"
 #import "IWPhoto.h"
 #import "UIImageView+WebCache.h"

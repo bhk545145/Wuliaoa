@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class IWAccount;
+@class IWToken;
 
 @interface IWAccountTool : NSObject
 /**
@@ -17,14 +18,15 @@
  *  @param account 需要存储的账号
  */
 + (void)saveAccount:(IWAccount *)account;
-
++ (void)saveToken:(IWToken *)token;
 /**
  *  返回存储的账号信息
  */
 + (IWAccount *)account;
-
++ (IWToken *)token;
 /**
  *  删除账号信息
  */
 + (BOOL)deleteFiel;
++ (BOOL)deleteFietoken;
 @end

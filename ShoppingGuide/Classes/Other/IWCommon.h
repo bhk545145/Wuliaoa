@@ -3,6 +3,7 @@
  */
 #define IWAPPURL @"http://latiao.izanpin.com/api"
 #define IWArticleURL @"http://latiao.izanpin.com/api/article"
+#define IWUserURL @"http://latiao.izanpin.com/api/user/"
 #define IWLoginURl @"http://latiao.izanpin.com/api/user/login"
 #define IWCodeLoginURl @"http://latiao.izanpin.com/api/user/smsLogin"
 

@@ -11,6 +11,7 @@
 #import "IWComposeToolbar.h"
 #import "AFNetworking.h"
 #import "IWAccount.h"
+#import "IWToken.h"
 #import "IWAccountTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "IWWeiboTool.h"
@@ -138,10 +139,10 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.user.id;
+    params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
-    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:IWArticleURL parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWArticleURL parameters:params success:^(id  _Nullable responseObject) {
         [MBProgressHUD showSuccess:@"发送成功"];
         //通知首页刷新
         [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
@@ -154,12 +155,16 @@
 - (void)sendStatusWithImage
 {
     // 1.创建请求管理对象
+    IWToken *token = [IWAccountTool token];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:token.token forHTTPHeaderField:@"token"];
     
     // 2.封装请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.user.id;
+    params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     

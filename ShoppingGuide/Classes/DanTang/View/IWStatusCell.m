@@ -9,7 +9,6 @@
 #import "IWStatusCell.h"
 #import "IWStatus.h"
 #import "IWStatusFrame.h"
-#import "IWUser.h"
 #import "UIImageView+WebCache.h"
 #import "IWStatusToolbar.h"
 #import "IWStatusTopView.h"

@@ -235,8 +235,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)editInfo {
     LYEditInfoViewController *editVc = [[LYEditInfoViewController alloc] init];
     IWAccount *account = [IWAccountTool account];
-    editVc.imageURL = account.user.avatar;
-    NSString *name = account.user.nickname;
+    editVc.imageURL = account.avatar;
+    NSString *name = account.nickname;
     editVc.name = name;
     MRNavigationController *nav = [[MRNavigationController alloc] initWithRootViewController:editVc];
     [self.navigationController presentViewController:nav animated:YES completion:nil];

@@ -9,6 +9,8 @@
 #import "LYNetworkTool.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "IWAccountTool.h"
+#import "IWToken.h"
 
 @interface LYNetworkTool ()
 
@@ -62,7 +64,7 @@ static id _instance;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         [SVProgressHUD showErrorWithStatus:@"加载失败~"];
-//        failure(error);
+        failure(error);
     }];
     
     [SVProgressHUD dismiss];
@@ -72,12 +74,47 @@ static id _instance;
           parameters:(id)parameters
              success:(void (^)(id _Nullable responseObject))success
              failure:(void (^)(NSError *error))failure {
-    [[AFHTTPSessionManager manager] POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    IWToken *token = [IWAccountTool token];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:token.token forHTTPHeaderField:@"token"];
+    [mgr POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"加载完成!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);
+        [SVProgressHUD showErrorWithStatus:@"加载失败~"];
+    }];
+    
+    [SVProgressHUD dismiss];
+}
+
+- (void)loadDataPost:(NSString *)URLString
+              parameters:(id)parameters
+                 success:(void (^)(id _Nullable responseObject))success
+                 failure:(void (^)(NSError *error))failure {
+    IWToken *token = [IWAccountTool token];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:token.token forHTTPHeaderField:@"token"];
+    [mgr POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 回调成功之后的block
+        success(responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 回调失败之后的block
+        failure(error);
+        [SVProgressHUD showSuccessWithStatus:@"发送失败!"];
     }];
     
     [SVProgressHUD dismiss];
@@ -87,11 +124,18 @@ static id _instance;
               parameters:(id)parameters
                  success:(void (^)(id _Nullable responseObject))success
                  failure:(void (^)(NSError *error))failure {
+    IWToken *token = [IWAccountTool token];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:token.token forHTTPHeaderField:@"token"];
     [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [mgr POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    [mgr POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
         [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
@@ -121,4 +165,26 @@ static id _instance;
     [SVProgressHUD dismiss];
 }
 
+- (void)loginPost:(NSString *)URLString
+                  parameters:(id)parameters
+                     success:(void (^)(id _Nullable responseObject))success
+                     failure:(void (^)(NSError *error))failure {
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [mgr POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 回调成功之后的block
+        success(responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 回调失败之后的block
+        failure(error);
+        [SVProgressHUD showSuccessWithStatus:@"发送失败!"];
+    }];
+    
+    [SVProgressHUD dismiss];
+}
 @end

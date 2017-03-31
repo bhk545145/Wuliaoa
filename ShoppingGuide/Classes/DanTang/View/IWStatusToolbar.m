@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "IWAccount.h"
 #import "IWAccountTool.h"
+#import "LYNetworkTool.h"
 
 
 @interface IWStatusToolbar()
@@ -214,27 +215,27 @@
             IWLog(@"赞");
             URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.user.id;
-            [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            params[@"userId"] = account.id;
+            
+            [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
                 _btnblock();
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            } failure:^(NSError * _Nullable error) {
                 IWLog(@"%@",error);
             }];
+            
             break;
         }
         case 103:{
             IWLog(@"踩");
             URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.user.id;
+            params[@"userId"] = account.id;
             
-            [mgr POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-            } success:^(NSURLSessionDataTask *task, id responseObject) {
+            [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
                 _btnblock();
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            } failure:^(NSError * _Nullable error) {
                 IWLog(@"%@",error);
             }];
             break;

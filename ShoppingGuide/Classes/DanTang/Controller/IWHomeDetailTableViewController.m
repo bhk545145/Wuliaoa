@@ -142,12 +142,12 @@ static NSString* commitCell = @"commitCell";
     [self.textView refreshFirstResponder];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    params[@"userId"] = account.user.id;
+    params[@"userId"] = account.id;
     params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
     NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@",IWAPPURL,articleId];
 
-    [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
         [self getComment];
         [self.textView resignFirstResponder];
     } failure:^(NSError * _Nullable error) {

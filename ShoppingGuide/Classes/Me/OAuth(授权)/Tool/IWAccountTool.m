@@ -8,8 +8,10 @@
 
 #import "IWAccount.h"
 #import "IWAccountTool.h"
+#import "IWToken.h"
 
 #define IWAccountFile [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
+#define IWTokenFile [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"token.data"]
 
 @implementation IWAccountTool
 + (void)saveAccount:(IWAccount *)account
@@ -26,6 +28,23 @@
 
 + (BOOL)deleteFiel{
     BOOL exists = [[self alloc] deleteFiel:IWAccountFile error:nil];
+    return exists;
+}
+
++ (void)saveToken:(IWToken *)token
+{
+    [NSKeyedArchiver archiveRootObject:token toFile:IWTokenFile];
+}
+
++ (IWToken *)token
+{
+    // 取出账号
+    IWToken *token = [NSKeyedUnarchiver unarchiveObjectWithFile:IWTokenFile];
+    return token;
+}
+
++ (BOOL)deleteFietoken{
+    BOOL exists = [[self alloc] deleteFiel:IWTokenFile error:nil];
     return exists;
 }
 
