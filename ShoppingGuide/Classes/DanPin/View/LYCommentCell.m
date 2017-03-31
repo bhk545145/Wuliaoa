@@ -8,7 +8,6 @@
 
 #import "LYCommentCell.h"
 #import "LYComment.h"
-#import "LYUser.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+MRExtension.h"
 
@@ -24,10 +23,6 @@
 
 - (void)setComment:(LYComment *)comment {
     _comment = comment;
-    LYUser *user = comment.user;
-    NSString *url = user.avatar_url;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    self.nickNameLabel.text = user.nickname;
     self.contentLabel.text = comment.content;
     self.timeLabel.text = [NSDate dateWithTimeStamp: comment.created_at];
 }

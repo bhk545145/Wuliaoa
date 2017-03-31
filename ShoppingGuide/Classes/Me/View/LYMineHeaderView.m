@@ -9,7 +9,6 @@
 #import "LYMineHeaderView.h"
 #import "UIImageView+WebCache.h"
 #import "LYNetworkTool.h"
-#import "LYUser.h"
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 

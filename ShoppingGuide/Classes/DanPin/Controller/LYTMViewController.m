@@ -25,7 +25,7 @@
     /// 自动对页面进行缩放以适应屏幕
     self.webView.scalesPageToFit = YES;
     self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.purchase_url]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.ali_click]]];
 }
 
 // 返回事件

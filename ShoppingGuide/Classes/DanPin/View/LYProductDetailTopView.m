@@ -70,7 +70,7 @@ static NSString * const detailCollectionViewCellID = @"detailCollectionViewCellI
     self.pageControl.numberOfPages = self.imageURLs.count;
     self.pageControl.mr_centerX = self.collectionView.mr_centerX;
     self.titleLabel.text = product.D_title;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.price];
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.Price];
     self.describeLabel.text = product.describe;
 }
 

@@ -16,7 +16,7 @@
 /**
  * cover_image_url
  */
-@property (nonatomic, copy) NSString *cover_image_url;
+//@property (nonatomic, copy) NSString *cover_image_url;
 
 /**
  *  created_at
@@ -56,7 +56,7 @@
 /**
  * price
  */
-@property (nonatomic, copy) NSString *price;
+//@property (nonatomic, copy) NSString *price;
 
 /**
  *  purchase_id
@@ -76,7 +76,7 @@
 /**
  * purchase_url
  */
-@property (nonatomic, copy) NSString *purchase_url;
+//@property (nonatomic, copy) NSString *purchase_url;
 
 /**
  *  updated_at
@@ -86,7 +86,7 @@
 /**
  * url
  */
-@property (nonatomic, copy) NSString *url;
+//@property (nonatomic, copy) NSString *url;
 
 
 //"GoodsID":"40987945983",				/*商品淘宝id*/
@@ -117,10 +117,9 @@
 @property (nonatomic, copy) NSString *GoodsID;
 @property (nonatomic, copy) NSString *Title;
 @property (nonatomic, copy) NSString *D_title;
-
-
-
-
+@property (nonatomic, copy) NSString *Pic;
+@property (nonatomic, copy) NSString *Price;
+@property (nonatomic, copy) NSString *ali_click;
 
 
 

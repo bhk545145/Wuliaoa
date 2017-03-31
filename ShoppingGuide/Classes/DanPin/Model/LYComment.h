@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LYUser.h"
 
 @interface LYComment : NSObject
 
@@ -30,6 +29,4 @@
 @property (nonatomic, copy) NSString *created_at;
 @property (nonatomic, assign) BOOL show;
 @property (nonatomic, assign) NSInteger item_id;
-@property (nonatomic, strong) LYUser *user;
-
 @end

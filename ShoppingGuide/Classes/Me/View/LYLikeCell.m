@@ -32,7 +32,7 @@
     _product = product;
     
     self.title.text = product.D_title;
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:product.cover_image_url]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:product.Pic]];
 }
 
 - (void)awakeFromNib {

@@ -13,7 +13,7 @@
 #import "IWAccount.h"
 #import "IWToken.h"
 #import "IWAccountTool.h"
-#import "MBProgressHUD+MJ.h"
+#import "SVProgressHUD.h"
 #import "IWWeiboTool.h"
 #import "LYNetworkTool.h"
 //选择相册
@@ -143,12 +143,12 @@
     params[@"content"] = self.textView.text;
     params[@"device"] = [IWWeiboTool iphoneType];
     [[LYNetworkTool sharedNetworkTool] loadDataJsonInfoPost:IWArticleURL parameters:params success:^(id  _Nullable responseObject) {
-        [MBProgressHUD showSuccess:@"发送成功"];
+        [SVProgressHUD showWithStatus:@"发送成功"];
         //通知首页刷新
         [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
 
     } failure:^(NSError * _Nullable error) {
-        [MBProgressHUD showSuccess:@"发送失败"];
+        [SVProgressHUD showErrorWithStatus:@"发送失败"];
     }];
 }
 
@@ -179,11 +179,11 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBProgressHUD showSuccess:@"发送成功"];
+        [SVProgressHUD showWithStatus:@"发送成功"];
         //通知首页刷新
         [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBProgressHUD showSuccess:@"发送失败"];
+        [SVProgressHUD showErrorWithStatus:@"发送失败"];
     }];
 }
 

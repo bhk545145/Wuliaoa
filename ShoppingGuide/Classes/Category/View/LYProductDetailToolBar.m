@@ -9,7 +9,6 @@
 #import "LYProductDetailToolBar.h"
 #import "MRNavigationController.h"
 #import "LYLoginViewController.h"
-#import "LYUser.h"
 
 @interface LYProductDetailToolBar ()
 

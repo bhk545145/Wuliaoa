@@ -101,7 +101,6 @@
 		08AA571F1D7C1AE200BB6D47 /* LYProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA571D1D7C1AE200BB6D47 /* LYProductCell.m */; };
 		08AA57201D7C1AE200BB6D47 /* LYProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08AA571E1D7C1AE200BB6D47 /* LYProductCell.xib */; };
 		08D428C41D7BFCD500457E47 /* LYSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D428C31D7BFCD500457E47 /* LYSearchResult.m */; };
-		08DE72AA1D8E8389000D496F /* LYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DE72A91D8E8389000D496F /* LYUser.m */; };
 		08DE72AD1D8E945D000D496F /* LYMineChoiceBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DE72AC1D8E945D000D496F /* LYMineChoiceBar.m */; };
 		08DE72AF1D8EA2B2000D496F /* LYProductDetailToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE72AE1D8EA2B2000D496F /* LYProductDetailToolBar.xib */; };
 		08DE72B21D8EA2C1000D496F /* LYProductDetailToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DE72B11D8EA2C1000D496F /* LYProductDetailToolBar.m */; };
@@ -314,8 +313,6 @@
 		08AA571E1D7C1AE200BB6D47 /* LYProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LYProductCell.xib; sourceTree = "<group>"; };
 		08D428C21D7BFCD500457E47 /* LYSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSearchResult.h; sourceTree = "<group>"; };
 		08D428C31D7BFCD500457E47 /* LYSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSearchResult.m; sourceTree = "<group>"; };
-		08DE72A81D8E8389000D496F /* LYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYUser.h; sourceTree = "<group>"; };
-		08DE72A91D8E8389000D496F /* LYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYUser.m; sourceTree = "<group>"; };
 		08DE72AB1D8E945D000D496F /* LYMineChoiceBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYMineChoiceBar.h; sourceTree = "<group>"; };
 		08DE72AC1D8E945D000D496F /* LYMineChoiceBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYMineChoiceBar.m; sourceTree = "<group>"; };
 		08DE72AE1D8EA2B2000D496F /* LYProductDetailToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LYProductDetailToolBar.xib; path = ../../Category/View/LYProductDetailToolBar.xib; sourceTree = "<group>"; };
@@ -979,8 +976,6 @@
 				02A682B61E7BBA27008824B2 /* IWAccount.m */,
 				02C20E5D1E8E059000C5240B /* IWToken.h */,
 				02C20E5E1E8E059000C5240B /* IWToken.m */,
-				08DE72A81D8E8389000D496F /* LYUser.h */,
-				08DE72A91D8E8389000D496F /* LYUser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1164,7 +1159,6 @@
 				085590B01D89180900D2876B /* LYCollectionDetailController.m in Sources */,
 				08372CC01D8F9D3600284199 /* LYDetailCollectionViewCell.m in Sources */,
 				0857ADA41D7AA51B007BA264 /* LYNetworkTool.m in Sources */,
-				08DE72AA1D8E8389000D496F /* LYUser.m in Sources */,
 				02C20E5F1E8E059000C5240B /* IWToken.m in Sources */,
 				0857ADB01D7AB5DC007BA264 /* LYChannelController.m in Sources */,
 				08FE666D1D77D6CB000DB820 /* MRVerticalButton.m in Sources */,

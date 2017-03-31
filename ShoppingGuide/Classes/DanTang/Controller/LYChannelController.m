@@ -56,7 +56,7 @@ static NSString * const HomeCell = @"HomeCell";
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [self.tableView.mj_header beginRefreshing];
+//    [self loadNewInfo];
 }
 
 /**
@@ -166,7 +166,7 @@ static NSString * const HomeCell = @"HomeCell";
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=JOKE",IWArticleURL,params[@"sinceid"]];
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE",IWArticleURL];
         }
-         [self loadItemInfo:OldURLString withType:2];
+        [self loadItemInfo:OldURLString withType:2];
     }else{
         if (self.channesID == 1) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@",IWArticleURL,params[@"count"]];
@@ -177,11 +177,7 @@ static NSString * const HomeCell = @"HomeCell";
         }
     }
     [self loadItemInfo:URLString withType:0];
-    
-    
-   
-    
-    
+
 }
 
 /**

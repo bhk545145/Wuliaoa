@@ -7,7 +7,6 @@
 //
 
 #import "LYMeController.h"
-#import "LYUser.h"
 #import "LYLikeCell.h"
 #import "LYItem.h"
 #import "LYProduct.h"
