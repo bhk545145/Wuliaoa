@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class LYItem;
-@class LYProduct;
+@class IWStatus;
 
 @interface LYLikeCell : UITableViewCell
 
 @property (nonatomic, strong) LYItem *item;
 
-@property (nonatomic, strong) LYProduct *product;
+@property (nonatomic, strong) IWStatus *status;
 
 @end

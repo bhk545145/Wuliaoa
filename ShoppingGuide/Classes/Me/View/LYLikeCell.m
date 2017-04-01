@@ -9,7 +9,7 @@
 #import "LYLikeCell.h"
 #import "UIImageView+WebCache.h"
 #import "LYItem.h"
-#import "LYProduct.h"
+#import "IWStatus.h"
 
 @interface LYLikeCell ()
 
@@ -28,11 +28,11 @@
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:item.cover_image_url]];
 }
 
-- (void)setProduct:(LYProduct *)product {
-    _product = product;
+- (void)setStatus:(IWStatus *)status {
+    _status = status;
     
-    self.title.text = product.D_title;
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:product.Pic]];
+    self.title.text = status.content;
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:status.authorAvatar]];
 }
 
 - (void)awakeFromNib {

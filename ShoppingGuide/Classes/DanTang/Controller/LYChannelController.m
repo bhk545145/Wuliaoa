@@ -24,7 +24,9 @@
 
 static NSString * const HomeCell = @"HomeCell";
 
-@interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource>
+@interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource>{
+    dispatch_queue_t queue;
+}
 
 /**
  * 下一页的请求地址
@@ -46,7 +48,7 @@ static NSString * const HomeCell = @"HomeCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     // 初始化表格
     [self setupTable];
     
@@ -78,69 +80,69 @@ static NSString * const HomeCell = @"HomeCell";
  *  请求数据
  */
 - (void)loadItemInfo:(NSString *)urlString withType:(NSInteger)type{
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:urlString parameters:nil success:^(id  _Nullable responseObject) {
+    dispatch_async(queue, ^{
+        __weak typeof(self) weakSelf = self;
         
-        // Tell MJExtension what type model will be contained in IWPhoto.
-        [IWStatus mj_setupObjectClassInArray:^NSDictionary *{
-            return @{@"images" : [IWPhoto class]};
-        }];
-        // 将字典数组转为模型数组(里面放的就是IWStatus模型)
-        NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-        // 创建frame模型对象
-        NSMutableArray *statusFrameArray = [NSMutableArray array];
-        for (IWStatus *status in statusArray) {
-            IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
-            // 传递微博模型数据
-            statusFrame.status = status;
-            [statusFrameArray addObject:statusFrame];
-        }
-
-        if(type == 0) { // 下拉刷新
-            // 将最新的数据追加到旧数据的最前面
-            // 旧数据: self.statusFrames
-            // 新数据: statusFrameArray
-            NSMutableArray *tempArray = [NSMutableArray array];
-            // 添加statusFrameArray的所有元素 添加到 tempArray中
-            [tempArray addObjectsFromArray:statusFrameArray];
-            // 添加self.statusFrames的所有元素 添加到 tempArray中
-            [tempArray addObjectsFromArray:self.statusFrames];
-            weakSelf.statusFrames = tempArray;
-        } else if(type == 1)  {   // 上拉加载
-            // 添加新数据到旧数据的后面
-            [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
-        }else{      //刷新旧数据
-            int i;
-            int x;
-            NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.statusFrames];
-            for (x=0; x<statusFrameArray.count; x++) {
-                IWStatusFrame *info = [statusFrameArray objectAtIndex:x];
-                for (i=0; i<array.count; i++)
-                {
-                    IWStatusFrame *tmp = [array objectAtIndex:i];
-                    if ([tmp.status.id isEqualToString:info.status.id])
+        [[LYNetworkTool sharedNetworkTool] loadDataInfo:urlString parameters:nil success:^(id  _Nullable responseObject) {
+            
+            // Tell MJExtension what type model will be contained in IWPhoto.
+            [IWStatus mj_setupObjectClassInArray:^NSDictionary *{
+                return @{@"images" : [IWPhoto class]};
+            }];
+            // 将字典数组转为模型数组(里面放的就是IWStatus模型)
+            NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+            // 创建frame模型对象
+            NSMutableArray *statusFrameArray = [NSMutableArray array];
+            for (IWStatus *status in statusArray) {
+                IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
+                // 传递微博模型数据
+                statusFrame.status = status;
+                [statusFrameArray addObject:statusFrame];
+            }
+            
+            if(type == 0) { // 下拉刷新
+                // 将最新的数据追加到旧数据的最前面
+                // 旧数据: self.statusFrames
+                // 新数据: statusFrameArray
+                NSMutableArray *tempArray = [NSMutableArray array];
+                // 添加statusFrameArray的所有元素 添加到 tempArray中
+                [tempArray addObjectsFromArray:statusFrameArray];
+                // 添加self.statusFrames的所有元素 添加到 tempArray中
+                [tempArray addObjectsFromArray:self.statusFrames];
+                weakSelf.statusFrames = tempArray;
+            } else if(type == 1)  {   // 上拉加载
+                // 添加新数据到旧数据的后面
+                [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
+            }else{      //刷新旧数据
+                int i;
+                int x;
+                NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.statusFrames];
+                for (x=0; x<statusFrameArray.count; x++) {
+                    IWStatusFrame *info = [statusFrameArray objectAtIndex:x];
+                    for (i=0; i<array.count; i++)
                     {
-                        [array replaceObjectAtIndex:i withObject:info];
-                        break;
+                        IWStatusFrame *tmp = [array objectAtIndex:i];
+                        if ([tmp.status.id isEqualToString:info.status.id])
+                        {
+                            [array replaceObjectAtIndex:i withObject:info];
+                            break;
+                        }
                     }
                 }
+                [self.statusFrames removeAllObjects];
+                [self.statusFrames addObjectsFromArray:array];
             }
-            [self.statusFrames removeAllObjects];
-            [self.statusFrames addObjectsFromArray:array];
-        }
+            // 刷新表格
+            [weakSelf.tableView reloadData];
+            
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
+        } failure:^(NSError * _Nullable error) {
+            
+        }];
 
-        // 刷新表格
-        [weakSelf.tableView reloadData];
-        
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
-        
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
-}
+    });
+   }
 
 /**
  *  下拉刷新

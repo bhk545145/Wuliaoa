@@ -9,7 +9,7 @@
 #import "LYMeController.h"
 #import "LYLikeCell.h"
 #import "LYItem.h"
-#import "LYProduct.h"
+#import "IWStatus.h"
 #import "LYNetworkTool.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
@@ -27,7 +27,10 @@
 #import "IWAccount.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>
+
+@interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
+    dispatch_queue_t queue;
+}
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -60,7 +63,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     [self setupTableView];
     // 注册登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LYLoginNotification" object:nil];
@@ -155,11 +158,12 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 // 请求用户喜欢的专题和商品
 - (void)loadLikeLoad {
     __weak typeof(self) weakSelf = self;
-    
+    IWAccount *account = [IWAccountTool account];
     // 喜欢的商品
-    NSString *productURL = @"http://api.dantangapp.com/v1/favorite_lists/7869/items?limit=20&offset=0";
+    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
+    NSString *productURL = [IWArticleURL stringByAppendingString:tailURL];
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:productURL parameters:nil success:^(id  _Nullable responseObject) {
-        NSArray *products = [LYProduct mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"items"]];
+        NSArray *products = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
         weakSelf.products = products;
         // 刷新表格数据
         [weakSelf.tableView reloadData];
@@ -168,15 +172,15 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     }];
     
     // 喜欢的专题
-    NSString *themeURL = @"http://api.dantangapp.com/v1/users/me/post_likes?limit=20&offset=0";
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:themeURL parameters:nil success:^(id  _Nullable responseObject) {
-        NSArray *themes = [LYItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"posts"]];
-        weakSelf.themes = themes;
-        // 刷新表格数据
-        [weakSelf.tableView reloadData];
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
+//    NSString *themeURL = @"http://api.dantangapp.com/v1/users/me/post_likes?limit=20&offset=0";
+//    [[LYNetworkTool sharedNetworkTool] loadDataInfo:themeURL parameters:nil success:^(id  _Nullable responseObject) {
+//        NSArray *themes = [LYItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"posts"]];
+//        weakSelf.themes = themes;
+//        // 刷新表格数据
+//        [weakSelf.tableView reloadData];
+//    } failure:^(NSError * _Nullable error) {
+//        
+//    }];
 }
 
 - (void)headerMessageClick:(UIButton *)btn {
@@ -243,15 +247,18 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 
 // 根据登录状态判断是否显示footerView
 - (void)inspectStatus {
-    IWAccount *account = [IWAccountTool account];
-    if(account) {
-        // 刷新收藏
-        [self loadLikeLoad];
-        self.tableView.tableFooterView = nil;
-    }else {
-        self.tableView.tableFooterView = self.footerView;
-    }
-    [self.tableView reloadData];
+    dispatch_async(queue, ^{
+        IWAccount *account = [IWAccountTool account];
+        if(account) {
+            // 刷新收藏
+            [self loadLikeLoad];
+            self.tableView.tableFooterView = nil;
+        }else {
+            self.tableView.tableFooterView = self.footerView;
+        }
+        [self.tableView reloadData];
+    });
+    
 }
 
 // 拖动监听
@@ -300,7 +307,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(self.type == 0) {
-        return 100;
+        return 41;
     }else {
         return 60;
     }
@@ -319,7 +326,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     LYLikeCell *cell = [tableView dequeueReusableCellWithIdentifier:likeThemeCellID];
     
      if(self.type == 0) {
-        cell.product = self.products[indexPath.row];
+        cell.status = self.products[indexPath.row];
      }else {
         cell.item = self.themes[indexPath.row];
      }
@@ -330,15 +337,15 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     // 取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(self.type == 0) {
-        LYProductDetailController *vc = [[LYProductDetailController alloc] init];
-        vc.product = self.products[indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else {
-        LYDetailController *vc = [[LYDetailController alloc] init];
-        vc.item = self.themes[indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if(self.type == 0) {
+//        LYProductDetailController *vc = [[LYProductDetailController alloc] init];
+//        vc.product = self.products[indexPath.row];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else {
+//        LYDetailController *vc = [[LYDetailController alloc] init];
+//        vc.item = self.themes[indexPath.row];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark - <LYMineChoiceBarDelegate>

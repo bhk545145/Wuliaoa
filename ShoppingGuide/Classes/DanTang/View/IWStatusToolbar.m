@@ -203,12 +203,12 @@
     switch (sender.tag) {
         case 100:{
             IWLog(@"转发");
-            _btnblock();
+
             break;
         }
         case 101:{
             IWLog(@"评论");
-            _btnblock();
+
             break;
         }
         case 102:{
@@ -219,7 +219,7 @@
             
             [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
-                _btnblock();
+
             } failure:^(NSError * _Nullable error) {
                 IWLog(@"%@",error);
             }];
@@ -234,7 +234,7 @@
             
             [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
-                _btnblock();
+
             } failure:^(NSError * _Nullable error) {
                 IWLog(@"%@",error);
             }];

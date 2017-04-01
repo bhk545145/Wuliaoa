@@ -14,6 +14,7 @@
                 <outlet property="loginBtn" destination="0JT-OH-DcE" id="0W9-WR-aCH"/>
                 <outlet property="phoneNum" destination="Kdb-2E-2gN" id="bae-LZ-tn4"/>
                 <outlet property="pwd" destination="Z2g-yy-0rU" id="ifN-L4-e1j"/>
+                <outlet property="sendSmsBtn" destination="w3P-tP-xVO" id="0Dq-Ot-s5j"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TbU-Ls-Gur"/>
             </connections>
         </placeholder>
@@ -52,12 +53,14 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z2g-yy-0rU">
                             <rect key="frame" x="76" y="43" width="524" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3P-tP-xVO">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3P-tP-xVO">
                             <rect key="frame" x="513" y="50" width="72" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="发送验证码"/>
+                            <state key="normal" title="发送验证码">
+                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
                                 <action selector="codeUp:" destination="-1" eventType="touchUpInside" id="ybn-4P-fuY"/>
                             </connections>
@@ -113,7 +116,7 @@
                         <action selector="loginIn:" destination="-1" eventType="touchUpInside" id="e19-kx-MeX"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-6P-qNg">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-6P-qNg">
                     <rect key="frame" x="529" y="267" width="56" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Olh-AI-Lhe"/>

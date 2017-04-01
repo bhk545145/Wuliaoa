@@ -185,10 +185,11 @@ static NSString* commitCell = @"commitCell";
         NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObjectArray];
         // 创建frame模型对象
         for (IWStatus *status in statusArray) {
-            IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
             // 传递微博模型数据
-            statusFrame.status = status;
-            _statusFrame = statusFrame;
+            _statusFrame.status.likeCount = status.likeCount;
+            _statusFrame.status.hateCount = status.hateCount;
+            _statusFrame.status.commentCount = status.commentCount;
+
             [self.tableView reloadData];
         }
         

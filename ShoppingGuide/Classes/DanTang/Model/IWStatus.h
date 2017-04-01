@@ -7,7 +7,6 @@
 //  微博模型(一个IWStatus对象就代表一条微博)
 
 #import <Foundation/Foundation.h>
-@class IWUser;
 
 @interface IWStatus : NSObject
 
