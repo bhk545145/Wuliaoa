@@ -14,7 +14,9 @@
 #import "LYNetworkTool.h"
 
 
-@interface IWStatusToolbar()
+@interface IWStatusToolbar(){
+    dispatch_queue_t queue;
+}
 @property (nonatomic, strong) NSMutableArray *btns;
 @property (nonatomic, strong) NSMutableArray *dividers;
 @property (nonatomic, weak) UIButton *reweetBtn;
@@ -45,6 +47,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
         // 1.设置图片
         self.userInteractionEnabled = YES;
         self.image = [UIImage resizedImageWithName:@""];
@@ -216,13 +219,15 @@
             URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
             params[@"userId"] = account.id;
+            dispatch_async(queue, ^{
+                [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+                    IWLog(@"%@",responseObject);
+                    
+                } failure:^(NSError * _Nullable error) {
+                    IWLog(@"%@",error);
+                }];
+            });
             
-            [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-                IWLog(@"%@",responseObject);
-
-            } failure:^(NSError * _Nullable error) {
-                IWLog(@"%@",error);
-            }];
             
             break;
         }
@@ -231,13 +236,14 @@
             URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
             URLString = [URLString stringByAppendingString:URLtail];
             params[@"userId"] = account.id;
-            
+            dispatch_async(queue, ^{
             [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                 IWLog(@"%@",responseObject);
 
             } failure:^(NSError * _Nullable error) {
                 IWLog(@"%@",error);
             }];
+            });
             break;
         }
         default:{
