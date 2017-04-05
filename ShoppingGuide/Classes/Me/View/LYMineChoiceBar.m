@@ -45,7 +45,7 @@
     
     if(!_leftBtn) {
         UIButton *btn = [[UIButton alloc] init];
-        [btn setTitle:@"我发的辣条" forState:UIControlStateNormal];
+        [btn setTitle:@"辣条" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:16];
         [btn setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor whiteColor];
@@ -63,7 +63,7 @@
     
     if(!_rightBtn) {
         UIButton *btn = [[UIButton alloc] init];
-        [btn setTitle:@"喜欢的专题" forState:UIControlStateNormal];
+        [btn setTitle:@"赞品" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:16];
         [btn setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor whiteColor];

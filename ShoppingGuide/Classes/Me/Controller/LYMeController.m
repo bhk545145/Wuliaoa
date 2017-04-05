@@ -158,18 +158,19 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 // 请求用户喜欢的专题和商品
 - (void)loadLikeLoad {
     __weak typeof(self) weakSelf = self;
-    IWAccount *account = [IWAccountTool account];
-    // 喜欢的商品
-    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
-    NSString *productURL = [IWArticleURL stringByAppendingString:tailURL];
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:productURL parameters:nil success:^(id  _Nullable responseObject) {
-        NSArray *products = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-        weakSelf.products = products;
-        // 刷新表格数据
-        [weakSelf.tableView reloadData];
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
+    weakSelf.products = [NSArray arrayWithObjects:@"我的辣条", nil];
+//    IWAccount *account = [IWAccountTool account];
+//    // 喜欢的商品
+//    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
+//    NSString *productURL = [IWArticleURL stringByAppendingString:tailURL];
+//    [[LYNetworkTool sharedNetworkTool] loadDataInfo:productURL parameters:nil success:^(id  _Nullable responseObject) {
+//        NSArray *products = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+//        weakSelf.products = products;
+//        // 刷新表格数据
+//        [weakSelf.tableView reloadData];
+//    } failure:^(NSError * _Nullable error) {
+//        
+//    }];
     
     // 喜欢的专题
 //    NSString *themeURL = @"http://api.dantangapp.com/v1/users/me/post_likes?limit=20&offset=0";
@@ -327,6 +328,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     
      if(self.type == 0) {
         cell.status = self.products[indexPath.row];
+         
      }else {
         cell.item = self.themes[indexPath.row];
      }

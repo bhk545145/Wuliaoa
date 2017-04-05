@@ -31,8 +31,8 @@
 - (void)setStatus:(IWStatus *)status {
     _status = status;
     
-    self.title.text = status.content;
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:status.authorAvatar]];
+    self.title.text = status;
+//    [self.imageV sd_setImageWithURL:[NSURL URLWithString:status.authorAvatar]];
 }
 
 - (void)awakeFromNib {
