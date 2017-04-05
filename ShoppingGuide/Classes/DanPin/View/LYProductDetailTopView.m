@@ -163,7 +163,7 @@ static NSString * const detailCollectionViewCellID = @"detailCollectionViewCellI
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LYDetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:detailCollectionViewCellID forIndexPath:indexPath];
     NSString *url = self.imageURLs[indexPath.item];
-    MRLog(@"%@", url);
+    IWLog(@"%@", url);
     [cell.bgImage sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         cell.placeholderBtn.hidden = YES;
     }];

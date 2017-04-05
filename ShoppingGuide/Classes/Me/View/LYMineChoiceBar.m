@@ -50,7 +50,7 @@
         [btn setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor whiteColor];
         [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        btn.layer.borderColor = MRRGBColor(230, 230, 230).CGColor;
+        btn.layer.borderColor = IWColor(230, 230, 230).CGColor;
         btn.layer.borderWidth = 1;
         btn.selected = YES;
         _leftBtn = btn;
@@ -68,7 +68,7 @@
         [btn setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor whiteColor];
         [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        btn.layer.borderColor = MRRGBColor(230, 230, 230).CGColor;
+        btn.layer.borderColor = IWColor(230, 230, 230).CGColor;
         btn.layer.borderWidth = 1;
         _rightBtn = btn;
     }
@@ -81,7 +81,7 @@
     if(!_indicatorView) {
         
         UIView *indicView = [[UIView alloc] init];
-        indicView.backgroundColor = MRRGBColor(245, 80, 83);
+        indicView.backgroundColor = IWColor(245, 80, 83);
         _indicatorView = indicView;
     }
     

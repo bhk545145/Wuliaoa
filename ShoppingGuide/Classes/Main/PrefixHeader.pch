@@ -16,17 +16,6 @@
 #import "MRConst.h"
 #import "IWCommon.h"
 
-#ifdef DEBUG    // 测试阶段
-
-#define MRLog(...) NSLog(__VA_ARGS__)
-
-#else   // 发布阶段
-
-#define MRLog(...)
-
-#endif
-
-
 
 // 打印方法调用的宏
 #define MRLogFunc MRLog(@"%s", __func__)
@@ -35,17 +24,16 @@
 
 #define MRScreenH [UIScreen mainScreen].bounds.size.height
 
-// rgb颜色方法
-#define MRRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 // 随机颜色
 #define MRRandomColor MRRGBColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
 // 全局主题颜色
-#define MRGlobalBg MRRGBColor(245, 80, 83)
+#define MRGlobalBg IWColor(255, 80, 83)
+//#define MRGlobalBg IWColor(255, 181, 161)
 
 // 主题背景颜色
-#define LYBgColor MRRGBColor(240, 240, 240)
+#define LYBgColor IWColor(240, 240, 240)
 
 #endif /* PrefixHeader_pch */
 

@@ -134,7 +134,7 @@
         UIButton *btn = [[UIButton alloc] init];
         btn.frame = CGRectMake(0, 265, self.bgView.mr_width, 45);
         btn.titleLabel.font = [UIFont systemFontOfSize:18];
-        [btn setTitleColor:MRRGBColor(74, 140, 240) forState:UIControlStateNormal];
+        [btn setTitleColor:IWColor(74, 140, 240) forState:UIControlStateNormal];
         [btn setTitle:@"取 消" forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor whiteColor];
         [btn addTarget:self action:@selector(cancelBtnClicked) forControlEvents:UIControlEventTouchUpInside];

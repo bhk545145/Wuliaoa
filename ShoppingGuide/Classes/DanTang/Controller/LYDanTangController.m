@@ -97,7 +97,7 @@
 {
     // 标签栏整体
     UIView *titleView = [[UIView alloc] init];
-    titleView.backgroundColor = MRRGBColor(240, 240, 240);
+    titleView.backgroundColor = IWColor(240, 240, 240);
     titleView.mr_y = LYNavBarHeight;
     titleView.mr_width = self.view.mr_width;
     titleView.mr_height = LYTitlesViewH;

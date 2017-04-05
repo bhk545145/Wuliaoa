@@ -134,7 +134,7 @@
         
         [self.groupDelegate groupButtonItemClcik:groupBtn];
     }else {
-        MRLog(@"%@", groupBtn.titleLabel.text);
+        IWLog(@"%@", groupBtn.titleLabel.text);
     }
 }
 

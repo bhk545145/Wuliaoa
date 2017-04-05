@@ -58,7 +58,7 @@
         _messageLabel.text = @"登录以享受功能";
         _messageLabel.textAlignment = NSTextAlignmentCenter;
         _messageLabel.font = [UIFont systemFontOfSize:15.0];
-        _messageLabel.textColor = MRRGBColor(200, 200, 200);
+        _messageLabel.textColor = IWColor(200, 200, 200);
         _messageLabel.frame = CGRectMake((MRScreenW - 200)/2, 0, 200, 40);
         _messageLabel.mr_centerY = 150;
     }

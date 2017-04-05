@@ -23,7 +23,7 @@
     [super viewDidLoad];
    
     // 添加子控制器
-    [self addChildController:[[LYDanTangController alloc] init] imageName:@"TabBar_home_23x23_" selectedImage:@"TabBar_home_23x23_selected" title:@"首页"];
+    [self addChildController:[[LYDanTangController alloc] init] imageName:@"TabBar_home_23x23_" selectedImage:@"TabBar_home_23x23_selected" title:@"辣条"];
     
     [self addChildController:[[LYDanPingController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"赞品"];
     
