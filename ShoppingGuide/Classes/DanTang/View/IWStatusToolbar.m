@@ -222,7 +222,6 @@
             dispatch_async(queue, ^{
                 [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                     IWLog(@"%@",responseObject);
-                    
                 } failure:^(NSError * _Nullable error) {
                     IWLog(@"%@",error);
                 }];

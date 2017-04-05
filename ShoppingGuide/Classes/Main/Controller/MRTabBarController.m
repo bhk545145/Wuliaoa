@@ -25,11 +25,11 @@
     // 添加子控制器
     [self addChildController:[[LYDanTangController alloc] init] imageName:@"TabBar_home_23x23_" selectedImage:@"TabBar_home_23x23_selected" title:@"首页"];
     
-    [self addChildController:[[LYDanPingController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"单品"];
+    [self addChildController:[[LYDanPingController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"赞品"];
     
-    [self addChildController:[[LYCategoryController alloc] init] imageName:@"TabBar_category_23x23_" selectedImage:@"TabBar_category_23x23_selected" title:@"分类"];
+    [self addChildController:[[LYCategoryController alloc] init] imageName:@"TabBar_category_23x23_" selectedImage:@"TabBar_category_23x23_selected" title:@"发现"];
     
-    [self addChildController:[[LYMeController alloc] init] imageName:@"TabBar_me_boy_23x23_" selectedImage:@"TabBar_me_boy_23x23_selected" title:@"个人"];
+    [self addChildController:[[LYMeController alloc] init] imageName:@"TabBar_me_boy_23x23_" selectedImage:@"TabBar_me_boy_23x23_selected" title:@"我的"];
 
 }
 
