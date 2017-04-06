@@ -20,6 +20,9 @@
 #import "MJExtension.h"
 #import "IWStatusCell.h"
 #import "IWPhoto.h"
+#import "IWAccount.h"
+#import "IWAccountTool.h"
+#import "SVProgressHUD.h"
 
 
 static NSString * const HomeCell = @"HomeCell";
@@ -58,6 +61,10 @@ static NSString * const HomeCell = @"HomeCell";
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    if (self.channesID == 4) {
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        self.navigationItem.title = @"我的辣条";
+    }
     [self loadInfo];
 }
 
@@ -65,15 +72,20 @@ static NSString * const HomeCell = @"HomeCell";
  *  初始化表格
  */
 - (void)setupTable {
+    if (self.channesID == 4) {
+        self.tableView.contentInset = UIEdgeInsetsMake(LYNavBarHeight, 0, self.tabBarController.tabBar.mr_height, 0);
+    }else{
+        self.tableView.contentInset = UIEdgeInsetsMake(LYNavBarHeight + LYTitlesViewH, 0, self.tabBarController.tabBar.mr_height, 0);
+    }
     
-    self.tableView.contentInset = UIEdgeInsetsMake(LYNavBarHeight + LYTitlesViewH, 0, self.tabBarController.tabBar.mr_height, 0);
     self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     
     // 给表格视图添加下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewInfo)];
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     // 给表格视图添加上拉加载
-    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInfo)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInfo)];
+    self.tableView.mj_footer.automaticallyChangeAlpha = YES;
 }
 
 /**
@@ -117,21 +129,27 @@ static NSString * const HomeCell = @"HomeCell";
                 int i;
                 int x;
                 NSMutableArray *array = [[NSMutableArray alloc] initWithArray:weakSelf.statusFrames];
-                for (x=0; x<statusFrameArray.count; x++) {
-                    IWStatusFrame *info = [statusFrameArray objectAtIndex:x];
-                    for (i=0; i<array.count; i++)
-                    {
-                        IWStatusFrame *tmp = [array objectAtIndex:i];
-                        if ([tmp.status.id isEqualToString:info.status.id])
+                if (array.count == 0) {
+                    [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
+                }else{
+                    for (x=0; x<statusFrameArray.count; x++) {
+                        IWStatusFrame *info = [statusFrameArray objectAtIndex:x];
+                        for (i=0; i<array.count; i++)
                         {
-                            [array replaceObjectAtIndex:i withObject:info];
-                            break;
+                            IWStatusFrame *tmp = [array objectAtIndex:i];
+                            if ([tmp.status.id isEqualToString:info.status.id])
+                            {
+                                [array replaceObjectAtIndex:i withObject:info];
+                                break;
+                            }
                         }
                     }
+                    [weakSelf.statusFrames removeAllObjects];
+                    [weakSelf.statusFrames addObjectsFromArray:array];
                 }
-                [weakSelf.statusFrames removeAllObjects];
-                [weakSelf.statusFrames addObjectsFromArray:array];
+
             }
+            [SVProgressHUD showSuccessWithStatus:@"加载完成!"];
             // 刷新表格
             [weakSelf.tableView reloadData];
             
@@ -148,16 +166,26 @@ static NSString * const HomeCell = @"HomeCell";
  */
 - (void)loadInfo {
     static NSString *OldURLString;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
+        IWStatusFrame *statusFrame = [self.statusFrames lastObject];
+        // 加载ID <= max_id的微博
+        long long maxId = [statusFrame.status.id longLongValue];
+        // 加载ID比since_id大的微博
+        params[@"sinceid"] = @(maxId);
         if (self.channesID == 1) {
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100",IWArticleURL];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
         }else if(self.channesID == 2){
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE",IWArticleURL];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
+        }else if(self.channesID == 3){
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
         }else{
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE",IWArticleURL];
+            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?authorId=%@",IWArticleURL,account.id];
         }
         [self loadItemInfo:OldURLString withType:2];
     }
+    
 }
 
 /**
@@ -169,32 +197,34 @@ static NSString * const HomeCell = @"HomeCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"count"] = @10;
     static NSString *URLString;
-    static NSString *OldURLString;
+    IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = self.statusFrames[0];
         // 加载ID比since_id大的微博
         params[@"sinceid"] = statusFrame.status.id;
         if (self.channesID == 1) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100",IWArticleURL];
         }else if(self.channesID == 2){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=PICTURE",IWArticleURL,params[@"sinceid"]];
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE",IWArticleURL];
-        }else{
+        }else if(self.channesID == 3) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=JOKE",IWArticleURL,params[@"sinceid"]];
-            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE",IWArticleURL];
+        }else{
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&authorId=%@",IWArticleURL,params[@"sinceid"],account.id];
         }
-        [self loadItemInfo:OldURLString withType:2];
+        [self loadInfo];
     }else{
         if (self.channesID == 1) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@",IWArticleURL,params[@"count"]];
         }else if(self.channesID == 2){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=PICTURE",IWArticleURL,params[@"count"]];
-        }else{
+        }else if(self.channesID == 3){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=JOKE",IWArticleURL,params[@"count"]];
+        }else{
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?authorId=%@",IWArticleURL,params[@"count"],account.id];
         }
     }
     [self loadItemInfo:URLString withType:0];
+
 
 }
 
@@ -205,6 +235,7 @@ static NSString * const HomeCell = @"HomeCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"count"] = @5;
     static NSString *URLString;
+    IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = [self.statusFrames lastObject];
         // 加载ID <= max_id的微博
@@ -215,13 +246,16 @@ static NSString * const HomeCell = @"HomeCell";
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@",IWArticleURL,params[@"count"],params[@"maxId"]];
         }else if(self.channesID == 2){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=PICTURE",IWArticleURL,params[@"count"],params[@"maxId"]];
-        }else{
+        }else if(self.channesID == 3){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=JOKE",IWArticleURL,params[@"count"],params[@"maxId"]];
+        }else{
+            URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&authorId=%@",IWArticleURL,params[@"count"],params[@"maxId"],account.id];
         }
+        [self loadItemInfo:URLString withType:1];
     }else{
         
     }
-    [self loadItemInfo:URLString withType:1];
+    
 }
 
 
@@ -269,21 +303,24 @@ static NSString * const HomeCell = @"HomeCell";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    static UIAccelerationValue _oldOffset;
-    if (_oldOffset > -64) {
-        if (scrollView.contentOffset.y > _oldOffset) {//如果当前位移大于缓存位移，说明scrollView向上滑动
-            [UIView animateWithDuration:1.5 animations:^{
-                self.tabBarController.tabBar.hidden = YES;
-            }];
-            
-        }else{
-            [UIView animateWithDuration:1.5 animations:^{
-                self.tabBarController.tabBar.hidden = NO;
-            }];
+    if(self.channesID != 4){
+        static UIAccelerationValue _oldOffset;
+        if (_oldOffset > -64) {
+            if (scrollView.contentOffset.y > _oldOffset) {//如果当前位移大于缓存位移，说明scrollView向上滑动
+                [UIView animateWithDuration:1.5 animations:^{
+                    self.tabBarController.tabBar.hidden = YES;
+                }];
+                
+            }else{
+                [UIView animateWithDuration:1.5 animations:^{
+                    self.tabBarController.tabBar.hidden = NO;
+                }];
+            }
         }
+        
+        _oldOffset = scrollView.contentOffset.y;//将当前位移变成缓存位移
     }
     
-    _oldOffset = scrollView.contentOffset.y;//将当前位移变成缓存位移
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

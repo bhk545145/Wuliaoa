@@ -26,6 +26,7 @@
 #import "IWAccountTool.h"
 #import "IWAccount.h"
 #import "UIImageView+AFNetworking.h"
+#import "LYChannelController.h"
 
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
@@ -64,6 +65,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
+    self.tableView.backgroundColor = IWColor(220, 220, 220);
     [self setupTableView];
     // 注册登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LYLoginNotification" object:nil];
@@ -303,7 +305,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -339,15 +341,15 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     // 取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    if(self.type == 0) {
-//        LYProductDetailController *vc = [[LYProductDetailController alloc] init];
-//        vc.product = self.products[indexPath.row];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }else {
+    if(self.type == 0) {
+        LYChannelController *vc = [[LYChannelController alloc] init];
+        vc.channesID = 4;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
 //        LYDetailController *vc = [[LYDetailController alloc] init];
 //        vc.item = self.themes[indexPath.row];
 //        [self.navigationController pushViewController:vc animated:YES];
-//    }
+    }
 }
 
 #pragma mark - <LYMineChoiceBarDelegate>
