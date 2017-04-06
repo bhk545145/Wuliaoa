@@ -15,6 +15,6 @@
 
 @property (nonatomic, strong) LYItem *item;
 
-@property (nonatomic, strong) IWStatus *status;
+@property (nonatomic, strong) NSString *status;
 
 @end

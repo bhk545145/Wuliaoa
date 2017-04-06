@@ -28,7 +28,7 @@
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:item.cover_image_url]];
 }
 
-- (void)setStatus:(IWStatus *)status {
+- (void)setStatus:(NSString *)status {
     _status = status;
     
     self.title.text = status;
