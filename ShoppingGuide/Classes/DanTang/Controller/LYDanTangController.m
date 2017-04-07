@@ -12,6 +12,9 @@
 #import "LYChannelController.h"
 #import "LYNetworkTool.h"
 #import "LYChannels.h"
+#import "IWAccountTool.h"
+#import "IWAccount.h"
+#import "SVProgressHUD.h"
 
 #define scrollViewInsetHeight self.view.mr_height - 100 - self.tabBarController.tabBar.mr_height
 
@@ -211,8 +214,14 @@
 - (void)add {
 //    LYSearchController *searchVc = [[LYSearchController alloc] init];
 //    [self.navigationController pushViewController:searchVc animated:YES];
-    IWComposeViewController *compose = [[IWComposeViewController alloc] init];
-    [self.navigationController pushViewController:compose animated:YES];
+    IWAccount *account = [IWAccountTool account];
+    if(account){
+        IWComposeViewController *compose = [[IWComposeViewController alloc] init];
+        [self.navigationController pushViewController:compose animated:YES];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"请先登录！"];
+    }
+    
 }
 
 #pragma mark - <UIScrollViewDelegate>

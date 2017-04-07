@@ -12,6 +12,7 @@
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 #import "LYNetworkTool.h"
+#import "SVProgressHUD.h"
 
 
 @interface IWStatusToolbar(){
@@ -203,54 +204,55 @@
     NSString *URLtail;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     IWAccount *account = [IWAccountTool account];
-    switch (sender.tag) {
-        case 100:{
-            IWLog(@"转发");
+    if(account){
+        switch (sender.tag) {
+            case 100:{
+                IWLog(@"转发");
+                break;
+            }
+            case 101:{
+                IWLog(@"评论");
+                break;
+            }
+            case 102:{
+                IWLog(@"赞");
+                URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
+                URLString = [URLString stringByAppendingString:URLtail];
+                params[@"userId"] = account.id;
+                dispatch_async(queue, ^{
+                    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+                        IWLog(@"%@",responseObject);
+                    } failure:^(NSError * _Nullable error) {
+                        IWLog(@"%@",error);
+                    }];
+                });
+                break;
+            }
+            case 103:{
+                IWLog(@"踩");
+                URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
+                URLString = [URLString stringByAppendingString:URLtail];
+                params[@"userId"] = account.id;
+                dispatch_async(queue, ^{
+                    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+                        IWLog(@"%@",responseObject);
+                        
+                    } failure:^(NSError * _Nullable error) {
+                        IWLog(@"%@",error);
+                    }];
+                });
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+        _btnblock();
 
-            break;
-        }
-        case 101:{
-            IWLog(@"评论");
-
-            break;
-        }
-        case 102:{
-            IWLog(@"赞");
-            URLtail = [NSString stringWithFormat:@"like/%@",_status.id];
-            URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.id;
-            dispatch_async(queue, ^{
-                [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-                    IWLog(@"%@",responseObject);
-                } failure:^(NSError * _Nullable error) {
-                    IWLog(@"%@",error);
-                }];
-            });
-            
-            
-            break;
-        }
-        case 103:{
-            IWLog(@"踩");
-            URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
-            URLString = [URLString stringByAppendingString:URLtail];
-            params[@"userId"] = account.id;
-            dispatch_async(queue, ^{
-            [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-                IWLog(@"%@",responseObject);
-
-            } failure:^(NSError * _Nullable error) {
-                IWLog(@"%@",error);
-            }];
-            });
-            break;
-        }
-        default:{
-            break;
-        }
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"请先登录！"];
     }
-    _btnblock();
-}
+    }
 
 
 
