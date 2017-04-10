@@ -64,14 +64,14 @@ static NSString * const detailCollectionViewCellID = @"detailCollectionViewCellI
 
 - (void)setProduct:(LYProduct *)product {
     _product = product;
-    
-    self.imageURLs = product.image_urls;
+    NSArray *picArray = [NSArray arrayWithObject:product.Pic];
+    self.imageURLs = picArray;
     [self.collectionView reloadData];
-    self.pageControl.numberOfPages = self.imageURLs.count;
+    self.pageControl.numberOfPages = picArray.count;
     self.pageControl.mr_centerX = self.collectionView.mr_centerX;
     self.titleLabel.text = product.D_title;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.Price];
-    self.describeLabel.text = product.describe;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.Org_Price];
+    self.describeLabel.text = product.Introduce;
 }
 
 #pragma mark - <懒加载>

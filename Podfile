@@ -5,7 +5,7 @@ target 'ShoppingGuide' do
   use_frameworks!
 
 	pod 'AFNetworking'
-	pod 'SDWebImage'
+	pod 'SDWebImage', '~> 3.7.2'
 	pod 'MJRefresh'
 	pod 'MBProgressHUD'
 	pod 'FMDB'

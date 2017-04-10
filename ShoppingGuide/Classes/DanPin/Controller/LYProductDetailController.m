@@ -18,7 +18,7 @@
 @interface LYProductDetailController ()<LYProductDetailToolBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) LYDetailScrollView *scrollView;
-
+@property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) LYProductDetailToolBar *toolBar;
 
 @end

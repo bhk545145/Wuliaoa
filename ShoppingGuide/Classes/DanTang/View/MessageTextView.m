@@ -27,7 +27,7 @@
     self.placeholder = @"回复评论：";
     self.placeholderColor = [UIColor lightGrayColor];
     self.pastableMediaTypes = SLKPastableMediaTypeAll;
-    
+    self.keyboardType = UIKeyboardTypeDefault;
     self.layer.borderColor = [UIColor colorWithRed:217.0/255.0 green:217.0/255.0 blue:217.0/255.0 alpha:1.0].CGColor;
 }
 

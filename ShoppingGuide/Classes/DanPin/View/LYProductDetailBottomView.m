@@ -55,35 +55,26 @@ static NSString * const commentCellID = @"commentCellID";
     __weak typeof(self) weakSelf = self;
     
     // 请求图文详情数据
-    NSString *detailURL = [NSString stringWithFormat:@"http://api.dantangapp.com/v2/items/%ld", product.productID];
-    
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:detailURL parameters:nil success:^(id  _Nullable responseObject) {
-        NSString *commentCount = responseObject[@"data"][@"comments_count"];
-        [weakSelf.choiceView.commentBtn setTitle:[NSString stringWithFormat:@"评论(%@)", commentCount] forState:UIControlStateNormal];
-        NSString *detail_html = responseObject[@"data"][@"detail_html"];
-        [weakSelf.webView loadHTMLString:detail_html baseURL:nil];
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
+    [weakSelf.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:product.Quan_link]]];
     
     // 请求商品评论数据
-    NSString *commentsURL = [NSString stringWithFormat:@"http://api.dantangapp.com/v2/items/%ld/comments", product.productID];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"limit"] = @(20);
-    params[@"offset"] = @(0);
-    [[LYNetworkTool sharedNetworkTool] loadDataInfo:commentsURL parameters:nil success:^(id  _Nullable responseObject) {
-        NSArray *dicts = responseObject[@"data"][@"comments"];
-        NSMutableArray *comments = [NSMutableArray array];
-        for (NSDictionary *dict in dicts) {
-            LYComment *comment = [LYComment mj_objectWithKeyValues:dict];
-            [comments addObject:comment];
-        }
-        weakSelf.comments = comments;
-        [weakSelf.commentTableView reloadData]; // 刷新评论数据
-        
-    } failure:^(NSError * _Nullable error) {
-        
-    }];
+//    NSString *commentsURL = [NSString stringWithFormat:@"http://api.dantangapp.com/v2/items/%ld/comments", product.productID];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"limit"] = @(20);
+//    params[@"offset"] = @(0);
+//    [[LYNetworkTool sharedNetworkTool] loadDataInfo:commentsURL parameters:nil success:^(id  _Nullable responseObject) {
+//        NSArray *dicts = responseObject[@"data"][@"comments"];
+//        NSMutableArray *comments = [NSMutableArray array];
+//        for (NSDictionary *dict in dicts) {
+//            LYComment *comment = [LYComment mj_objectWithKeyValues:dict];
+//            [comments addObject:comment];
+//        }
+//        weakSelf.comments = comments;
+//        [weakSelf.commentTableView reloadData]; // 刷新评论数据
+//        
+//    } failure:^(NSError * _Nullable error) {
+//        
+//    }];
 }
 
 - (LYDetailChoiceButtonView *)choiceView {

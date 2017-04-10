@@ -32,8 +32,8 @@
     _product = product;
     
     self.titleLabel.text = product.D_title;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.Price];
-    [self.likeBtn setTitle:[NSString stringWithFormat:@" %ld  ", product.favorites_count] forState:UIControlStateNormal];
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.Org_Price];
+    [self.likeBtn setTitle:[NSString stringWithFormat:@" %ld  ", (long)product.Sales_num] forState:UIControlStateNormal];
     [self.productImage sd_setImageWithURL:[NSURL URLWithString:product.Pic] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.placeholderBtn.hidden = YES;
     }];

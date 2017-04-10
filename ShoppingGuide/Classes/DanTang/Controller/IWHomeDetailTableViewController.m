@@ -74,7 +74,7 @@ static NSString* commitCell = @"commitCell";
     [super viewDidLoad];
     self.inverted = NO;
     [self.rightButton setTitle:@"发送" forState:UIControlStateNormal];
-    
+    [self.leftButton setTitle:@"123" forState:UIControlStateNormal];
     [self.textInputbar.editorTitle setTextColor:[UIColor whiteColor]];
     [self getComment];
 }
@@ -156,6 +156,10 @@ static NSString* commitCell = @"commitCell";
     [super didPressRightButton:sender];
 }
 
+
+- (void)didPressLeftButton:(id)sender{
+    [super didPressLeftButton:sender];
+}
 //获取评论
 - (void)getComment{
     NSString *articleId = _statusFrame.status.id;

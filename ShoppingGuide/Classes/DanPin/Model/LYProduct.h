@@ -26,7 +26,7 @@
 /**
  * describe
  */
-@property (nonatomic, copy) NSString *describe;
+//@property (nonatomic, copy) NSString *describe;
 
 /**
  *  editor_id
@@ -119,10 +119,13 @@
 @property (nonatomic, copy) NSString *D_title;
 @property (nonatomic, copy) NSString *Pic;
 @property (nonatomic, copy) NSString *Price;
+@property (nonatomic, copy) NSString *Org_Price;
 @property (nonatomic, copy) NSString *ali_click;
-
-
-
+@property (nonatomic, copy) NSString *Introduce;
+@property (nonatomic, copy) NSString *Quan_link;
+@property (nonatomic, copy) NSString *Quan_m_link;
+@property (nonatomic, copy) NSString *Jihua_link;
+@property (nonatomic, assign) NSInteger Sales_num;
 
 
 
