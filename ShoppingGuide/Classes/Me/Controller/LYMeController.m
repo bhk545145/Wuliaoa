@@ -27,6 +27,7 @@
 #import "IWAccount.h"
 #import "UIImageView+AFNetworking.h"
 #import "LYChannelController.h"
+#import "SVProgressHUD.h"
 
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
@@ -160,7 +161,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 // 请求用户喜欢的专题和商品
 - (void)loadLikeLoad {
     __weak typeof(self) weakSelf = self;
-    weakSelf.products = [NSArray arrayWithObjects:@"我的辣条", nil];
+    weakSelf.products = [NSArray arrayWithObjects:@"我的辣条",@"清除缓存", nil];
 //    IWAccount *account = [IWAccountTool account];
 //    // 喜欢的商品
 //    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
@@ -342,15 +343,33 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if(self.type == 0) {
-        LYChannelController *vc = [[LYChannelController alloc] init];
-        vc.channesID = 4;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row == 0) {
+            LYChannelController *vc = [[LYChannelController alloc] init];
+            vc.channesID = 4;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if(indexPath.row == 1){
+            [self removeSDImageCache];
+        }
+        
     }else {
 //        LYDetailController *vc = [[LYDetailController alloc] init];
 //        vc.item = self.themes[indexPath.row];
 //        [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+//清除缓存
+- (void)removeSDImageCache{
+    [SVProgressHUD showSuccessWithStatus:@"正在清除缓存"];
+    dispatch_async(queue, ^{
+        [[SDImageCache sharedImageCache] clearDisk];
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showSuccessWithStatus:@"清除成功"];
+    });
+    
+    
+}
+
 
 #pragma mark - <LYMineChoiceBarDelegate>
 
