@@ -97,10 +97,24 @@ static NSString* commitCell = @"commitCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.bounces = YES;
+    self.shakeToClearEnabled = YES;
+    self.keyboardPanningEnabled = YES;
+    self.shouldScrollToBottomAfterKeyboardShows = NO;
     self.inverted = NO;
+    
     [self.rightButton setTitle:@"发送" forState:UIControlStateNormal];
-    [self.leftButton setTitle:@"123" forState:UIControlStateNormal];
-    [self.textInputbar.editorTitle setTextColor:[UIColor whiteColor]];
+    
+    [self.leftButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background_os7"] forState:UIControlStateNormal];
+    [self.leftButton setTintColor:[UIColor grayColor]];
+    
+    self.textInputbar.autoHideRightButton = YES;
+    self.textInputbar.maxCharCount = 24;
+    self.textInputbar.counterStyle = SLKCounterStyleSplit;
+    self.textInputbar.counterPosition = SLKCounterPositionTop;
+    [self.textInputbar.editorTitle setTextColor:[UIColor darkGrayColor]];
+    [self.textInputbar.editorLeftButton setTintColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]];
+    [self.textInputbar.editorRightButton setTintColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]];
     [self getComment];
     
     _growingInputType = InputType_Text;
@@ -190,6 +204,7 @@ static NSString* commitCell = @"commitCell";
 
 
 - (void)didPressLeftButton:(id)sender{
+    [self openEmotion];
     [super didPressLeftButton:sender];
 }
 //获取评论
@@ -281,13 +296,13 @@ static NSString* commitCell = @"commitCell";
 }
 //当前选中系列的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"content-details_like_selected_16x16_"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }
 //未选中状态的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"content-details_like_selected_16x16_"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }

@@ -114,7 +114,7 @@
 		08FE65C91D77D113000DB820 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65C71D77D113000DB820 /* Main.storyboard */; };
 		08FE65CC1D77D113000DB820 /* ShoppingGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08FE65CA1D77D113000DB820 /* ShoppingGuide.xcdatamodeld */; };
 		08FE65D11D77D113000DB820 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65CF1D77D113000DB820 /* LaunchScreen.storyboard */; };
-		08FE65DD1D77D1A8000DB820 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65DC1D77D1A8000DB820 /* Assets.xcassets */; };
+		08FE65DD1D77D1A8000DB820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FE65DC1D77D1A8000DB820 /* Images.xcassets */; };
 		08FE66621D77D6CB000DB820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE66491D77D6CB000DB820 /* AppDelegate.m */; };
 		08FE66631D77D6CB000DB820 /* NSDate+MRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE664C1D77D6CB000DB820 /* NSDate+MRExtension.m */; };
 		08FE66641D77D6CB000DB820 /* UIBarButtonItem+MRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE664E1D77D6CB000DB820 /* UIBarButtonItem+MRExtension.m */; };
@@ -334,7 +334,7 @@
 		08FE65CB1D77D113000DB820 /* ShoppingGuide.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingGuide.xcdatamodel; sourceTree = "<group>"; };
 		08FE65D01D77D113000DB820 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08FE65D21D77D113000DB820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08FE65DC1D77D1A8000DB820 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08FE65DC1D77D1A8000DB820 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		08FE66481D77D6CB000DB820 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		08FE66491D77D6CB000DB820 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		08FE664B1D77D6CB000DB820 /* NSDate+MRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MRExtension.h"; sourceTree = "<group>"; };
@@ -636,7 +636,7 @@
 				08FE65DE1D77D25C000DB820 /* Classes */,
 				08FE65C71D77D113000DB820 /* Main.storyboard */,
 				08FE65CF1D77D113000DB820 /* LaunchScreen.storyboard */,
-				08FE65DC1D77D1A8000DB820 /* Assets.xcassets */,
+				08FE65DC1D77D1A8000DB820 /* Images.xcassets */,
 				08FE65D21D77D113000DB820 /* Info.plist */,
 				08FE65CA1D77D113000DB820 /* ShoppingGuide.xcdatamodeld */,
 				08FE65BE1D77D113000DB820 /* Supporting Files */,
@@ -1091,7 +1091,7 @@
 				08331F991D90366600CE736C /* LYCommentCell.xib in Resources */,
 				08E48F901D8E70BE00E0A863 /* SettingCell.plist in Resources */,
 				0810B4121D90D1E000EC0716 /* LYTMViewController.xib in Resources */,
-				08FE65DD1D77D1A8000DB820 /* Assets.xcassets in Resources */,
+				08FE65DD1D77D1A8000DB820 /* Images.xcassets in Resources */,
 				02A683031E7BBA40008824B2 /* MJPhotoBrowser.bundle in Resources */,
 				085AAD771D911A8400A365B8 /* LYLikeCell.xib in Resources */,
 				0810B41C1D90E98600EC0716 /* LYEditInfoViewController.xib in Resources */,

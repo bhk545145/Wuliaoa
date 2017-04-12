@@ -55,7 +55,7 @@
         self.highlightedImage = [UIImage resizedImageWithName:@""];
         
         // 2.添加按钮
-        self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"moreicon_textpage" bgImage:@"timeline_card_leftbottom_highlighted"];
+//        self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"moreicon_textpage" bgImage:@"timeline_card_leftbottom_highlighted"];
         self.commentBtn = [self setupBtnWithTitle:@"评论" image:@"commenticon_textpage" bgImage:@"timeline_card_middlebottom_highlighted"];
         self.attitudeBtn = [self setupBtnWithTitle:@"赞" image:@"digupicon_comment" bgImage:@"digupicon_comment_press"];
         self.hateBtn = [self setupBtnWithTitle:@"踩" image:@"digdownicon_textpage" bgImage:@"digdownicon_textpage_press"];
@@ -149,7 +149,7 @@
     _status = status;
     
     // 1.设置转发数
-    [self setupBtn:self.reweetBtn originalTitle:@"转发" count:status.reposts_count];
+//    [self setupBtn:self.reweetBtn originalTitle:@"转发" count:status.reposts_count];
     [self setupBtn:self.commentBtn originalTitle:@"评论" count:status.commentCount];
     [self setupBtn:self.attitudeBtn originalTitle:@"赞" count:status.likeCount];
     [self setupBtn:self.hateBtn originalTitle:@"踩" count:status.hateCount];

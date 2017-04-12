@@ -18,8 +18,8 @@
         
         [self addButtonWithIcon:@"compose_camerabutton_background" highIcon:@"compose_camerabutton_background_highlighted" tag:IWComposeToolbarButtonTypeCamera];
         [self addButtonWithIcon:@"compose_toolbar_picture" highIcon:@"compose_toolbar_picture_highlighted" tag:IWComposeToolbarButtonTypePicture];
-        [self addButtonWithIcon:@"compose_mentionbutton_background" highIcon:@"compose_mentionbutton_background_highlighted" tag:IWComposeToolbarButtonTypeMention];
-        [self addButtonWithIcon:@"compose_trendbutton_background" highIcon:@"compose_trendbutton_background_highlighted" tag:IWComposeToolbarButtonTypeTrend];
+//        [self addButtonWithIcon:@"compose_mentionbutton_background" highIcon:@"compose_mentionbutton_background_highlighted" tag:IWComposeToolbarButtonTypeMention];
+//        [self addButtonWithIcon:@"compose_trendbutton_background" highIcon:@"compose_trendbutton_background_highlighted" tag:IWComposeToolbarButtonTypeTrend];
         [self addButtonWithIcon:@"compose_emoticonbutton_background" highIcon:@"compose_emoticonbutton_background_highlighted" tag:IWComposeToolbarButtonTypeEmotion];
     }
     return self;
