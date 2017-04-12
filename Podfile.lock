@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AGEmojiKeyboard (0.2.1)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -28,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AGEmojiKeyboard
   - FMDB
   - LoremIpsum (~> 1.0)
   - MBProgressHUD
@@ -38,6 +40,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AGEmojiKeyboard: d5a01a4b0de30e1f1c2a121503ac36a79c7217ab
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   LoremIpsum: 9029c55d36501b2ee0b05cc9ecda11d3a0479160
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -46,6 +49,6 @@ SPEC CHECKSUMS:
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
 
-PODFILE CHECKSUM: 50e69c9ea5f07aed1f84534d8d1f37d45f3911fb
+PODFILE CHECKSUM: be997643e5027cf74367ea9fa31eb504613e225a
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

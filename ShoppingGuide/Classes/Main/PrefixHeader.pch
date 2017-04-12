@@ -15,6 +15,8 @@
 #import "UIImage+MJ.h"
 #import "MRConst.h"
 #import "IWCommon.h"
+//表情键盘
+#import "AGEmojiKeyBoardView.h"
 
 
 // 打印方法调用的宏

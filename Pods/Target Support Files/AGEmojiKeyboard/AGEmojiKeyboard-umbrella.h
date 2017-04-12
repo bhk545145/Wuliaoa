@@ -10,7 +10,9 @@
 #endif
 #endif
 
+#import "AGEmojiKeyBoardView.h"
+#import "AGEmojiPageView.h"
 
-FOUNDATION_EXPORT double Pods_ShoppingGuideVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ShoppingGuideVersionString[];
+FOUNDATION_EXPORT double AGEmojiKeyboardVersionNumber;
+FOUNDATION_EXPORT const unsigned char AGEmojiKeyboardVersionString[];
 

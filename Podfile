@@ -12,4 +12,5 @@ target 'ShoppingGuide' do
     pod 'MJExtension'
     pod 'SlackTextViewController'
     pod 'LoremIpsum', '~> 1.0'
+    pod 'AGEmojiKeyboard'
 end

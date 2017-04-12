@@ -20,7 +20,17 @@
 #import "LHGroupViewController.h"
 #import "LHCollectionViewController.h"
 #import "LHConst.h"
-@interface IWComposeViewController () <IWComposeToolbarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+typedef enum _InputType
+{
+    InputType_Text     = 0,
+    InputType_Emoji    = 1,
+} InputType;
+
+@interface IWComposeViewController () <IWComposeToolbarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource>
+{
+    AGEmojiKeyboardView *_emojiKeyboardView;
+}
 @property (nonatomic, weak) UITextView *textView;
 @property (nonatomic, weak) IWComposeToolbar *toolbar;
 @property (nonatomic,strong) NSMutableArray *imageArray;//存放处理完的图片
@@ -28,6 +38,7 @@
 @property (nonatomic,strong) NSMutableArray *scrollSubFrame;//子视图的frame
 @property (nonatomic,strong) NSMutableArray *localLength;//每张图片的尺寸
 @property (nonatomic, assign) NSInteger selectedNumber;
+@property (nonatomic, assign) InputType growingInputType;
 @end
 
 @implementation IWComposeViewController
@@ -44,6 +55,14 @@
     [self setupTextView];
     [self setupToolbar];
     [self setupImageView];
+    
+    _growingInputType = InputType_Text;
+    //创建键盘
+    AGEmojiKeyboardView *emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 216) dataSource:self];
+    emojiKeyboardView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    emojiKeyboardView.delegate = self;
+    _emojiKeyboardView = emojiKeyboardView;
+
 }
 
 - (void)setupImageView
@@ -204,7 +223,9 @@
         case IWComposeToolbarButtonTypePicture: // 相册
             [self openAlbum];
             break;
-            
+        case IWComposeToolbarButtonTypeEmotion: // 表情键盘
+            [self openEmotion];
+            break;
         default:
             break;
     }
@@ -227,6 +248,24 @@
 - (void)openAlbum
 {
     [self acquireLocal];
+}
+
+/**
+ *  表情
+ */
+- (void)openEmotion
+{
+    if (_growingInputType == InputType_Text) {
+        [_textView resignFirstResponder];
+        _textView.inputView = _emojiKeyboardView;
+        [_textView becomeFirstResponder];
+        self.growingInputType = InputType_Emoji;
+    } else if (_growingInputType == InputType_Emoji) {
+        [_textView resignFirstResponder];
+        _textView.inputView = nil;
+        [_textView becomeFirstResponder];
+        self.growingInputType = InputType_Text;
+    }
 }
 
 #pragma mark --
@@ -369,5 +408,60 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark 表情键盘数据源和代理
+//选中表情后
+- (void)emojiKeyBoardView:(AGEmojiKeyboardView *)emojiKeyBoardView didUseEmoji:(NSString *)emoji {
+    self.textView.text = [self.textView.text stringByAppendingString:emoji];
+}
+//点击删除按钮
+- (void)emojiKeyBoardViewDidPressBackSpace:(AGEmojiKeyboardView *)emojiKeyBoardView {
+    [self.textView deleteBackward];
+}
+//删除按钮的图片
+- (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
 
+//生成随机色
+- (UIColor *)randomColor {
+    return [UIColor colorWithRed:drand48()
+                           green:drand48()
+                            blue:drand48()
+                           alpha:drand48()];
+}
+//生成长方形图片,颜色随机
+- (UIImage *)randomImage {
+    CGSize size = CGSizeMake(30, 10);
+    UIGraphicsBeginImageContextWithOptions(size , NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIColor *fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    CGContextFillRect(context, rect);
+    
+    fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGFloat xxx = 3;
+    rect = CGRectMake(xxx, xxx, size.width - 2 * xxx, size.height - 2 * xxx);
+    CGContextFillRect(context, rect);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+//当前选中系列的标题图片
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
+//未选中状态的标题图片
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
 @end

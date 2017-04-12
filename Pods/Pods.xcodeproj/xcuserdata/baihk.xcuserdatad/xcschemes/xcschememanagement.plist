@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AGEmojiKeyboard.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,7 +57,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>197EDD716B9A5E672DE066C2E28B935C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>251BAD17812F7EBF6532EACF66F941C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F0DF944F19169FF7FF132C5885A0666</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40672E7C24EC916EDFEB5C56BD529103</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,17 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7163B48F29C2BB1CF3728B2720CE6EA3</key>
+		<key>7EED7351993DAAA3A69403827255EA3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>91710B7DF90241FB3857CCDA4E28AFE6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C9A1023755A4B4A02F7DC62DD1510268</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,11 +103,6 @@
 			<true/>
 		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F6F82199BF9485C981FD928D3C4F3C4A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

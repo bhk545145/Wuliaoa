@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '40672E7C24EC916EDFEB5C56BD529103'
-               BlueprintName = 'SlackTextViewController'
+               BlueprintIdentifier = '7EED7351993DAAA3A69403827255EA3C'
+               BlueprintName = 'AGEmojiKeyboard'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SlackTextViewController.framework'>
+               BuildableName = 'AGEmojiKeyboard.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

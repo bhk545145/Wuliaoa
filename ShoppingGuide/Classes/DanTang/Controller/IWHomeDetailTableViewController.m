@@ -28,13 +28,20 @@
 
 #define DEBUG_CUSTOM_TYPING_INDICATOR 0
 #define DEBUG_CUSTOM_BOTTOM_VIEW 0
+
+typedef enum _InputType
+{
+    InputType_Text     = 0,
+    InputType_Emoji    = 1,
+} InputType;
 static NSString* commitCell = @"commitCell";
-@interface IWHomeDetailTableViewController (){
-    
+@interface IWHomeDetailTableViewController ()<AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource>{
+       AGEmojiKeyboardView *_emojiKeyboardView;
 }
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (nonatomic, strong) NSArray *commentArray;
 @property (nonatomic, strong) UIWindow *pipWindow;
+@property (nonatomic, assign) InputType growingInputType;
 @end
 
 @implementation IWHomeDetailTableViewController
@@ -70,6 +77,24 @@ static NSString* commitCell = @"commitCell";
 
 }
 
+/**
+ *  表情
+ */
+- (void)openEmotion
+{
+    if (_growingInputType == InputType_Text) {
+        [self.textView resignFirstResponder];
+        self.textView.inputView = _emojiKeyboardView;
+        [self.textView becomeFirstResponder];
+        self.growingInputType = InputType_Emoji;
+    } else if (_growingInputType == InputType_Emoji) {
+        [self.textView resignFirstResponder];
+        self.textView.inputView = nil;
+        [self.textView becomeFirstResponder];
+        self.growingInputType = InputType_Text;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.inverted = NO;
@@ -77,6 +102,13 @@ static NSString* commitCell = @"commitCell";
     [self.leftButton setTitle:@"123" forState:UIControlStateNormal];
     [self.textInputbar.editorTitle setTextColor:[UIColor whiteColor]];
     [self getComment];
+    
+    _growingInputType = InputType_Text;
+    //创建键盘
+    AGEmojiKeyboardView *emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 216) dataSource:self];
+    emojiKeyboardView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    emojiKeyboardView.delegate = self;
+    _emojiKeyboardView = emojiKeyboardView;
 }
 
 
@@ -201,6 +233,63 @@ static NSString* commitCell = @"commitCell";
         
     }];
 
+}
+
+#pragma mark 表情键盘数据源和代理
+//选中表情后
+- (void)emojiKeyBoardView:(AGEmojiKeyboardView *)emojiKeyBoardView didUseEmoji:(NSString *)emoji {
+    self.textView.text = [self.textView.text stringByAppendingString:emoji];
+}
+//点击删除按钮
+- (void)emojiKeyBoardViewDidPressBackSpace:(AGEmojiKeyboardView *)emojiKeyBoardView {
+    [self.textView deleteBackward];
+}
+//删除按钮的图片
+- (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
+
+//生成随机色
+- (UIColor *)randomColor {
+    return [UIColor colorWithRed:drand48()
+                           green:drand48()
+                            blue:drand48()
+                           alpha:drand48()];
+}
+//生成长方形图片,颜色随机
+- (UIImage *)randomImage {
+    CGSize size = CGSizeMake(30, 10);
+    UIGraphicsBeginImageContextWithOptions(size , NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIColor *fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    CGContextFillRect(context, rect);
+    
+    fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGFloat xxx = 3;
+    rect = CGRectMake(xxx, xxx, size.width - 2 * xxx, size.height - 2 * xxx);
+    CGContextFillRect(context, rect);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+//当前选中系列的标题图片
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
+//未选中状态的标题图片
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
 }
 
 @end
