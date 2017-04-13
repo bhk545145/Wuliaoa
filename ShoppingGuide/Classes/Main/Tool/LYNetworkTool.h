@@ -10,7 +10,7 @@
 
 @interface LYNetworkTool : NSObject<NSCopying>
 
-+ (instancetype)sharedNetworkTool;
++ (instancetype _Nullable )sharedNetworkTool;
 
 - (void)loadDataInfo:(nullable NSString *)URLString
           parameters:(nullable id)parameters

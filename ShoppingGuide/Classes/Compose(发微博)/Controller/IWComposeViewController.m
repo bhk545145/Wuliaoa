@@ -412,6 +412,7 @@ typedef enum _InputType
 //选中表情后
 - (void)emojiKeyBoardView:(AGEmojiKeyboardView *)emojiKeyBoardView didUseEmoji:(NSString *)emoji {
     self.textView.text = [self.textView.text stringByAppendingString:emoji];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 //点击删除按钮
 - (void)emojiKeyBoardViewDidPressBackSpace:(AGEmojiKeyboardView *)emojiKeyBoardView {

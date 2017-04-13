@@ -14,7 +14,7 @@
 /**
  *  id
  */
-@property (nonatomic, assign) NSInteger channelsID;
+@property (nonatomic, assign) channesIDType channelsID;
 
 /**
  *  eidtable

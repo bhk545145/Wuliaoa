@@ -345,7 +345,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     if(self.type == 0) {
         if (indexPath.row == 0) {
             LYChannelController *vc = [[LYChannelController alloc] init];
-            vc.channesID = 4;
+            vc.channesID = channesIDTypeauthorId;
             [self.navigationController pushViewController:vc animated:YES];
         }else if(indexPath.row == 1){
             [self removeSDImageCache];

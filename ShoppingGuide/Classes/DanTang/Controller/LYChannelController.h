@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface LYChannelController : UITableViewController
 
 /**
  *  channelID
  */
-@property (nonatomic, assign) NSInteger channesID;
+@property (nonatomic, assign) channesIDType channesID;
 
 @end

@@ -61,7 +61,7 @@ static NSString * const HomeCell = @"HomeCell";
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    if (self.channesID == 4) {
+    if (self.channesID == channesIDTypeauthorId) {
         [self.navigationController setNavigationBarHidden:NO animated:NO];
         self.navigationItem.title = @"我的辣条";
     }
@@ -72,7 +72,7 @@ static NSString * const HomeCell = @"HomeCell";
  *  初始化表格
  */
 - (void)setupTable {
-    if (self.channesID == 4) {
+    if (self.channesID == channesIDTypeauthorId) {
         self.tableView.contentInset = UIEdgeInsetsMake(LYNavBarHeight, 0, self.tabBarController.tabBar.mr_height, 0);
     }else{
         self.tableView.contentInset = UIEdgeInsetsMake(LYNavBarHeight + LYTitlesViewH, 0, self.tabBarController.tabBar.mr_height, 0);
@@ -174,11 +174,11 @@ static NSString * const HomeCell = @"HomeCell";
         long long maxId = [statusFrame.status.id longLongValue];
         // 加载ID比since_id大的微博
         params[@"sinceid"] = @(maxId);
-        if (self.channesID == 1) {
+        if (self.channesID == channesIDTypeAll) {
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
-        }else if(self.channesID == 2){
+        }else if(self.channesID == channesIDTypePICTURE){
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
-        }else if(self.channesID == 3){
+        }else if(self.channesID == channesIDTypeJOKE){
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
         }else{
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?authorId=%@",IWArticleURL,account.id];
@@ -202,22 +202,22 @@ static NSString * const HomeCell = @"HomeCell";
         IWStatusFrame *statusFrame = self.statusFrames[0];
         // 加载ID比since_id大的微博
         params[@"sinceid"] = statusFrame.status.id;
-        if (self.channesID == 1) {
+        if (self.channesID == channesIDTypeAll) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
-        }else if(self.channesID == 2){
+        }else if(self.channesID == channesIDTypePICTURE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=PICTURE",IWArticleURL,params[@"sinceid"]];
-        }else if(self.channesID == 3) {
+        }else if(self.channesID == channesIDTypeJOKE) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=JOKE",IWArticleURL,params[@"sinceid"]];
         }else{
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&authorId=%@",IWArticleURL,params[@"sinceid"],account.id];
         }
         [self loadInfo];
     }else{
-        if (self.channesID == 1) {
+        if (self.channesID == channesIDTypeAll) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@",IWArticleURL,params[@"count"]];
-        }else if(self.channesID == 2){
+        }else if(self.channesID == channesIDTypePICTURE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=PICTURE",IWArticleURL,params[@"count"]];
-        }else if(self.channesID == 3){
+        }else if(self.channesID == channesIDTypeJOKE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=JOKE",IWArticleURL,params[@"count"]];
         }else{
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?authorId=%@",IWArticleURL,params[@"count"],account.id];
@@ -242,11 +242,11 @@ static NSString * const HomeCell = @"HomeCell";
         long long maxId = [statusFrame.status.id longLongValue];
         params[@"maxId"] = @(maxId);
         
-        if (self.channesID == 1) {
+        if (self.channesID == channesIDTypeAll) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@",IWArticleURL,params[@"count"],params[@"maxId"]];
-        }else if(self.channesID == 2){
+        }else if(self.channesID == channesIDTypePICTURE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=PICTURE",IWArticleURL,params[@"count"],params[@"maxId"]];
-        }else if(self.channesID == 3){
+        }else if(self.channesID == channesIDTypeJOKE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=JOKE",IWArticleURL,params[@"count"],params[@"maxId"]];
         }else{
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&authorId=%@",IWArticleURL,params[@"count"],params[@"maxId"],account.id];
@@ -303,7 +303,7 @@ static NSString * const HomeCell = @"HomeCell";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(self.channesID != 4){
+    if(self.channesID != channesIDTypeauthorId){
         static UIAccelerationValue _oldOffset;
         if (_oldOffset > -64) {
             if (scrollView.contentOffset.y > _oldOffset) {//如果当前位移大于缓存位移，说明scrollView向上滑动

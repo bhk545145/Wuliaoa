@@ -9,6 +9,13 @@ typedef enum {
     LYLoadTypeMore
 } LYLoadType;
 
+typedef enum {
+    channesIDTypeAll,
+    channesIDTypePICTURE,
+    channesIDTypeJOKE,
+    channesIDTypeauthorId
+}   channesIDType;
+
 // 圆角半径
 UIKIT_EXTERN NSInteger const kLYCornerRadius;
 
