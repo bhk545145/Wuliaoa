@@ -38,6 +38,8 @@
     self.bgImageView.frame = CGRectMake(0, -20, MRScreenW, 200);
     [self addSubview:self.bgImageView];
     [self addSubview:self.settingButton];
+    [self.settingButton addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.settingButton];
     [self.messageButton addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.messageButton];
     [self.iconButton addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,28 +78,28 @@
     
     return _bgImageView;
 }
-//
-//- (UIButton *)settingButton {
-//    
-//    if(!_settingButton) {
-//        _settingButton = [[UIButton alloc] init];
-//        [_settingButton setImage:[UIImage imageNamed:@"Me_settings_20x20_"] forState:UIControlStateNormal];
-//        _settingButton.frame = CGRectMake(MRScreenW - 44, 0, 44, 44);
-//    }
-//    
-//    return _settingButton;
-//}
 
-- (UIButton *)messageButton {
+- (UIButton *)settingButton {
     
-    if(!_messageButton) {
-        _messageButton = [[UIButton alloc] init];
-        [_messageButton setImage:[UIImage imageNamed:@"Me_message_20x20_"] forState:UIControlStateNormal];
-        _messageButton.frame = CGRectMake(MRScreenW - 44, 0, 44, 44);
+    if(!_settingButton) {
+        _settingButton = [[UIButton alloc] init];
+        [_settingButton setImage:[UIImage imageNamed:@"Me_settings_20x20_"] forState:UIControlStateNormal];
+        _settingButton.frame = CGRectMake(MRScreenW - 44, 0, 44, 44);
     }
     
-    return _messageButton;
+    return _settingButton;
 }
+
+//- (UIButton *)messageButton {
+//    
+//    if(!_messageButton) {
+//        _messageButton = [[UIButton alloc] init];
+//        [_messageButton setImage:[UIImage imageNamed:@"Me_message_20x20_"] forState:UIControlStateNormal];
+//        _messageButton.frame = CGRectMake(MRScreenW - 44, 0, 44, 44);
+//    }
+//    
+//    return _messageButton;
+//}
 
 - (UIButton *)iconButton {
     

@@ -187,6 +187,12 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 //    }];
 }
 
+- (void)headerSettingClick:(UIButton *)btn{
+    LYMeSettingController *settingVc = [[LYMeSettingController alloc]init];
+    settingVc.title = @"设置";
+    [self.navigationController pushViewController:settingVc animated:YES];
+}
+
 - (void)headerMessageClick:(UIButton *)btn {
     // 创建消息中心的控制器
     LYMeMessageController *messageVc = [[LYMeMessageController alloc] init];
