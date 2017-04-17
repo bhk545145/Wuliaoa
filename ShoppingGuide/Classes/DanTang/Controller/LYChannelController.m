@@ -156,7 +156,8 @@ static NSString * const HomeCell = @"HomeCell";
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
         } failure:^(NSError * _Nullable error) {
-            
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
         }];
 
     });

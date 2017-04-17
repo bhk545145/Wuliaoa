@@ -70,10 +70,10 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     [self setupTableView];
     // 注册登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LYLoginNotification" object:nil];
-    // 注册点赞专题的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheme:) name:@"LYThemeLikeNotification" object:nil];
-    // 注册点赞商品的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeProduct:) name:@"LYProductLikeNotification" object:nil];
+//    // 注册点赞专题的通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheme:) name:@"LYThemeLikeNotification" object:nil];
+//    // 注册点赞商品的通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeProduct:) name:@"LYProductLikeNotification" object:nil];
 }
 
 // 初始化TableView
@@ -161,7 +161,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 // 请求用户喜欢的专题和商品
 - (void)loadLikeLoad {
     __weak typeof(self) weakSelf = self;
-    weakSelf.products = [NSArray arrayWithObjects:@"我的辣条",@"清除缓存", nil];
+    weakSelf.products = [NSArray arrayWithObjects:@"我的辣条", nil];
 //    IWAccount *account = [IWAccountTool account];
 //    // 喜欢的商品
 //    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
@@ -292,18 +292,18 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     [self inspectStatus];
 }
 
-// 专题点赞通知回调
-- (void)likeTheme:(NSNotification *)notif {
-    
-    // 重新请求数据
-    [self loadLikeLoad];
-}
-
-// 商品点赞通知回调
-- (void)likeProduct:(NSNotification *)notif {
-    // 重新请求数据
-    [self loadLikeLoad];
-}
+//// 专题点赞通知回调
+//- (void)likeTheme:(NSNotification *)notif {
+//    
+//    // 重新请求数据
+//    [self loadLikeLoad];
+//}
+//
+//// 商品点赞通知回调
+//- (void)likeProduct:(NSNotification *)notif {
+//    // 重新请求数据
+//    [self loadLikeLoad];
+//}
 
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 
@@ -354,7 +354,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
             vc.channesID = channesIDTypeauthorId;
             [self.navigationController pushViewController:vc animated:YES];
         }else if(indexPath.row == 1){
-            [self removeSDImageCache];
+            
         }
         
     }else {
@@ -364,17 +364,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     }
 }
 
-//清除缓存
-- (void)removeSDImageCache{
-    [SVProgressHUD showSuccessWithStatus:@"正在清除缓存"];
-    dispatch_async(queue, ^{
-        [[SDImageCache sharedImageCache] clearDisk];
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showSuccessWithStatus:@"清除成功"];
-    });
-    
-    
-}
+
 
 
 #pragma mark - <LYMineChoiceBarDelegate>
@@ -394,8 +384,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)dealloc {
     // 移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LYLoginNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LYThemeLikeNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LYProductLikeNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LYThemeLikeNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LYProductLikeNotification" object:nil];
 }
 
 @end

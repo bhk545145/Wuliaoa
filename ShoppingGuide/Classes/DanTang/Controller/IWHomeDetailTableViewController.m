@@ -17,6 +17,7 @@
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 #import "MBProgressHUD+MJ.h"
+#import "SVProgressHUD.h"
 #import "IWWeiboTool.h"
 #import "IWCommit.h"
 #import "MJExtension.h"
@@ -197,7 +198,8 @@ static NSString* commitCell = @"commitCell";
         [self getComment];
         [self.textView resignFirstResponder];
     } failure:^(NSError * _Nullable error) {
-        
+        [self.textView resignFirstResponder];
+        [SVProgressHUD showErrorWithStatus:@"发送失败"];
     }];
     [super didPressRightButton:sender];
 }
@@ -218,7 +220,7 @@ static NSString* commitCell = @"commitCell";
         [self getarticle];
         
     } failure:^(NSError * _Nullable error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"获取评论失败"];
     }];
 }
 //根据id获取最新辣条
@@ -302,7 +304,7 @@ static NSString* commitCell = @"commitCell";
 }
 //未选中状态的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    UIImage *img = [UIImage imageNamed:@"content-details_like_selected_16x16_"];
+    UIImage *img = [UIImage imageNamed:@"content-details_like_16x16_"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }

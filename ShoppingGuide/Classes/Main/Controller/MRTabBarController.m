@@ -9,7 +9,8 @@
 #import "MRTabBarController.h"
 #import "MRNavigationController.h"
 #import "LYDanTangController.h"
-#import "LYDanPingController.h"
+//#import "LYDanPingController.h"
+#import "LYTMViewController.h"
 #import "LYCategoryController.h"
 #import "LYMeController.h"
 
@@ -25,7 +26,7 @@
     // 添加子控制器
     [self addChildController:[[LYDanTangController alloc] init] imageName:@"TabBar_home_23x23_" selectedImage:@"TabBar_home_23x23_selected" title:@"辣条"];
     
-    [self addChildController:[[LYDanPingController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"赞品"];
+    [self addChildController:[[LYTMViewController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"赞品"];
     
     [self addChildController:[[LYCategoryController alloc] init] imageName:@"TabBar_category_23x23_" selectedImage:@"TabBar_category_23x23_selected" title:@"发现"];
     
