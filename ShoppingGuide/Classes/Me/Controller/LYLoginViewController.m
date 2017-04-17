@@ -112,6 +112,7 @@
             IWLog(@"登录信息——————%@",responseObject);
             int isLongin = [responseObject[@"status"] intValue];
             if (isLongin == 1) {
+                [SVProgressHUD showSuccessWithStatus:@"登录成功!"];
                 IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"][@"user"]];
                 IWToken *token = [IWToken mj_objectWithKeyValues:responseObject[@"result"][@"token"]];
                 [IWAccountTool saveAccount:account];
