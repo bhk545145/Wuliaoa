@@ -41,11 +41,20 @@
     if(!_tableView) {
         UITableView *tableView = [[UITableView alloc] init];
         tableView.frame = self.view.bounds;
+        tableView.bounces = NO;
         [self.view addSubview:tableView];
         _tableView = tableView;
     }
     
     return _tableView;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"  ";
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
