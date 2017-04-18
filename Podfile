@@ -13,4 +13,5 @@ target 'ShoppingGuide' do
     pod 'SlackTextViewController'
     pod 'LoremIpsum', '~> 1.0'
     pod 'AGEmojiKeyboard'
+    pod 'BaiduMobStat'
 end

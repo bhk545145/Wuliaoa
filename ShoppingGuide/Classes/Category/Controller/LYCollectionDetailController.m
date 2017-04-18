@@ -12,7 +12,7 @@
 #import "LYNetworkTool.h"
 #import "LYItemCell.h"
 #import "MJExtension.h"
-
+#import "BaiduMobStat.h"
 @interface LYCollectionDetailController ()
 
 /**
@@ -30,6 +30,21 @@ static NSString * LYCollectionDetailCellID = @"LYCollectionTableViewCell";
     [super viewDidLoad];
     
     [self setupUI];
+}
+
+// 进入页面，建议在此处添加
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    
+}
+
+// 退出页面，建议在此处添加
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 - (void)setupUI {

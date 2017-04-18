@@ -10,6 +10,7 @@
 #import "LYProduct.h"
 #import "MJRefresh.h"
 #import "SVProgressHUD.h"
+#import "BaiduMobStat.h"
 
 @interface LYTMViewController ()<UIWebViewDelegate>{
     dispatch_queue_t queue;
@@ -31,9 +32,25 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"checkUserType_backward_9x15_"] style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackClick)];
     
     [self setupWebView];
+    __weak typeof(self) weakSelf = self;
     // 刷新
-    [self.webView.scrollView.mj_header beginRefreshing];
+    [weakSelf.webView.scrollView.mj_header beginRefreshing];
 
+}
+
+// 进入页面，建议在此处添加
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    
+}
+
+// 退出页面，建议在此处添加
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 - (void)setupWebView{
@@ -58,6 +75,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     IWLog(@"URL---%@",request);
     [self foraward:request];
+    [[BaiduMobStat defaultStat] webviewStartLoadWithRequest:request];
     return YES;
 }
 
@@ -91,20 +109,18 @@
 }
 
 -(void)foraward:(NSURLRequest *)request{
-    // 淘宝
     NSString *URLString = [NSString stringWithFormat:@"%@",request.URL];
+    // 淘宝
     if ([URLString containsString:@"taobao://m.taobao.com"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
-            [[UIApplication sharedApplication] openURL:request.URL options:nil completionHandler:^(BOOL success) {
-            }];
+            [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
         }
     }
     
     // 天猫
     if ([URLString containsString:@"detail.tmall.m"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
-            [[UIApplication sharedApplication] openURL:request.URL options:nil completionHandler:^(BOOL success) {
-            }];
+            [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
         }
     }
     

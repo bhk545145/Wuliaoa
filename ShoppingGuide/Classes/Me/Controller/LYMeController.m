@@ -28,6 +28,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "LYChannelController.h"
 #import "SVProgressHUD.h"
+#import "BaiduMobStat.h"
 
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
@@ -74,6 +75,21 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheme:) name:@"LYThemeLikeNotification" object:nil];
 //    // 注册点赞商品的通知
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeProduct:) name:@"LYProductLikeNotification" object:nil];
+}
+
+// 进入页面，建议在此处添加
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    
+}
+
+// 退出页面，建议在此处添加
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 // 初始化TableView

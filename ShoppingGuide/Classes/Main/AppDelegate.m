@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MRTabBarController.h"
+#import "BaiduMobStat.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +32,9 @@
     
     [self.window makeKeyAndVisible];
     
+    //百度移动统计SDK
+    [BaiduMobStat defaultStat].enableDebugOn = YES;
+    [[BaiduMobStat defaultStat] startWithAppId:@"3e822587d6"];
     return YES;
 }
 

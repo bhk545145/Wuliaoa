@@ -15,6 +15,7 @@
 #import "IWAccountTool.h"
 #import "IWAccount.h"
 #import "SVProgressHUD.h"
+#import "BaiduMobStat.h"
 
 #define scrollViewInsetHeight self.view.mr_height - 100 - self.tabBarController.tabBar.mr_height
 
@@ -50,6 +51,22 @@
     [self setNav];
     // 请求头部标题数据
     [self loadTitlesViewInfo];
+}
+
+
+// 进入页面，建议在此处添加
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    
+}
+
+// 退出页面，建议在此处添加
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 /**
