@@ -152,7 +152,7 @@
 //    [self setupBtn:self.reweetBtn originalTitle:@"转发" count:status.reposts_count];
     [self setupBtn:self.commentBtn originalTitle:@"评论" count:status.commentCount];
     [self setupBtn:self.attitudeBtn originalTitle:@"赞" count:status.likeCount];
-    [self setupBtn:self.hateBtn originalTitle:@"踩" count:status.hateCount];
+    [self setupBtn:self.hateBtn originalTitle:@"举报" count:status.hateCount];
 }
 
 /**
