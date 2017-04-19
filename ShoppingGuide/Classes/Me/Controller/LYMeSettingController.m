@@ -69,7 +69,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
     cell.textLabel.text = @"清除缓存";
-    cell.imageView.image = [UIImage imageNamed:@"latiao"];
+    cell.imageView.image = [UIImage imageNamed:@"removeCache"];
     
     return cell;
 }

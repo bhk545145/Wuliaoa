@@ -263,7 +263,7 @@ static NSString* commitCell = @"commitCell";
 }
 //删除按钮的图片
 - (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"back"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }

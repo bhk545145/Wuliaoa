@@ -420,7 +420,7 @@ typedef enum _InputType
 }
 //删除按钮的图片
 - (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"back"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }
@@ -455,13 +455,13 @@ typedef enum _InputType
 }
 //当前选中系列的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"content-details_like_selected_16x16_"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }
 //未选中状态的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
-    UIImage *img = [self randomImage];
+    UIImage *img = [UIImage imageNamed:@"content-details_like_16x16_"];
     [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return img;
 }

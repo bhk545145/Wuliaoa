@@ -59,7 +59,7 @@
     if(!_images) {
         
 //        _images = @[@"Share_WeChatTimelineIcon_70x70_", @"Share_WeChatSessionIcon_70x70_", @"Share_WeiboIcon_70x70_", @"Share_QzoneIcon_70x70_", @"Share_QQIcon_70x70_", @"Share_CopyLinkIcon_70x70_"];
-        _images = @[@"jingshi"];
+        _images = @[@"Warning"];
         
     }
     
