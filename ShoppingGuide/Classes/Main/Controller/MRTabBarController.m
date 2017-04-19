@@ -28,7 +28,7 @@
     
     [self addChildController:[[LYTMViewController alloc] init] imageName:@"TabBar_gift_23x23_" selectedImage:@"TabBar_gift_23x23_selected" title:@"赞品"];
     
-    [self addChildController:[[LYCategoryController alloc] init] imageName:@"TabBar_category_23x23_" selectedImage:@"TabBar_category_23x23_selected" title:@"发现"];
+//    [self addChildController:[[LYCategoryController alloc] init] imageName:@"TabBar_category_23x23_" selectedImage:@"TabBar_category_23x23_selected" title:@"发现"];
     
     [self addChildController:[[LYMeController alloc] init] imageName:@"TabBar_me_boy_23x23_" selectedImage:@"TabBar_me_boy_23x23_selected" title:@"我的"];
 

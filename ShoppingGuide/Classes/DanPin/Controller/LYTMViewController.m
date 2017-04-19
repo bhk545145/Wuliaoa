@@ -97,7 +97,9 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-//    [SVProgressHUD showErrorWithStatus:@"出错啦~"];
+    [SVProgressHUD showErrorWithStatus:@"出错啦~"];
+     __weak typeof(self) weakSelf = self;
+    [weakSelf.webView.scrollView.mj_header endRefreshing];
 }
 
 
@@ -118,7 +120,7 @@
     }
     
     // 天猫
-    if ([URLString containsString:@"detail.tmall.m"]) {
+    if ([URLString containsString:@"detail.m.tmall.com"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
             [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
         }

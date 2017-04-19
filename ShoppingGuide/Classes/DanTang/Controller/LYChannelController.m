@@ -149,7 +149,7 @@ static NSString * const HomeCell = @"HomeCell";
                 }
 
             }
-            [SVProgressHUD showSuccessWithStatus:@"加载完成!"];
+//            [SVProgressHUD showSuccessWithStatus:@"加载完成!"];
             // 刷新表格
             [weakSelf.tableView reloadData];
             

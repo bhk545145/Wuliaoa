@@ -8,6 +8,7 @@
 
 #import "LYActionSheetView.h"
 #import "LYShareBtnsView.h"
+#import "SVProgressHUD.h"
 
 @interface LYActionSheetView ()<LYShareBtnDelegate>
 
@@ -150,6 +151,7 @@
 #pragma mark <LYShareBtnDelegate>  
 
 -(void)shareBtnClickWithTag:(NSInteger)index {
+    [SVProgressHUD showSuccessWithStatus:@"已提交举报！！"];
     [self cancelBtnClicked];
 }
 

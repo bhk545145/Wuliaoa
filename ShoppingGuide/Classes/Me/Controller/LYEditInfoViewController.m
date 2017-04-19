@@ -13,6 +13,7 @@
 #import "IWAccount.h"
 #import "IWToken.h"
 #import "AFNetworking.h"
+#import "SVProgressHUD.h"
 
 @interface LYEditInfoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -64,6 +65,7 @@
     [self setNickname];
     // 向服务器上传图片修改资料
     [self setImage];
+    
 }
 
 - (void)setImage{
@@ -103,8 +105,9 @@
         account.nickname = responseObject[@"result"][@"nickname"];
         [IWAccountTool saveAccount:account];
         [self dismissViewControllerAnimated:YES completion:nil];
+        [SVProgressHUD showSuccessWithStatus:@"修改成功"];
     } failure:^(NSError * _Nullable error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"修改失败"];
     }];
 }
 

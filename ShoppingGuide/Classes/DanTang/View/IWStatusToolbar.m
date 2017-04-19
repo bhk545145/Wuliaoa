@@ -13,6 +13,7 @@
 #import "IWAccountTool.h"
 #import "LYNetworkTool.h"
 #import "SVProgressHUD.h"
+#import "LYActionSheetView.h"
 
 
 @interface IWStatusToolbar(){
@@ -55,10 +56,11 @@
         self.highlightedImage = [UIImage resizedImageWithName:@""];
         
         // 2.添加按钮
-//        self.reweetBtn = [self setupBtnWithTitle:@"分享" image:@"moreicon_textpage" bgImage:@"timeline_card_leftbottom_highlighted"];
+
         self.commentBtn = [self setupBtnWithTitle:@"评论" image:@"commenticon_textpage" bgImage:@"timeline_card_middlebottom_highlighted"];
         self.attitudeBtn = [self setupBtnWithTitle:@"赞" image:@"digupicon_comment" bgImage:@"digupicon_comment_press"];
         self.hateBtn = [self setupBtnWithTitle:@"踩" image:@"digdownicon_textpage" bgImage:@"digdownicon_textpage_press"];
+                self.reweetBtn = [self setupBtnWithTitle:@"更多" image:@"moreicon_textpage" bgImage:@"timeline_card_leftbottom_highlighted"];
         
         // 3.添加分割线
         [self setupDivider];
@@ -66,10 +68,11 @@
         [self setupDivider];
         
         //4.指定tag
-        self.reweetBtn.tag = 100;
+
         self.commentBtn.tag = 101;
         self.attitudeBtn.tag = 102;
         self.hateBtn.tag = 103;
+        self.reweetBtn.tag = 104;
         
     }
     return self;
@@ -149,10 +152,10 @@
     _status = status;
     
     // 1.设置转发数
-//    [self setupBtn:self.reweetBtn originalTitle:@"转发" count:status.reposts_count];
     [self setupBtn:self.commentBtn originalTitle:@"评论" count:status.commentCount];
     [self setupBtn:self.attitudeBtn originalTitle:@"赞" count:status.likeCount];
-    [self setupBtn:self.hateBtn originalTitle:@"举报" count:status.hateCount];
+    [self setupBtn:self.hateBtn originalTitle:@"踩" count:status.hateCount];
+    [self setupBtn:self.reweetBtn originalTitle:@"更多" count:status.reposts_count];
 }
 
 /**
@@ -206,10 +209,7 @@
     IWAccount *account = [IWAccountTool account];
     if(account){
         switch (sender.tag) {
-            case 100:{
-                IWLog(@"转发");
-                break;
-            }
+
             case 101:{
                 IWLog(@"评论");
                 break;
@@ -243,6 +243,22 @@
                 });
                 break;
             }
+            case 104:{
+                IWLog(@"更多");
+                URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
+                URLString = [URLString stringByAppendingString:URLtail];
+                params[@"userId"] = account.id;
+                dispatch_async(queue, ^{
+                    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+                        IWLog(@"%@",responseObject);
+                        
+                    } failure:^(NSError * _Nullable error) {
+                        IWLog(@"%@",error);
+                    }];
+                });
+                [self shareItemClick];
+                break;
+            }
             default:{
                 break;
             }
@@ -252,8 +268,14 @@
     }else{
         [SVProgressHUD showErrorWithStatus:@"请先登录！"];
     }
-    }
+}
 
+
+// 点击分享
+- (void)shareItemClick {
+    // 弹出分享框
+    [LYActionSheetView show];
+}
 
 
 
