@@ -199,10 +199,10 @@
 }
 
 - (void)doButton1:(UIButton *)sender{
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-    [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+//    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+//    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+//    [mgr.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     NSString *URLString = [NSString stringWithFormat:@"%@/",IWArticleURL];
     NSString *URLtail;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -245,18 +245,7 @@
             }
             case 104:{
                 IWLog(@"更多");
-                URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
-                URLString = [URLString stringByAppendingString:URLtail];
-                params[@"userId"] = account.id;
-                dispatch_async(queue, ^{
-                    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-                        IWLog(@"%@",responseObject);
-                        
-                    } failure:^(NSError * _Nullable error) {
-                        IWLog(@"%@",error);
-                    }];
-                });
-                [self shareItemClick];
+                [self shareItemClickStatus:_status];
                 break;
             }
             default:{
@@ -272,9 +261,9 @@
 
 
 // 点击分享
-- (void)shareItemClick {
+- (void)shareItemClickStatus:(IWStatus *)status {
     // 弹出分享框
-    [LYActionSheetView show];
+    [LYActionSheetView showStatus:status];
 }
 
 

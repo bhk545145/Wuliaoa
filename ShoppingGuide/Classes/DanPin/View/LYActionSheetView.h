@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class IWStatus;
 @interface LYActionSheetView : UIView
-
+@property (nonatomic,strong) IWStatus *status;
 + (void)show;
-
++ (void)showStatus:(IWStatus *)status;
 @end

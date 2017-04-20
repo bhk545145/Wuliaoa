@@ -9,8 +9,14 @@
 #import "LYActionSheetView.h"
 #import "LYShareBtnsView.h"
 #import "SVProgressHUD.h"
+#import "IWStatus.h"
+#import "IWAccount.h"
+#import "IWAccountTool.h"
+#import "LYNetworkTool.h"
 
-@interface LYActionSheetView ()<LYShareBtnDelegate>
+@interface LYActionSheetView ()<LYShareBtnDelegate>{
+    dispatch_queue_t queue;
+}
 
 /**
  *  顶部
@@ -53,6 +59,7 @@
 
 // 初始化布局
 - (void)setupUI {
+    queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     // 添加子控件
     UIView *acbg = [[UIView alloc] init];
     acbg.frame = CGRectMake(10, MRScreenH, MRScreenW - 20, 330);
@@ -76,6 +83,20 @@
         sheetView.backView.mr_y = MRScreenH - 330;
     } completion:nil];
  
+}
+
++ (void)showStatus:(IWStatus *)status {
+    
+    LYActionSheetView *sheetView = [[LYActionSheetView alloc] init];
+    sheetView.status = status;
+    sheetView.frame = [UIScreen mainScreen].bounds;
+    sheetView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    [[UIApplication sharedApplication].keyWindow addSubview:sheetView];
+    
+    [UIView animateWithDuration:kAnimationTime animations:^{
+        sheetView.backView.mr_y = MRScreenH - 330;
+    } completion:nil];
+    
 }
 
 - (void)cancelBtnClicked {
@@ -151,6 +172,21 @@
 #pragma mark <LYShareBtnDelegate>  
 
 -(void)shareBtnClickWithTag:(NSInteger)index {
+    NSString *URLString = [NSString stringWithFormat:@"%@/",IWArticleURL];
+    NSString *URLtail;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    IWAccount *account = [IWAccountTool account];
+    URLtail = [NSString stringWithFormat:@"hate/%@",_status.id];
+    URLString = [URLString stringByAppendingString:URLtail];
+    params[@"userId"] = account.id;
+    dispatch_async(queue, ^{
+        [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+            IWLog(@"%@",responseObject);
+            
+        } failure:^(NSError * _Nullable error) {
+            IWLog(@"%@",error);
+        }];
+    });
     [SVProgressHUD showSuccessWithStatus:@"已提交举报！！"];
     [self cancelBtnClicked];
 }
