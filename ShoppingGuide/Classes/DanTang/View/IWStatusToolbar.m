@@ -226,6 +226,7 @@
                         IWLog(@"%@",error);
                     }];
                 });
+                _btnblock();
                 break;
             }
             case 103:{
@@ -241,6 +242,7 @@
                         IWLog(@"%@",error);
                     }];
                 });
+                _btnblock();
                 break;
             }
             case 104:{
@@ -252,7 +254,7 @@
                 break;
             }
         }
-        _btnblock();
+        
 
     }else{
         [SVProgressHUD showErrorWithStatus:@"请先登录！"];

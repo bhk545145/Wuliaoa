@@ -182,12 +182,12 @@
     dispatch_async(queue, ^{
         [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
             IWLog(@"%@",responseObject);
-            
+            [SVProgressHUD showSuccessWithStatus:@"已提交举报!"];
         } failure:^(NSError * _Nullable error) {
             IWLog(@"%@",error);
         }];
     });
-    [SVProgressHUD showSuccessWithStatus:@"已提交举报！！"];
+    
     [self cancelBtnClicked];
 }
 

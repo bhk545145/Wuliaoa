@@ -22,7 +22,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sendSmsBtn;
-
+@property (weak, nonatomic) IBOutlet UIButton *passwordOrSms;
+@property (weak, nonatomic) IBOutlet UIButton *sendSms;
+@property (weak, nonatomic) IBOutlet UILabel *smstxt;
+@property (nonatomic,assign) BOOL ispassword;
 @end
 
 @implementation LYLoginViewController
@@ -36,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
+    _ispassword = NO;
     [self setupNav];
 }
 
@@ -100,7 +104,17 @@
 }
 
 - (IBAction)loginIn:(UIButton *)sender {
-    
+    if (_ispassword) {
+        [self passwordLogin];
+    }else{
+        [self CodeLogin];
+    }
+
+   
+}
+
+//验证码登录
+- (void)CodeLogin{
     __weak typeof(self) weakSelf = self;
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -132,7 +146,40 @@
             [SVProgressHUD showErrorWithStatus:@"登录失败"];
         }];
     });
-   
+}
+//密码登录
+- (void)passwordLogin{
+    __weak typeof(self) weakSelf = self;
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"phone"] = self.phoneNum.text;
+    params[@"password"] = self.pwd.text;
+    params[@"device"] = [IWWeiboTool iphoneType];
+    dispatch_async(queue, ^{
+        [[LYNetworkTool sharedNetworkTool] loginPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
+            IWLog(@"登录信息——————%@",responseObject);
+            int isLongin = [responseObject[@"status"] intValue];
+            if (isLongin == 1) {
+                [SVProgressHUD showSuccessWithStatus:@"登录成功!"];
+                IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"][@"user"]];
+                IWToken *token = [IWToken mj_objectWithKeyValues:responseObject[@"result"][@"token"]];
+                [IWAccountTool saveAccount:account];
+                [IWAccountTool saveToken:token];
+                // 发送通知
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
+                [IWWeiboTool chooseTabBarController];
+            }else{
+                [SVProgressHUD showSuccessWithStatus:@"登录失败"];
+            }
+            // 退出登录界面
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            
+        } failure:^(NSError * _Nullable error) {
+            
+            [SVProgressHUD showErrorWithStatus:@"登录失败"];
+        }];
+    });
 }
 
 - (void)cancel:(UIBarButtonItem *)item {
@@ -141,6 +188,21 @@
 
 - (void)registe {
     
+}
+
+- (IBAction)passwordOrSmsbtn:(id)sender {
+    if (_ispassword) {
+        [_passwordOrSms setTitle:@"验证码登入" forState:UIControlStateNormal];
+        _smstxt.text = @"验证码";
+        _sendSms.hidden = NO;
+        _ispassword = NO;
+
+    }else{
+        [_passwordOrSms setTitle:@"密码登入" forState:UIControlStateNormal];
+        _smstxt.text = @"密码";
+        _sendSms.hidden = YES;
+        _ispassword = YES;
+    }
 }
 
 #pragma mark - <UITextFieldDelegate>
