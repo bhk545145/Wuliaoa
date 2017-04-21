@@ -63,6 +63,8 @@
     // 添加子控件
     UIView *acbg = [[UIView alloc] init];
     acbg.frame = CGRectMake(10, MRScreenH, MRScreenW - 20, 330);
+    UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelBtnClicked)];
+    [acbg addGestureRecognizer:tapGesture];
     self.backView = acbg;
     [self addSubview:acbg];
     [acbg addSubview:self.bgView];

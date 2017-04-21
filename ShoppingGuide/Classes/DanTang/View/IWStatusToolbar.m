@@ -266,6 +266,7 @@
 - (void)shareItemClickStatus:(IWStatus *)status {
     // 弹出分享框
     [LYActionSheetView showStatus:status];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
 
