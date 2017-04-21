@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "WechatIMG1.jpeg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "removeCache.png",
       "scale" : "2x"
     },
     {

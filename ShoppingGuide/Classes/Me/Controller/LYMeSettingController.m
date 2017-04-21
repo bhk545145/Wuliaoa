@@ -9,11 +9,14 @@
 #import "LYMeSettingController.h"
 #import "SVProgressHUD.h"
 #import "UIImageView+WebCache.h"
+#import "IWSettingArrowItem.h"
+#import "IWSettingGroup.h"
+#import "IWAboutMeViewController.h"
 
 @interface LYMeSettingController ()<UITableViewDataSource, UITableViewDelegate>{
     dispatch_queue_t queue;
 }
-@property (nonatomic, weak) UITableView *tableView;
+
 @end
 
 @implementation LYMeSettingController
@@ -26,64 +29,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
-    [self setupTableView];
+    [self setupGroup0];
+    [self setupGroup1];
     
 }
-// 初始化TableView
-- (void)setupTableView {
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
 
-- (UITableView *)tableView {
+- (void)setupGroup0
+{
+    IWSettingGroup *group = [self addGroup];
     
-    if(!_tableView) {
-        UITableView *tableView = [[UITableView alloc] init];
-        tableView.frame = self.view.bounds;
-        tableView.bounces = NO;
-        [self.view addSubview:tableView];
-        _tableView = tableView;
-    }
-    
-    return _tableView;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"  ";
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *ID = @"shezhi";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
-    cell.textLabel.text = @"清除缓存";
-    cell.imageView.image = [UIImage imageNamed:@"removeCache"];
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // 取消选中
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row == 0) {
+    IWSettingItem *removeCache = [IWSettingItem itemWithIcon:@"removeCache" title:@"清除缓存"];
+    removeCache.option = ^{
         [self removeSDImageCache];
-    }else if(indexPath.row == 1){
-        
-    }
+    };
+    group.items = @[removeCache];
 }
+
+- (void)setupGroup1
+{
+    IWSettingGroup *group = [self addGroup];
+    
+    IWSettingArrowItem *aboutMe = [IWSettingArrowItem itemWithIcon:@"album" title:@"关于辣条" destVcClass:[IWAboutMeViewController class]];
+    group.items = @[aboutMe];
+}
+
+
 
 //清除缓存
 - (void)removeSDImageCache{

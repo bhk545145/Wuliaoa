@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "common_icon_checkmark.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "removeCache.png",
+      "filename" : "common_icon_checkmark@2x.png",
       "scale" : "2x"
     },
     {

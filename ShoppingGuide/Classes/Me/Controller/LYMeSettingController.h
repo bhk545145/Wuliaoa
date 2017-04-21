@@ -7,7 +7,7 @@
 //
 
 #import "LYBaseViewController.h"
-
-@interface LYMeSettingController : LYBaseViewController
+#import "IWSettingViewController.h"
+@interface LYMeSettingController : IWSettingViewController
 
 @end

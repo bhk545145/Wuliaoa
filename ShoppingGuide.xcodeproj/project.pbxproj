@@ -56,6 +56,20 @@
 		02A6833D1E7BBFB7008824B2 /* IWImageCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A683381E7BBFB7008824B2 /* IWImageCollectView.m */; };
 		02A6833E1E7BBFB7008824B2 /* IWPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6833A1E7BBFB7008824B2 /* IWPlaceholderTextView.m */; };
 		02C20E5F1E8E059000C5240B /* IWToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C20E5E1E8E059000C5240B /* IWToken.m */; };
+		02FE7F5B1EA9EDFC0011EA45 /* IWSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F5A1EA9EDFC0011EA45 /* IWSettingViewController.m */; };
+		02FE7F6F1EA9EE340011EA45 /* IWSettingCheckGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F5F1EA9EE340011EA45 /* IWSettingCheckGroup.m */; };
+		02FE7F701EA9EE340011EA45 /* IWSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F611EA9EE340011EA45 /* IWSettingGroup.m */; };
+		02FE7F711EA9EE340011EA45 /* IWSettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F641EA9EE340011EA45 /* IWSettingArrowItem.m */; };
+		02FE7F721EA9EE340011EA45 /* IWSettingCheckItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F661EA9EE340011EA45 /* IWSettingCheckItem.m */; };
+		02FE7F731EA9EE340011EA45 /* IWSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F681EA9EE340011EA45 /* IWSettingItem.m */; };
+		02FE7F741EA9EE340011EA45 /* IWSettingLabelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F6A1EA9EE340011EA45 /* IWSettingLabelItem.m */; };
+		02FE7F751EA9EE340011EA45 /* IWSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F6C1EA9EE340011EA45 /* IWSettingSwitchItem.m */; };
+		02FE7F761EA9EE340011EA45 /* IWSettingValueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F6E1EA9EE340011EA45 /* IWSettingValueItem.m */; };
+		02FE7F7C1EA9EE6C0011EA45 /* IWBgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F791EA9EE6C0011EA45 /* IWBgCell.m */; };
+		02FE7F7D1EA9EE6C0011EA45 /* IWSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F7B1EA9EE6C0011EA45 /* IWSettingCell.m */; };
+		02FE7F801EA9EE9E0011EA45 /* IWBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F7F1EA9EE9E0011EA45 /* IWBadgeButton.m */; };
+		02FE7F841EAA04C00011EA45 /* IWAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE7F821EAA04C00011EA45 /* IWAboutMeViewController.m */; };
+		02FE7F851EAA04C00011EA45 /* IWAboutMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FE7F831EAA04C00011EA45 /* IWAboutMeViewController.xib */; };
 		080131291D839B54009207F5 /* LYSearchSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 080131281D839B54009207F5 /* LYSearchSortView.m */; };
 		0803D7771D7BE96A0087EABF /* LYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803D7761D7BE96A0087EABF /* LYDetailController.m */; };
 		0809682C1D882FB3007E7E59 /* LYThemeCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0809682B1D882FB3007E7E59 /* LYThemeCollectionController.m */; };
@@ -232,6 +246,33 @@
 		02A6833A1E7BBFB7008824B2 /* IWPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWPlaceholderTextView.m; sourceTree = "<group>"; };
 		02C20E5D1E8E059000C5240B /* IWToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWToken.h; sourceTree = "<group>"; };
 		02C20E5E1E8E059000C5240B /* IWToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWToken.m; sourceTree = "<group>"; };
+		02FE7F591EA9EDFC0011EA45 /* IWSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingViewController.h; sourceTree = "<group>"; };
+		02FE7F5A1EA9EDFC0011EA45 /* IWSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingViewController.m; sourceTree = "<group>"; };
+		02FE7F5E1EA9EE340011EA45 /* IWSettingCheckGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingCheckGroup.h; sourceTree = "<group>"; };
+		02FE7F5F1EA9EE340011EA45 /* IWSettingCheckGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingCheckGroup.m; sourceTree = "<group>"; };
+		02FE7F601EA9EE340011EA45 /* IWSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingGroup.h; sourceTree = "<group>"; };
+		02FE7F611EA9EE340011EA45 /* IWSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingGroup.m; sourceTree = "<group>"; };
+		02FE7F631EA9EE340011EA45 /* IWSettingArrowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingArrowItem.h; sourceTree = "<group>"; };
+		02FE7F641EA9EE340011EA45 /* IWSettingArrowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingArrowItem.m; sourceTree = "<group>"; };
+		02FE7F651EA9EE340011EA45 /* IWSettingCheckItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingCheckItem.h; sourceTree = "<group>"; };
+		02FE7F661EA9EE340011EA45 /* IWSettingCheckItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingCheckItem.m; sourceTree = "<group>"; };
+		02FE7F671EA9EE340011EA45 /* IWSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingItem.h; sourceTree = "<group>"; };
+		02FE7F681EA9EE340011EA45 /* IWSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingItem.m; sourceTree = "<group>"; };
+		02FE7F691EA9EE340011EA45 /* IWSettingLabelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingLabelItem.h; sourceTree = "<group>"; };
+		02FE7F6A1EA9EE340011EA45 /* IWSettingLabelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingLabelItem.m; sourceTree = "<group>"; };
+		02FE7F6B1EA9EE340011EA45 /* IWSettingSwitchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingSwitchItem.h; sourceTree = "<group>"; };
+		02FE7F6C1EA9EE340011EA45 /* IWSettingSwitchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingSwitchItem.m; sourceTree = "<group>"; };
+		02FE7F6D1EA9EE340011EA45 /* IWSettingValueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingValueItem.h; sourceTree = "<group>"; };
+		02FE7F6E1EA9EE340011EA45 /* IWSettingValueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingValueItem.m; sourceTree = "<group>"; };
+		02FE7F781EA9EE6C0011EA45 /* IWBgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWBgCell.h; sourceTree = "<group>"; };
+		02FE7F791EA9EE6C0011EA45 /* IWBgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWBgCell.m; sourceTree = "<group>"; };
+		02FE7F7A1EA9EE6C0011EA45 /* IWSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWSettingCell.h; sourceTree = "<group>"; };
+		02FE7F7B1EA9EE6C0011EA45 /* IWSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWSettingCell.m; sourceTree = "<group>"; };
+		02FE7F7E1EA9EE9E0011EA45 /* IWBadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IWBadgeButton.h; path = Cell/IWBadgeButton.h; sourceTree = "<group>"; };
+		02FE7F7F1EA9EE9E0011EA45 /* IWBadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IWBadgeButton.m; path = Cell/IWBadgeButton.m; sourceTree = "<group>"; };
+		02FE7F811EAA04C00011EA45 /* IWAboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWAboutMeViewController.h; sourceTree = "<group>"; };
+		02FE7F821EAA04C00011EA45 /* IWAboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWAboutMeViewController.m; sourceTree = "<group>"; };
+		02FE7F831EAA04C00011EA45 /* IWAboutMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IWAboutMeViewController.xib; sourceTree = "<group>"; };
 		080131271D839B54009207F5 /* LYSearchSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSearchSortView.h; sourceTree = "<group>"; };
 		080131281D839B54009207F5 /* LYSearchSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSearchSortView.m; sourceTree = "<group>"; };
 		0803D7751D7BE96A0087EABF /* LYDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYDetailController.h; sourceTree = "<group>"; };
@@ -603,6 +644,57 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		02FE7F5C1EA9EE340011EA45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02FE7F5D1EA9EE340011EA45 /* Group */,
+				02FE7F621EA9EE340011EA45 /* Item */,
+			);
+			name = Model;
+			path = Controller/Model;
+			sourceTree = "<group>";
+		};
+		02FE7F5D1EA9EE340011EA45 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				02FE7F5E1EA9EE340011EA45 /* IWSettingCheckGroup.h */,
+				02FE7F5F1EA9EE340011EA45 /* IWSettingCheckGroup.m */,
+				02FE7F601EA9EE340011EA45 /* IWSettingGroup.h */,
+				02FE7F611EA9EE340011EA45 /* IWSettingGroup.m */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		02FE7F621EA9EE340011EA45 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				02FE7F631EA9EE340011EA45 /* IWSettingArrowItem.h */,
+				02FE7F641EA9EE340011EA45 /* IWSettingArrowItem.m */,
+				02FE7F651EA9EE340011EA45 /* IWSettingCheckItem.h */,
+				02FE7F661EA9EE340011EA45 /* IWSettingCheckItem.m */,
+				02FE7F671EA9EE340011EA45 /* IWSettingItem.h */,
+				02FE7F681EA9EE340011EA45 /* IWSettingItem.m */,
+				02FE7F691EA9EE340011EA45 /* IWSettingLabelItem.h */,
+				02FE7F6A1EA9EE340011EA45 /* IWSettingLabelItem.m */,
+				02FE7F6B1EA9EE340011EA45 /* IWSettingSwitchItem.h */,
+				02FE7F6C1EA9EE340011EA45 /* IWSettingSwitchItem.m */,
+				02FE7F6D1EA9EE340011EA45 /* IWSettingValueItem.h */,
+				02FE7F6E1EA9EE340011EA45 /* IWSettingValueItem.m */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		02FE7F771EA9EE6C0011EA45 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				02FE7F781EA9EE6C0011EA45 /* IWBgCell.h */,
+				02FE7F791EA9EE6C0011EA45 /* IWBgCell.m */,
+				02FE7F7A1EA9EE6C0011EA45 /* IWSettingCell.h */,
+				02FE7F7B1EA9EE6C0011EA45 /* IWSettingCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		0857ADA11D7AA4D2007BA264 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,6 +782,7 @@
 				0857ADA11D7AA4D2007BA264 /* Tool */,
 				08FE664A1D77D6CB000DB820 /* Category */,
 				08FE66531D77D6CB000DB820 /* Controller */,
+				02FE7F5C1EA9EE340011EA45 /* Model */,
 				08FE665D1D77D6CB000DB820 /* View */,
 			);
 			path = Main;
@@ -719,6 +812,8 @@
 				08FE66571D77D6CB000DB820 /* MRTabBarController.m */,
 				086E277D1D79DD9900B6D98F /* LYBaseViewController.h */,
 				086E277E1D79DD9900B6D98F /* LYBaseViewController.m */,
+				02FE7F591EA9EDFC0011EA45 /* IWSettingViewController.h */,
+				02FE7F5A1EA9EDFC0011EA45 /* IWSettingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -726,6 +821,9 @@
 		08FE665D1D77D6CB000DB820 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				02FE7F771EA9EE6C0011EA45 /* Cell */,
+				02FE7F7E1EA9EE9E0011EA45 /* IWBadgeButton.h */,
+				02FE7F7F1EA9EE9E0011EA45 /* IWBadgeButton.m */,
 				08FE665E1D77D6CB000DB820 /* MRTextField.h */,
 				08FE665F1D77D6CB000DB820 /* MRTextField.m */,
 				08FE66601D77D6CB000DB820 /* MRVerticalButton.h */,
@@ -965,6 +1063,9 @@
 				0810B4181D90E96600EC0716 /* LYEditInfoViewController.h */,
 				0810B4191D90E96600EC0716 /* LYEditInfoViewController.m */,
 				0810B41B1D90E98600EC0716 /* LYEditInfoViewController.xib */,
+				02FE7F811EAA04C00011EA45 /* IWAboutMeViewController.h */,
+				02FE7F821EAA04C00011EA45 /* IWAboutMeViewController.m */,
+				02FE7F831EAA04C00011EA45 /* IWAboutMeViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1082,6 +1183,7 @@
 				08DE72AF1D8EA2B2000D496F /* LYProductDetailToolBar.xib in Resources */,
 				082030021D8840BC004BBA17 /* LYCategoryCollectionCell.xib in Resources */,
 				085590AA1D88F71100D2876B /* LYSeeAllTopicCell.xib in Resources */,
+				02FE7F851EAA04C00011EA45 /* IWAboutMeViewController.xib in Resources */,
 				08372CC21D8F9D7400284199 /* LYDetailCollectionViewCell.xib in Resources */,
 				025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */,
 				02A6830C1E7BBA40008824B2 /* SVProgressHUD.bundle in Resources */,
@@ -1155,6 +1257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FE7F6F1EA9EE340011EA45 /* IWSettingCheckGroup.m in Sources */,
 				082030051D8845E4004BBA17 /* LYCategoryBottomView.m in Sources */,
 				085590B01D89180900D2876B /* LYCollectionDetailController.m in Sources */,
 				08372CC01D8F9D3600284199 /* LYDetailCollectionViewCell.m in Sources */,
@@ -1168,8 +1271,10 @@
 				08FE66621D77D6CB000DB820 /* AppDelegate.m in Sources */,
 				085590AD1D88FDBF00D2876B /* LYSeeAllTopicController.m in Sources */,
 				02A683051E7BBA40008824B2 /* MJPhotoLoadingView.m in Sources */,
+				02FE7F751EA9EE340011EA45 /* IWSettingSwitchItem.m in Sources */,
 				085590A91D88F71100D2876B /* LYSeeAllTopicCell.m in Sources */,
 				08FE666B1D77D6CB000DB820 /* MRConst.m in Sources */,
+				02FE7F7C1EA9EE6C0011EA45 /* IWBgCell.m in Sources */,
 				02A682BC1E7BBA27008824B2 /* IWAccountTool.m in Sources */,
 				085590B31D89192400D2876B /* LYCollectionPost.m in Sources */,
 				025BA1F41E811E8E0010D7FB /* IWCommitCell.m in Sources */,
@@ -1192,8 +1297,11 @@
 				0857ADB71D7AD205007BA264 /* LYItemCell.m in Sources */,
 				08372CC51D8FB91B00284199 /* LYDetailScrollView.m in Sources */,
 				3C1DF8401E8013E3002A6439 /* IWCommit.m in Sources */,
+				02FE7F5B1EA9EDFC0011EA45 /* IWSettingViewController.m in Sources */,
 				02A682FF1E7BBA40008824B2 /* LHPhotoList.m in Sources */,
 				08967C3F1D7E95DF00123932 /* LYActionSheetView.m in Sources */,
+				02FE7F731EA9EE340011EA45 /* IWSettingItem.m in Sources */,
+				02FE7F7D1EA9EE6C0011EA45 /* IWSettingCell.m in Sources */,
 				0857ADA71D7AB37B007BA264 /* LYChannels.m in Sources */,
 				02A682BB1E7BBA27008824B2 /* IWAccount.m in Sources */,
 				02A682A51E7BB222008824B2 /* IWStatusCell.m in Sources */,
@@ -1212,8 +1320,11 @@
 				08DE72AD1D8E945D000D496F /* LYMineChoiceBar.m in Sources */,
 				08FE66891D77D818000DB820 /* LYMeController.m in Sources */,
 				02A683081E7BBA40008824B2 /* MJPhotoView.m in Sources */,
+				02FE7F711EA9EE340011EA45 /* IWSettingArrowItem.m in Sources */,
 				02A6830E1E7BBA40008824B2 /* SVRadialGradientLayer.m in Sources */,
+				02FE7F761EA9EE340011EA45 /* IWSettingValueItem.m in Sources */,
 				02A6833D1E7BBFB7008824B2 /* IWImageCollectView.m in Sources */,
+				02FE7F721EA9EE340011EA45 /* IWSettingCheckItem.m in Sources */,
 				08AA571B1D7C0BEF00BB6D47 /* LYProduct.m in Sources */,
 				08DFCD741D900A4700DEAF3E /* LYProductDetailBottomView.m in Sources */,
 				02A6833B1E7BBFB7008824B2 /* IWComposeViewController.m in Sources */,
@@ -1244,6 +1355,7 @@
 				08FE66651D77D6CB000DB820 /* UIImage+MRExtension.m in Sources */,
 				02A682FE1E7BBA40008824B2 /* LHGroupViewController.m in Sources */,
 				02A683061E7BBA40008824B2 /* MJPhotoProgressView.m in Sources */,
+				02FE7F801EA9EE9E0011EA45 /* IWBadgeButton.m in Sources */,
 				082030011D8840BC004BBA17 /* LYCategoryCollectionCell.m in Sources */,
 				080131291D839B54009207F5 /* LYSearchSortView.m in Sources */,
 				08FE66681D77D6CB000DB820 /* MRTabBarController.m in Sources */,
@@ -1255,10 +1367,13 @@
 				08FE666A1D77D6CB000DB820 /* main.m in Sources */,
 				0803D7771D7BE96A0087EABF /* LYDetailController.m in Sources */,
 				0810B41A1D90E96600EC0716 /* LYEditInfoViewController.m in Sources */,
+				02FE7F841EAA04C00011EA45 /* IWAboutMeViewController.m in Sources */,
 				0810B4111D90D1E000EC0716 /* LYTMViewController.m in Sources */,
 				08F5D2D91D8D427B00EB0BCA /* LYMineHeaderView.m in Sources */,
 				02A682A41E7BB222008824B2 /* IWReweetStatusView.m in Sources */,
+				02FE7F741EA9EE340011EA45 /* IWSettingLabelItem.m in Sources */,
 				08FE66661D77D6CB000DB820 /* UIView+MRExtension.m in Sources */,
+				02FE7F701EA9EE340011EA45 /* IWSettingGroup.m in Sources */,
 				02A6830A1E7BBA40008824B2 /* SVIndefiniteAnimatedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
