@@ -234,7 +234,7 @@ static NSString * const HomeCell = @"HomeCell";
  */
 - (void)loadMoreInfo {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"count"] = @5;
+    params[@"count"] = @20;
     static NSString *URLString;
     IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {

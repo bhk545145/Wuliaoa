@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import "IWSettingArrowItem.h"
+#import "IWSettingLabelItem.h"
 #import "IWSettingGroup.h"
 #import "IWAboutMeViewController.h"
 
@@ -38,9 +39,16 @@
 {
     IWSettingGroup *group = [self addGroup];
     
-    IWSettingItem *removeCache = [IWSettingItem itemWithIcon:@"removeCache" title:@"清除缓存"];
+    IWSettingLabelItem *removeCache = [IWSettingLabelItem itemWithIcon:@"removeCache" title:@"清除缓存"];
+    removeCache.defaultText = [self getSDImageCacheSize];
     removeCache.option = ^{
-        [self removeSDImageCache];
+        dispatch_async(queue, ^{
+            [self removeSDImageCache];
+            IWSettingLabelItem *removeCache = group.items[0];
+            removeCache.defaultText = [self getSDImageCacheSize];
+            group.items = @[removeCache];
+        });
+        
     };
     group.items = @[removeCache];
 }
@@ -58,10 +66,16 @@
 //清除缓存
 - (void)removeSDImageCache{
     [SVProgressHUD showSuccessWithStatus:@"正在清除缓存"];
-    dispatch_async(queue, ^{
-        [[SDImageCache sharedImageCache] clearDisk];
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showSuccessWithStatus:@"清除成功"];
-    });
+    [[SDImageCache sharedImageCache] clearDisk];
+    [SVProgressHUD dismiss];
+    [SVProgressHUD showSuccessWithStatus:@"清除成功"];
+    IWLog(@"%@",[self getSDImageCacheSize]);
+}
+
+//获取缓存
+- (NSString *)getSDImageCacheSize{
+    NSUInteger sizeint = [[SDImageCache sharedImageCache] getSize];
+    NSString *SDImageCacheSize = [NSString stringWithFormat:@"%0.2fM",sizeint/1024.0/1024.0];
+    return SDImageCacheSize;
 }
 @end

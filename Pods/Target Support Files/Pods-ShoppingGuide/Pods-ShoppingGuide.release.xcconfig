@@ -7,4 +7,5 @@ OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/
 OTHER_LDFLAGS = $(inherited) -ObjC -l"BaiduMobStat" -l"stdc++" -l"z" -framework "AFNetworking" -framework "AGEmojiKeyboard" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "FMDB" -framework "Foundation" -framework "JavaScriptCore" -framework "LoremIpsum" -framework "MBProgressHUD" -framework "MJExtension" -framework "MJRefresh" -framework "SDWebImage" -framework "Security" -framework "SlackTextViewController" -framework "SystemConfiguration" -framework "UIKit"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods

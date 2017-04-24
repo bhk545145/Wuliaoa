@@ -115,6 +115,7 @@
     // 2.操作
     if (item.option) {
         item.option();
+        [self.tableView reloadData];
     }
     
     // 3.跳转
