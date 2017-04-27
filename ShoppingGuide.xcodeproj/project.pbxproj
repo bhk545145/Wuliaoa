@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		025BA1F41E811E8E0010D7FB /* IWCommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 025BA1F21E811E8E0010D7FB /* IWCommitCell.m */; };
 		025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025BA1F31E811E8E0010D7FB /* IWCommitCell.xib */; };
+		02A196411EB1C49600FEC1CB /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 02A196401EB1C49600FEC1CB /* yw_1222.jpg */; };
 		02A6828E1E7BB1EE008824B2 /* IWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682871E7BB1EE008824B2 /* IWPhoto.m */; };
 		02A6828F1E7BB1EE008824B2 /* IWStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A682891E7BB1EE008824B2 /* IWStatus.m */; };
 		02A682901E7BB1EE008824B2 /* IWStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A6828B1E7BB1EE008824B2 /* IWStatusFrame.m */; };
@@ -153,6 +154,7 @@
 		025BA1F11E811E8E0010D7FB /* IWCommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWCommitCell.h; sourceTree = "<group>"; };
 		025BA1F21E811E8E0010D7FB /* IWCommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWCommitCell.m; sourceTree = "<group>"; };
 		025BA1F31E811E8E0010D7FB /* IWCommitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IWCommitCell.xib; sourceTree = "<group>"; };
+		02A196401EB1C49600FEC1CB /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		02A682861E7BB1EE008824B2 /* IWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWPhoto.h; sourceTree = "<group>"; };
 		02A682871E7BB1EE008824B2 /* IWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWPhoto.m; sourceTree = "<group>"; };
 		02A682881E7BB1EE008824B2 /* IWStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWStatus.h; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				08FE65C71D77D113000DB820 /* Main.storyboard */,
 				08FE65CF1D77D113000DB820 /* LaunchScreen.storyboard */,
 				08FE65DC1D77D1A8000DB820 /* Images.xcassets */,
+				02A196401EB1C49600FEC1CB /* yw_1222.jpg */,
 				08FE65D21D77D113000DB820 /* Info.plist */,
 				08FE65CA1D77D113000DB820 /* ShoppingGuide.xcdatamodeld */,
 				08FE65BE1D77D113000DB820 /* Supporting Files */,
@@ -1185,6 +1188,7 @@
 				082030021D8840BC004BBA17 /* LYCategoryCollectionCell.xib in Resources */,
 				085590AA1D88F71100D2876B /* LYSeeAllTopicCell.xib in Resources */,
 				02FE7F851EAA04C00011EA45 /* IWAboutMeViewController.xib in Resources */,
+				02A196411EB1C49600FEC1CB /* yw_1222.jpg in Resources */,
 				08372CC21D8F9D7400284199 /* LYDetailCollectionViewCell.xib in Resources */,
 				025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */,
 				02A6830C1E7BBA40008824B2 /* SVProgressHUD.bundle in Resources */,

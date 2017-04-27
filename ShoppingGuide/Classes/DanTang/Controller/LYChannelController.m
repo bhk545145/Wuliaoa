@@ -107,7 +107,7 @@ static NSString * const HomeCell = @"HomeCell";
             NSMutableArray *statusFrameArray = [NSMutableArray array];
             for (IWStatus *status in statusArray) {
                 IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
-                // 传递微博模型数据
+                // 传递辣条模型数据
                 statusFrame.status = status;
                 [statusFrameArray addObject:statusFrame];
             }
@@ -122,6 +122,8 @@ static NSString * const HomeCell = @"HomeCell";
                 // 添加self.statusFrames的所有元素 添加到 tempArray中
                 [tempArray addObjectsFromArray:self.statusFrames];
                 weakSelf.statusFrames = tempArray;
+                // 显示最新辣条的数量(给用户一些友善的提示)
+                [self showNewStatusCount:statusFrameArray.count];
             } else if(type == 1)  {   // 上拉加载
                 // 添加新数据到旧数据的后面
                 [weakSelf.statusFrames addObjectsFromArray:statusFrameArray];
@@ -171,9 +173,9 @@ static NSString * const HomeCell = @"HomeCell";
     IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = [self.statusFrames lastObject];
-        // 加载ID <= max_id的微博
+        // 加载ID <= max_id的辣条
         long long maxId = [statusFrame.status.id longLongValue];
-        // 加载ID比since_id大的微博
+        // 加载ID比since_id大的辣条
         params[@"sinceid"] = @(maxId);
         if (self.channesID == channesIDTypeAll) {
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
@@ -201,7 +203,7 @@ static NSString * const HomeCell = @"HomeCell";
     IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = self.statusFrames[0];
-        // 加载ID比since_id大的微博
+        // 加载ID比since_id大的辣条
         params[@"sinceid"] = statusFrame.status.id;
         if (self.channesID == channesIDTypeAll) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@",IWArticleURL,params[@"sinceid"]];
@@ -239,7 +241,7 @@ static NSString * const HomeCell = @"HomeCell";
     IWAccount *account = [IWAccountTool account];
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = [self.statusFrames lastObject];
-        // 加载ID <= max_id的微博
+        // 加载ID <= max_id的辣条
         long long maxId = [statusFrame.status.id longLongValue];
         params[@"maxId"] = @(maxId);
         
@@ -331,5 +333,53 @@ static NSString * const HomeCell = @"HomeCell";
     [self.navigationController pushViewController:detailView animated:YES];
 }
 
+/**
+ *  显示最新辣条的数量
+ *
+ *  @param count 最新辣条的数量
+ */
+- (void)showNewStatusCount:(int)count
+{
+    // 1.创建一个按钮
+    UIButton *btn = [[UIButton alloc] init];
+    // below : 下面  btn会显示在self.navigationController.navigationBar的下面
+    [self.navigationController.view insertSubview:btn belowSubview:self.navigationController.navigationBar];
+    
+    // 2.设置图片和文字
+    btn.userInteractionEnabled = NO;
+    [btn setBackgroundImage:[UIImage resizedImageWithName:@"timeline_new_status_background"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    if (count) {
+        NSString *title = [NSString stringWithFormat:@"共有%d条新的辣条", count];
+        [btn setTitle:title forState:UIControlStateNormal];
+    } else {
+        [btn setTitle:@"没有新的辣条" forState:UIControlStateNormal];
+    }
+    
+    // 3.设置按钮的初始frame
+    CGFloat btnH = 30;
+    CGFloat btnY = 64 - btnH;
+    CGFloat btnX = 0;
+    CGFloat btnW = self.view.frame.size.width - 2 * btnX;
+    btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+    
+    // 4.通过动画移动按钮(按钮向下移动 btnH + 1)
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        btn.transform = CGAffineTransformMakeTranslation(0, btnH);
+        
+    } completion:^(BOOL finished) { // 向下移动的动画执行完毕后
+        
+        // 建议:尽量使用animateWithDuration, 不要使用animateKeyframesWithDuration
+        [UIView animateWithDuration:0.7 delay:1.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            btn.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            // 将btn从内存中移除
+            [btn removeFromSuperview];
+        }];
+        
+    }];
+}
 
 @end

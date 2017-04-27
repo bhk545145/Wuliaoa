@@ -41,7 +41,6 @@
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     _ispassword = NO;
     [self setupNav];
-    [self passwordOrSmsbtn:nil];
 }
 
 - (void)setupNav {
