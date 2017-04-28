@@ -62,7 +62,7 @@
 
 - (void)loadNewInfo{
     dispatch_async(queue, ^{
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://demo.dataoke.com/"]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php"]]];
         //    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.ali_click]]];
         
         
