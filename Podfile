@@ -13,5 +13,14 @@ target 'ShoppingGuide' do
     pod 'SlackTextViewController'
     pod 'LoremIpsum', '~> 1.0'
     pod 'AGEmojiKeyboard'
-    pod 'BaiduMobStat'
+    #友盟统计
+    pod 'UMengAnalytics-NO-IDFA'
+    # U-Share SDK UI模块（分享面板，建议添加）
+    pod 'UMengUShare/UI'
+    # 集成微信(完整版14.4M)
+    pod 'UMengUShare/Social/WeChat'
+    # 集成QQ(完整版7.6M)
+    pod 'UMengUShare/Social/QQ'
+    # 集成新浪微博(完整版25.3M)
+    pod 'UMengUShare/Social/Sina'
 end

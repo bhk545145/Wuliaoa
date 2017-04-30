@@ -28,7 +28,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "LYChannelController.h"
 #import "SVProgressHUD.h"
-#import "BaiduMobStat.h"
+#import "UMMobClick/MobClick.h"
 
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
@@ -81,7 +81,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [MobClick beginLogPageView:cName];
     
 }
 
@@ -89,7 +89,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+    [MobClick endLogPageView:cName];
 }
 
 // 初始化TableView

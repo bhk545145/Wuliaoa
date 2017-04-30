@@ -15,7 +15,7 @@
 #import "IWAccountTool.h"
 #import "IWAccount.h"
 #import "SVProgressHUD.h"
-#import "BaiduMobStat.h"
+#import "UMMobClick/MobClick.h"
 
 #define scrollViewInsetHeight self.view.mr_height - 100 - self.tabBarController.tabBar.mr_height
 
@@ -58,7 +58,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [MobClick beginLogPageView:cName];
     
 }
 
@@ -66,7 +66,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+    [MobClick endLogPageView:cName];
 }
 
 /**

@@ -72,16 +72,6 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright 2017 Baidu. All rights reserved.</string>
-			<key>License</key>
-			<string>Copyright</string>
-			<key>Title</key>
-			<string>BaiduMobStat</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>If you are using FMDB in your project, I'd love to hear about it.  Let Gus know
 by sending an email to gus@flyingmeat.com.
 
@@ -275,6 +265,28 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
 			<string>MIT</string>
 			<key>Title</key>
 			<string>SlackTextViewController</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2011 - 2015 UMeng.com. All rights reserved.
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>UMengAnalytics-NO-IDFA</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2011 - 2017 UMeng.com. All rights reserved.
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>UMengUShare</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

@@ -12,7 +12,7 @@
 #import "LYNetworkTool.h"
 #import "LYItemCell.h"
 #import "MJExtension.h"
-#import "BaiduMobStat.h"
+#import "UMMobClick/MobClick.h"
 @interface LYCollectionDetailController ()
 
 /**
@@ -36,7 +36,7 @@ static NSString * LYCollectionDetailCellID = @"LYCollectionTableViewCell";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [MobClick beginLogPageView:cName];
     
 }
 
@@ -44,7 +44,7 @@ static NSString * LYCollectionDetailCellID = @"LYCollectionTableViewCell";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+    [MobClick beginLogPageView:cName];
 }
 
 - (void)setupUI {

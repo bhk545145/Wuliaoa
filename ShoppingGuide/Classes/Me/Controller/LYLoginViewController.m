@@ -14,6 +14,8 @@
 #import "IWAccountTool.h"
 #import "IWWeiboTool.h"
 #import "SVProgressHUD.h"
+#import "UMMobClick/MobClick.h"
+#import <UMSocialCore/UMSocialCore.h>
 @interface LYLoginViewController ()<UITextFieldDelegate>{
     dispatch_queue_t queue;
 }
@@ -131,6 +133,8 @@
                 IWToken *token = [IWToken mj_objectWithKeyValues:responseObject[@"result"][@"token"]];
                 [IWAccountTool saveAccount:account];
                 [IWAccountTool saveToken:token];
+                //友盟账号登入统计
+                [MobClick profileSignInWithPUID:account.phone];
                 // 发送通知
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
@@ -213,4 +217,28 @@
 }
 
 
+//友盟获取登录信息
+- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+        
+        UMSocialUserInfoResponse *resp = result;
+        
+        // 第三方登录数据(为空表示平台未提供)
+        // 授权数据
+        NSLog(@" uid: %@", resp.uid);
+        NSLog(@" openid: %@", resp.openid);
+        NSLog(@" accessToken: %@", resp.accessToken);
+        NSLog(@" refreshToken: %@", resp.refreshToken);
+        NSLog(@" expiration: %@", resp.expiration);
+        
+        // 用户数据
+        NSLog(@" name: %@", resp.name);
+        NSLog(@" iconurl: %@", resp.iconurl);
+        NSLog(@" gender: %@", resp.gender);
+        
+        // 第三方平台SDK原始数据
+        NSLog(@" originalResponse: %@", resp.originalResponse);
+    }];
+}
 @end

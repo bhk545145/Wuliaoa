@@ -10,7 +10,7 @@
 #import "LYProduct.h"
 #import "MJRefresh.h"
 #import "SVProgressHUD.h"
-#import "BaiduMobStat.h"
+#import "UMMobClick/MobClick.h"
 
 @interface LYTMViewController ()<UIWebViewDelegate>{
     dispatch_queue_t queue;
@@ -42,7 +42,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [MobClick beginLogPageView:cName];
     
 }
 
@@ -50,7 +50,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+    [MobClick endLogPageView:cName];
 }
 
 - (void)setupWebView{
@@ -75,7 +75,6 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     IWLog(@"URL---%@",request);
     [self foraward:request];
-    [[BaiduMobStat defaultStat] webviewStartLoadWithRequest:request];
     return YES;
 }
 
@@ -116,6 +115,7 @@
     if ([URLString containsString:@"taobao://m.taobao.com"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
             [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
+            [MobClick event:@"taobao"];
         }
     }
     
@@ -123,6 +123,7 @@
     if ([URLString containsString:@"detail.m.tmall.com"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
             [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
+            [MobClick event:@"detail"];
         }
     }
     
