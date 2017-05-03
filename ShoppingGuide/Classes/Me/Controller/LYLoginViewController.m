@@ -140,11 +140,12 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
                 [IWWeiboTool chooseTabBarController];
+                // 退出登录界面
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }else{
-                [SVProgressHUD showSuccessWithStatus:@"登录失败"];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
             }
-            // 退出登录界面
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            
             
         } failure:^(NSError * _Nullable error) {
             
@@ -174,11 +175,11 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
                 [IWWeiboTool chooseTabBarController];
+                // 退出登录界面
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }else{
-                [SVProgressHUD showSuccessWithStatus:@"登录失败"];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
             }
-            // 退出登录界面
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
             
         } failure:^(NSError * _Nullable error) {
             
@@ -218,8 +219,27 @@
 }
 
 - (IBAction)onAuthEvent:(UIButton *)sender {
-    [[UMSocialManager defaultManager] cancelAuthWithPlatform:UMSocialPlatformType_QQ completion:^(id result, NSError *error) {
-        [self getUserInfoForPlatform:UMSocialPlatformType_QQ];
+    UMSocialPlatformType modelPlatformType;
+    switch (sender.tag) {
+        case 100:
+            //sina
+            modelPlatformType = UMSocialPlatformType_Sina;
+            break;
+        case 101:
+            //weixin
+            modelPlatformType = UMSocialPlatformType_WechatSession;
+            break;
+        case 102:
+            //QQ
+            modelPlatformType = UMSocialPlatformType_QQ;
+            break;
+            
+        default:
+            modelPlatformType = UMSocialPlatformType_UnKnown;
+            break;
+    }
+    [[UMSocialManager defaultManager] cancelAuthWithPlatform:modelPlatformType completion:^(id result, NSError *error) {
+        [self getUserInfoForPlatform:modelPlatformType];
     }];
 }
 

@@ -14,9 +14,10 @@
 #import "LYNetworkTool.h"
 #import "SVProgressHUD.h"
 #import "LYActionSheetView.h"
+#import <UShareUI/UShareUI.h>
 
 
-@interface IWStatusToolbar(){
+@interface IWStatusToolbar()<UMSocialShareMenuViewDelegate>{
     dispatch_queue_t queue;
 }
 @property (nonatomic, strong) NSMutableArray *btns;
@@ -74,8 +75,22 @@
         self.hateBtn.tag = 103;
         self.reweetBtn.tag = 104;
         
+        [self setPreDefinePlatforms];
+        
     }
     return self;
+}
+
+- (void)setPreDefinePlatforms{
+    //设置用户自定义的平台
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),
+                                               @(UMSocialPlatformType_QQ),
+                                               @(UMSocialPlatformType_Sina),
+                                               ]];
+    //设置分享面板的显示和隐藏的代理回调
+    [UMSocialUIManager setShareMenuViewDelegate:self];
+    
+    
 }
 
 /**
@@ -265,8 +280,30 @@
 // 点击分享
 - (void)shareItemClickStatus:(IWStatus *)status {
     // 弹出分享框
-    [LYActionSheetView showStatus:status];
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//    [LYActionSheetView showStatus:status];
+//    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
+    //加入copy的操作
+    //@see http://dev.umeng.com/social/ios/进阶文档#6
+    [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
+                                     withPlatformIcon:[UIImage imageNamed:@"Warning"]
+                                     withPlatformName:@"举报"];
+    
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            //在回调里面获得点击的
+            if (platformType == UMSocialPlatformType_UserDefine_Begin+2) {
+                NSLog(@"点击演示添加Icon后该做的操作");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showSuccessWithStatus:@"已提交举报!"];
+                });
+            }
+            else{
+//                [self runShareWithType:platformType];
+            }
+        }];
+
 }
 
 

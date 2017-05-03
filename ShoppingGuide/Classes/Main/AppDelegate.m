@@ -34,7 +34,7 @@
     [self.window makeKeyAndVisible];
     
     // 友盟统计SDK
-    UMConfigInstance.appKey = @"59030d3999f0c7502000168f";
+    UMConfigInstance.appKey = UMengAPPKEY;
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     [MobClick setLogEnabled:YES];
@@ -45,6 +45,7 @@
     
     /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"59030d3999f0c7502000168f"];
+    
     
     [self configUSharePlatforms];
     
@@ -87,7 +88,7 @@
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105821097"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106060415"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
     
     /* 设置新浪的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"3921700954"  appSecret:@"04b48b094faeb16683c32669824ebdad" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];

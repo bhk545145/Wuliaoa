@@ -37,6 +37,8 @@
 // 主题背景颜色
 #define LYBgColor IWColor(240, 240, 240)
 
+#define UMengAPPKEY @"59030d3999f0c7502000168f"
+
 #endif /* PrefixHeader_pch */
 
 
