@@ -196,13 +196,13 @@
 
 - (IBAction)passwordOrSmsbtn:(id)sender {
     if (_ispassword) {
-        [_passwordOrSms setTitle:@"验证码登入" forState:UIControlStateNormal];
+        [_passwordOrSms setTitle:@"密码登入" forState:UIControlStateNormal];
         _smstxt.text = @"验证码";
         _sendSms.hidden = NO;
         _ispassword = NO;
 
     }else{
-        [_passwordOrSms setTitle:@"密码登入" forState:UIControlStateNormal];
+        [_passwordOrSms setTitle:@"验证码登入" forState:UIControlStateNormal];
         _smstxt.text = @"密码";
         _sendSms.hidden = YES;
         _ispassword = YES;

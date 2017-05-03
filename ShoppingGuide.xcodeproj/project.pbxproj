@@ -1504,10 +1504,10 @@
 				INFOPLIST_FILE = ShoppingGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.broadlink.blappsdk.wuliaoa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.izanpin.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17164d66-0ea0-40a0-a18c-652aee65625b";
-				PROVISIONING_PROFILE_SPECIFIER = ios2_econtrol_development;
+				PROVISIONING_PROFILE = "ca16771b-ea5c-482a-8432-e2728b0d5acc";
+				PROVISIONING_PROFILE_SPECIFIER = ihcCommon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1523,10 +1523,10 @@
 				INFOPLIST_FILE = ShoppingGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.broadlink.blappsdk.wuliaoa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.izanpin.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17164d66-0ea0-40a0-a18c-652aee65625b";
-				PROVISIONING_PROFILE_SPECIFIER = ios2_econtrol_development;
+				PROVISIONING_PROFILE = "ca16771b-ea5c-482a-8432-e2728b0d5acc";
+				PROVISIONING_PROFILE_SPECIFIER = ihcCommon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
