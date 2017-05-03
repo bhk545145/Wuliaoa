@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "UMMobClick/MobClick.h"
 #import <UMSocialCore/UMSocialCore.h>
+
 @interface LYLoginViewController ()<UITextFieldDelegate>{
     dispatch_queue_t queue;
 }
@@ -214,6 +215,12 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     self.loginBtn.enabled = (self.phoneNum.text.length > 0 && self.pwd.text.length > 0) ? YES : NO;
     return YES;
+}
+
+- (IBAction)onAuthEvent:(UIButton *)sender {
+    [[UMSocialManager defaultManager] cancelAuthWithPlatform:UMSocialPlatformType_QQ completion:^(id result, NSError *error) {
+        [self getUserInfoForPlatform:UMSocialPlatformType_QQ];
+    }];
 }
 
 

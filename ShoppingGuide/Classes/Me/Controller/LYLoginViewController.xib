@@ -177,6 +177,9 @@
                         <constraint firstAttribute="width" constant="70" id="G6T-VA-iom"/>
                     </constraints>
                     <state key="normal" image="Share_WeChatSessionIcon_70x70_"/>
+                    <connections>
+                        <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="PzO-iA-KNy"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLB-RZ-daQ">
                     <rect key="frame" x="365" y="362" width="70" height="70"/>
@@ -185,6 +188,9 @@
                         <constraint firstAttribute="height" constant="70" id="naN-50-a4t"/>
                     </constraints>
                     <state key="normal" image="Share_QQIcon_70x70_"/>
+                    <connections>
+                        <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="SDd-EG-Cur"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPC-fO-R7i">
                     <rect key="frame" x="165" y="362" width="70" height="70"/>
@@ -193,6 +199,9 @@
                         <constraint firstAttribute="height" constant="70" id="klj-eW-jjS"/>
                     </constraints>
                     <state key="normal" image="Share_WeiboIcon_70x70_"/>
+                    <connections>
+                        <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="bzL-m7-odg"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
