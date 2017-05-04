@@ -15,6 +15,7 @@
 #import "SVProgressHUD.h"
 #import "LYActionSheetView.h"
 #import <UShareUI/UShareUI.h>
+#import "IWPhoto.h"
 
 
 @interface IWStatusToolbar()<UMSocialShareMenuViewDelegate>{
@@ -280,34 +281,55 @@
 // 点击分享
 - (void)shareItemClickStatus:(IWStatus *)status {
     // 弹出分享框
-//    [LYActionSheetView showStatus:status];
-//    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    
-    //加入copy的操作
+   
     //@see http://dev.umeng.com/social/ios/进阶文档#6
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
                                      withPlatformIcon:[UIImage imageNamed:@"Warning"]
                                      withPlatformName:@"举报"];
     
     [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
-    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRadius;
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
             //在回调里面获得点击的
             if (platformType == UMSocialPlatformType_UserDefine_Begin+2) {
-                NSLog(@"点击演示添加Icon后该做的操作");
+                IWLog(@"点击演示添加Icon后该做的操作");
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SVProgressHUD showSuccessWithStatus:@"已提交举报!"];
                 });
             }
             else{
-//                [self runShareWithType:platformType];
+                [self runShareWithType:platformType showStatus:status];
             }
         }];
 
 }
 
-
-
+- (void)runShareWithType:(UMSocialPlatformType)platformType showStatus:(IWStatus *)status{
+    //分享文本
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //设置文本
+    NSString *latiaoURLstring = @"http://t.cn/RaZ38kL";
+    messageObject.text = [NSString stringWithFormat:@"%@   ——————————————分享自：辣条%@",status.content,latiaoURLstring];
+    //    //创建图片内容对象
+    //    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    //    //如果有缩略图，则设置缩略图
+    //    shareObject.thumbImage = [UIImage imageNamed:@"latiao"];
+    //    IWPhoto *imageURL = status.images[0];
+    //    [shareObject setShareImage:imageURL.url];
+    //
+    //    //分享消息对象设置分享内容对象
+    //    messageObject.shareObject = shareObject;
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        if (error) {
+            IWLog(@"************Share fail with error %@*********",error);
+        }else{
+            IWLog(@"response data is %@",data);
+        }
+    }];
+    
+}
 
 
 
