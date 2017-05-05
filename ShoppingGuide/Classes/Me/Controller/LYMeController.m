@@ -273,17 +273,17 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 
 // 根据登录状态判断是否显示footerView
 - (void)inspectStatus {
-    dispatch_async(queue, ^{
+    __weak typeof(self) weakSelf = self;
         IWAccount *account = [IWAccountTool account];
         if(account) {
             // 刷新收藏
-            [self loadLikeLoad];
-            self.tableView.tableFooterView = nil;
+            [weakSelf loadLikeLoad];
+            weakSelf.tableView.tableFooterView = nil;
         }else {
-            self.tableView.tableFooterView = self.footerView;
+            weakSelf.tableView.tableFooterView = weakSelf.footerView;
         }
-        [self.tableView reloadData];
-    });
+        [weakSelf.tableView reloadData];
+
     
 }
 

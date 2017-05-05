@@ -41,16 +41,22 @@
 // 进入页面，建议在此处添加
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [MobClick beginLogPageView:cName];
+    dispatch_async(queue, ^{
+        NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+        [MobClick beginLogPageView:cName];
+    });
+    
     
 }
 
 // 退出页面，建议在此处添加
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [MobClick endLogPageView:cName];
+    dispatch_async(queue, ^{
+        NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+        [MobClick endLogPageView:cName];
+    });
+    
 }
 
 - (void)setupWebView{
@@ -62,7 +68,7 @@
 
 - (void)loadNewInfo{
     dispatch_async(queue, ^{
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php"]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
         //    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.ali_click]]];
         
         

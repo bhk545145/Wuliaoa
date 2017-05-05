@@ -176,7 +176,10 @@
                         <constraint firstAttribute="height" constant="70" id="DHa-3E-jK3"/>
                         <constraint firstAttribute="width" constant="70" id="G6T-VA-iom"/>
                     </constraints>
-                    <state key="normal" image="Share_WeChatSessionIcon_70x70_"/>
+                    <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
+                    <state key="normal" title="暂时未开放" backgroundImage="Share_WeChatSessionIcon_70x70_">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="PzO-iA-KNy"/>
                     </connections>
