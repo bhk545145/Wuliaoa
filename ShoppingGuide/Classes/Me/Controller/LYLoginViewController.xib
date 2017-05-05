@@ -132,7 +132,7 @@
                         <action selector="passwordOrSmsbtn:" destination="-1" eventType="touchUpInside" id="rRJ-fa-79S"/>
                     </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVe-LT-W5c">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVe-LT-W5c">
                     <rect key="frame" x="0.0" y="312" width="600" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用社交账号登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Ac-1MI">
@@ -170,7 +170,7 @@
                         <constraint firstAttribute="height" constant="30" id="ywM-jZ-vc7"/>
                     </constraints>
                 </view>
-                <button hidden="YES" opaque="NO" tag="101" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psM-Bn-S9K">
+                <button opaque="NO" tag="101" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psM-Bn-S9K">
                     <rect key="frame" x="265" y="362" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="DHa-3E-jK3"/>
@@ -184,7 +184,7 @@
                         <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="PzO-iA-KNy"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLB-RZ-daQ">
+                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLB-RZ-daQ">
                     <rect key="frame" x="365" y="362" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="6eU-Wp-2WT"/>
@@ -195,7 +195,7 @@
                         <action selector="onAuthEvent:" destination="-1" eventType="touchUpInside" id="SDd-EG-Cur"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPC-fO-R7i">
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPC-fO-R7i">
                     <rect key="frame" x="165" y="362" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="ah7-gy-7lK"/>

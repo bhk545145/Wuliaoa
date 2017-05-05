@@ -42,12 +42,10 @@
     IWSettingLabelItem *removeCache = [IWSettingLabelItem itemWithIcon:@"removeCache" title:@"清除缓存"];
     removeCache.defaultText = [self getSDImageCacheSize];
     removeCache.option = ^{
-        dispatch_async(queue, ^{
-            [self removeSDImageCache];
-            IWSettingLabelItem *removeCache = group.items[0];
-            removeCache.defaultText = [self getSDImageCacheSize];
-            group.items = @[removeCache];
-        });
+        [self removeSDImageCache];
+        IWSettingLabelItem *removeCache = group.items[0];
+        removeCache.defaultText = [self getSDImageCacheSize];
+        group.items = @[removeCache];
         
     };
     group.items = @[removeCache];
