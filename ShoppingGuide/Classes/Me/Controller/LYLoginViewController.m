@@ -120,6 +120,7 @@
 - (void)CodeLogin{
     __weak typeof(self) weakSelf = self;
     
+    [SVProgressHUD showWithStatus:@"正在登入"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
     params[@"code"] = self.pwd.text;
@@ -157,6 +158,7 @@
 - (void)passwordLogin{
     __weak typeof(self) weakSelf = self;
     
+    [SVProgressHUD showWithStatus:@"正在登入"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
     params[@"password"] = self.pwd.text;
@@ -248,6 +250,8 @@
 - (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
 {
     __weak typeof(self) weakSelf = self;
+    
+    [SVProgressHUD showWithStatus:@"正在登入"];
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
 //        IWLog(@" error:%@",error);
         UMSocialUserInfoResponse *resp = result;

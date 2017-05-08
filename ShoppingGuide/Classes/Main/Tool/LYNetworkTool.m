@@ -171,7 +171,6 @@ static id _instance;
                   parameters:(id)parameters
                      success:(void (^)(id _Nullable responseObject))success
                      failure:(void (^)(NSError *error))failure {
-    [SVProgressHUD showWithStatus:@"正在登入"];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -181,7 +180,6 @@ static id _instance;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
-        [SVProgressHUD showSuccessWithStatus:@"登入成功!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);

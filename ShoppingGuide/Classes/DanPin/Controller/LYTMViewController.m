@@ -76,7 +76,6 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     [SVProgressHUD showWithStatus:@"正在加载"];
-    IWLog(@"webView:%f",self.webView.frame.size.height);
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
