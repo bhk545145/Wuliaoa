@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,19 +26,8 @@
                             <constraint firstAttribute="height" constant="30" id="MXE-nG-nVV"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FFe-BP-ZpW">
-                        <rect key="frame" x="43" y="5" width="71" height="18"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHs-BY-N3r">
-                                <rect key="frame" x="0.0" y="0.0" width="71" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-7Z-Qp5">
-                        <rect key="frame" x="43" y="34" width="269" height="13.5"/>
+                        <rect key="frame" x="43" y="34" width="269" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,18 +38,23 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHs-BY-N3r">
+                        <rect key="frame" x="43" y="5" width="71" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="u3h-7Z-Qp5" firstAttribute="top" secondItem="FFe-BP-ZpW" secondAttribute="bottom" constant="11" id="48E-c0-eJx"/>
                     <constraint firstItem="k4n-u5-iRE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="CPj-pR-917"/>
                     <constraint firstItem="u3h-7Z-Qp5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="EbW-0y-3rx"/>
                     <constraint firstItem="k4n-u5-iRE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="G3i-3g-ohP"/>
                     <constraint firstItem="UIz-if-T2a" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="JPz-Fj-6WL"/>
-                    <constraint firstItem="FFe-BP-ZpW" firstAttribute="leading" secondItem="k4n-u5-iRE" secondAttribute="trailing" constant="8" id="QMp-fe-Wa3"/>
-                    <constraint firstItem="FFe-BP-ZpW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="i5c-4L-mha"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="u3h-7Z-Qp5" secondAttribute="bottom" constant="0.5" id="SDh-CW-4V5"/>
+                    <constraint firstItem="u3h-7Z-Qp5" firstAttribute="top" secondItem="lHs-BY-N3r" secondAttribute="bottom" constant="11" id="gUK-1a-6wO"/>
                     <constraint firstItem="u3h-7Z-Qp5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="35" id="rzf-yr-eAm"/>
                     <constraint firstItem="UIz-if-T2a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="w9R-T1-9Iq"/>
-                    <constraint firstAttribute="trailing" secondItem="FFe-BP-ZpW" secondAttribute="trailing" constant="206" id="wzL-F0-XBe"/>
+                    <constraint firstItem="u3h-7Z-Qp5" firstAttribute="leading" secondItem="lHs-BY-N3r" secondAttribute="leading" id="xBm-m0-oI9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

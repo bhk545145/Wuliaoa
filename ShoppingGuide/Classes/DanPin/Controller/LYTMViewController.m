@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "SVProgressHUD.h"
 #import "UMMobClick/MobClick.h"
+#import <WebKit/WebKit.h>
 
 @interface LYTMViewController ()<UIWebViewDelegate>{
     dispatch_queue_t queue;
@@ -85,7 +86,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [SVProgressHUD showWithStatus:@"数据加载中..."];
+//    [SVProgressHUD showWithStatus:@"数据加载中..."];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -98,7 +99,7 @@
         self.navigationItem.leftBarButtonItem.enabled = NO;
         self.webView.scrollView.bounces = YES;
     }
-    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+//    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
