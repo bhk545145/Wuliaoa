@@ -26,6 +26,8 @@
 
 #define MRScreenH [UIScreen mainScreen].bounds.size.height
 
+#define MAS_SHORTHAND
+
 
 // 随机颜色
 #define MRRandomColor MRRGBColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))

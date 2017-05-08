@@ -12,12 +12,13 @@
 #import "SVProgressHUD.h"
 #import "UMMobClick/MobClick.h"
 #import <WebKit/WebKit.h>
+#import "Masonry.h"
 
-@interface LYTMViewController ()<UIWebViewDelegate>{
+@interface LYTMViewController ()<WKNavigationDelegate,WKUIDelegate>{
     dispatch_queue_t queue;
 }
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) WKWebView *webView;
 
 @end
 
@@ -27,16 +28,24 @@
     [super viewDidLoad];
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     self.title = @"赞品";
+    self.webView = [[WKWebView alloc]init];
+    [self.view addSubview:self.webView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+//    self.webView.scalesPageToFit = YES;
+//    self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
     self.webView.backgroundColor = [UIColor whiteColor];
-    self.webView.delegate = self;
     self.webView.scrollView.showsVerticalScrollIndicator = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"checkUserType_backward_9x15_"] style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackClick)];
-    
-    [self setupWebView];
-    __weak typeof(self) weakSelf = self;
-    // 刷新
-    [weakSelf.webView.scrollView.mj_header beginRefreshing];
-
+    dispatch_async(queue, ^{
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
+    });
 }
 
 // 进入页面，建议在此处添加
@@ -61,59 +70,77 @@
 }
 
 - (void)setupWebView{
-    /// 自动对页面进行缩放以适应屏幕
-    self.webView.scalesPageToFit = YES;
-    self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
     self.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewInfo)];
 }
 
 - (void)loadNewInfo{
     dispatch_async(queue, ^{
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
-        //    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.ali_click]]];
-        
-        
     });
     
 }
 
-#pragma mark - <UIWebViewDelegate>
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    IWLog(@"URL---%@",request);
-    [self foraward:request];
-    return YES;
+
+#pragma mark - WKNavigationDelegate
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    [SVProgressHUD showWithStatus:@"正在加载"];
 }
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-//    [SVProgressHUD showWithStatus:@"数据加载中..."];
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
 }
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    __weak typeof(self) weakSelf = self;
-    [weakSelf.webView.scrollView.mj_header endRefreshing];
-    if(self.webView.canGoBack){
-        self.navigationItem.leftBarButtonItem.enabled = YES;
-        self.webView.scrollView.bounces = NO;
-    }else{
-        self.navigationItem.leftBarButtonItem.enabled = NO;
-        self.webView.scrollView.bounces = YES;
-    }
-//    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
 }
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:@"出错啦~"];
-     __weak typeof(self) weakSelf = self;
-    [weakSelf.webView.scrollView.mj_header endRefreshing];
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+    [SVProgressHUD showErrorWithStatus:@"加载失败"];
 }
-
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+// 在收到响应后，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    
+    NSLog(@"%@",navigationResponse.response.URL.absoluteString);
+    //允许跳转
+    decisionHandler(WKNavigationResponsePolicyAllow);
+}
+// 在发送请求之前，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    
+    NSLog(@"%@",navigationAction.request.URL.absoluteString);
+    //允许跳转
+    decisionHandler(WKNavigationActionPolicyAllow);
+    [self foraward:navigationAction.request];
+}
+#pragma mark - WKUIDelegate
+// 创建一个新的WebView
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    return [[WKWebView alloc]init];
+}
+// 输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+    completionHandler(@"http");
+}
+// 确认框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
+    completionHandler(YES);
+}
+// 警告框
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    NSLog(@"%@",message);
+    completionHandler();
+}
 
 
 // 返回事件
 - (void)navigationBackClick {
     [self.webView goBack];
-//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)foraward:(NSURLRequest *)request{

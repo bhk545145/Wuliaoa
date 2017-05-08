@@ -75,7 +75,6 @@
 		0803D7771D7BE96A0087EABF /* LYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803D7761D7BE96A0087EABF /* LYDetailController.m */; };
 		0809682C1D882FB3007E7E59 /* LYThemeCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0809682B1D882FB3007E7E59 /* LYThemeCollectionController.m */; };
 		0810B4111D90D1E000EC0716 /* LYTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0810B40F1D90D1E000EC0716 /* LYTMViewController.m */; };
-		0810B4121D90D1E000EC0716 /* LYTMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0810B4101D90D1E000EC0716 /* LYTMViewController.xib */; };
 		0810B41A1D90E96600EC0716 /* LYEditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0810B4191D90E96600EC0716 /* LYEditInfoViewController.m */; };
 		0810B41C1D90E98600EC0716 /* LYEditInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0810B41B1D90E98600EC0716 /* LYEditInfoViewController.xib */; };
 		081E88E61D8E4AC400746B38 /* LYMineFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081E88E51D8E4AC400746B38 /* LYMineFooterView.m */; };
@@ -283,7 +282,6 @@
 		0809682B1D882FB3007E7E59 /* LYThemeCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYThemeCollectionController.m; sourceTree = "<group>"; };
 		0810B40E1D90D1E000EC0716 /* LYTMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTMViewController.h; sourceTree = "<group>"; };
 		0810B40F1D90D1E000EC0716 /* LYTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTMViewController.m; sourceTree = "<group>"; };
-		0810B4101D90D1E000EC0716 /* LYTMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LYTMViewController.xib; sourceTree = "<group>"; };
 		0810B4181D90E96600EC0716 /* LYEditInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEditInfoViewController.h; sourceTree = "<group>"; };
 		0810B4191D90E96600EC0716 /* LYEditInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEditInfoViewController.m; sourceTree = "<group>"; };
 		0810B41B1D90E98600EC0716 /* LYEditInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LYEditInfoViewController.xib; sourceTree = "<group>"; };
@@ -909,7 +907,6 @@
 				08967C381D7E8FD800123932 /* LYProductDetailController.m */,
 				0810B40E1D90D1E000EC0716 /* LYTMViewController.h */,
 				0810B40F1D90D1E000EC0716 /* LYTMViewController.m */,
-				0810B4101D90D1E000EC0716 /* LYTMViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1197,7 +1194,6 @@
 				08FE65D11D77D113000DB820 /* LaunchScreen.storyboard in Resources */,
 				08331F991D90366600CE736C /* LYCommentCell.xib in Resources */,
 				08E48F901D8E70BE00E0A863 /* SettingCell.plist in Resources */,
-				0810B4121D90D1E000EC0716 /* LYTMViewController.xib in Resources */,
 				08FE65DD1D77D1A8000DB820 /* Images.xcassets in Resources */,
 				02A683031E7BBA40008824B2 /* MJPhotoBrowser.bundle in Resources */,
 				085AAD771D911A8400A365B8 /* LYLikeCell.xib in Resources */,
@@ -1252,7 +1248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

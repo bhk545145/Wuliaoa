@@ -23,4 +23,6 @@ target 'ShoppingGuide' do
     pod 'UMengUShare/Social/QQ'
     # 集成新浪微博(完整版25.3M)
     pod 'UMengUShare/Social/Sina'
+    #
+    pod 'Masonry'
 end
