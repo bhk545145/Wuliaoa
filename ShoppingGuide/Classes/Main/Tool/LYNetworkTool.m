@@ -74,6 +74,7 @@ static id _instance;
           parameters:(id)parameters
              success:(void (^)(id _Nullable responseObject))success
              failure:(void (^)(NSError *error))failure {
+    
     IWToken *token = [IWAccountTool token];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -100,6 +101,7 @@ static id _instance;
               parameters:(id)parameters
                  success:(void (^)(id _Nullable responseObject))success
                  failure:(void (^)(NSError *error))failure {
+    [SVProgressHUD showWithStatus:@"正在发送..."];
     IWToken *token = [IWAccountTool token];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -155,11 +157,11 @@ static id _instance;
     [[AFHTTPSessionManager manager] DELETE:URLString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
-        [SVProgressHUD showSuccessWithStatus:@"发送成功!"];
+        [SVProgressHUD showSuccessWithStatus:@"删除成功!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);
-        [SVProgressHUD showSuccessWithStatus:@"发送失败!"];
+        [SVProgressHUD showSuccessWithStatus:@"删除失败!"];
     }];
     
     [SVProgressHUD dismiss];
@@ -169,6 +171,7 @@ static id _instance;
                   parameters:(id)parameters
                      success:(void (^)(id _Nullable responseObject))success
                      failure:(void (^)(NSError *error))failure {
+    [SVProgressHUD showWithStatus:@"正在登入"];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -178,7 +181,7 @@ static id _instance;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 回调成功之后的block
         success(responseObject);
-        
+        [SVProgressHUD showSuccessWithStatus:@"登入成功!"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 回调失败之后的block
         failure(error);

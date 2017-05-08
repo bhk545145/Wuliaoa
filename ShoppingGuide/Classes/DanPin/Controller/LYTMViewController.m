@@ -36,8 +36,10 @@
         make.top.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
-//    self.webView.scalesPageToFit = YES;
-//    self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    //网页自适配
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
     self.webView.backgroundColor = [UIColor whiteColor];
@@ -46,6 +48,7 @@
     dispatch_async(queue, ^{
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
     });
+    
 }
 
 // 进入页面，建议在此处添加
@@ -69,23 +72,11 @@
     
 }
 
-- (void)setupWebView{
-    self.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewInfo)];
-}
-
-- (void)loadNewInfo{
-    dispatch_async(queue, ^{
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
-    });
-    
-}
-
-
-
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     [SVProgressHUD showWithStatus:@"正在加载"];
+    IWLog(@"webView:%f",self.webView.frame.size.height);
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{

@@ -247,26 +247,43 @@
 //友盟获取登录信息
 - (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
 {
+    __weak typeof(self) weakSelf = self;
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
-        IWLog(@" result:%@",result);
-        IWLog(@" error:%@",error);
+//        IWLog(@" error:%@",error);
         UMSocialUserInfoResponse *resp = result;
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        IWLog(@" openid:%@",resp.refreshToken);
+        params[@"openId"] = resp.uid;
+        params[@"platformType"] = [NSNumber numberWithInteger:resp.platformType];
+        params[@"nickname"] = resp.name;
+        params[@"iconUrl"] = resp.iconurl;
+        params[@"gender"] = [resp.gender isEqualToString:@"男"] ? @"1" : @"2";
+        params[@"device"] = [IWWeiboTool iphoneType];
+        dispatch_async(queue, ^{
+           [[LYNetworkTool sharedNetworkTool] loginPost:IWoauthLogin parameters:params success:^(id  _Nullable responseObject) {
+               IWLog(@"登录信息——————%@",responseObject);
+               int isLongin = [responseObject[@"status"] intValue];
+               if (isLongin == 1) {
+                   [SVProgressHUD showSuccessWithStatus:@"登录成功!"];
+                   IWAccount *account = [IWAccount mj_objectWithKeyValues:responseObject[@"result"][@"user"]];
+                   IWToken *token = [IWToken mj_objectWithKeyValues:responseObject[@"result"][@"token"]];
+                   [IWAccountTool saveAccount:account];
+                   [IWAccountTool saveToken:token];
+                   // 发送通知
+                   
+                   [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
+                   [IWWeiboTool chooseTabBarController];
+                   // 退出登录界面
+                   [weakSelf dismissViewControllerAnimated:YES completion:nil];
+               }else{
+                   [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+               }
+           } failure:^(NSError * _Nullable error) {
+               IWLog(@"登录error——————%@",error);
+               [SVProgressHUD showErrorWithStatus:@"登录失败"];
+           }];
+        });
         
-        // 第三方登录数据(为空表示平台未提供)
-        // 授权数据
-        IWLog(@" uid: %@", resp.uid);
-        IWLog(@" openid: %@", resp.openid);
-        IWLog(@" accessToken: %@", resp.accessToken);
-        IWLog(@" refreshToken: %@", resp.refreshToken);
-        IWLog(@" expiration: %@", resp.expiration);
-        
-        // 用户数据
-        IWLog(@" name: %@", resp.name);
-        IWLog(@" iconurl: %@", resp.iconurl);
-        IWLog(@" gender: %@", resp.gender);
-        
-        // 第三方平台SDK原始数据
-        IWLog(@" originalResponse: %@", resp.originalResponse);
     }];
 }
 @end

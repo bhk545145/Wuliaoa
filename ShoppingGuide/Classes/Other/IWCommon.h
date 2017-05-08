@@ -6,6 +6,7 @@
 #define IWUserURL @"http://latiao.izanpin.com/api/user/"
 #define IWLoginURl @"http://latiao.izanpin.com/api/user/login"
 #define IWCodeLoginURl @"http://latiao.izanpin.com/api/user/smsLogin"
+#define IWoauthLogin @"http://latiao.izanpin.com/api/user/oauthLogin"
 
 #define PROBE_DEVICES_CHANGED @"probechanged"
 // 弱引用

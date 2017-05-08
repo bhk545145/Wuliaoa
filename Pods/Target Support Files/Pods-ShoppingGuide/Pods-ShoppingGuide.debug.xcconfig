@@ -1,3 +1,4 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO
 FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking" "$PODS_CONFIGURATION_BUILD_DIR/AGEmojiKeyboard" "$PODS_CONFIGURATION_BUILD_DIR/FMDB" "$PODS_CONFIGURATION_BUILD_DIR/LoremIpsum" "$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD" "$PODS_CONFIGURATION_BUILD_DIR/MJExtension" "$PODS_CONFIGURATION_BUILD_DIR/MJRefresh" "$PODS_CONFIGURATION_BUILD_DIR/Masonry" "$PODS_CONFIGURATION_BUILD_DIR/SDWebImage" "$PODS_CONFIGURATION_BUILD_DIR/SlackTextViewController" "${PODS_ROOT}/UMengAnalytics-NO-IDFA/umsdk_IOS_analyics_no-idfa_v4.2.5" "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK" "${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/QQ/QQSDK" "${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialUI"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/UMengAnalytics-NO-IDFA" "${PODS_ROOT}/Headers/Public/UMengUShare"
@@ -7,5 +8,4 @@ OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/
 OTHER_LDFLAGS = $(inherited) -ObjC -l"SocialQQ" -l"SocialSina" -l"SocialWeChat" -l"UMSocialLog" -l"WeChatSDK" -l"WeiboSDK" -l"c++" -l"sqlite3" -l"z" -framework "AFNetworking" -framework "AGEmojiKeyboard" -framework "CoreGraphics" -framework "CoreTelephony" -framework "FMDB" -framework "ImageIO" -framework "LoremIpsum" -framework "MBProgressHUD" -framework "MJExtension" -framework "MJRefresh" -framework "Masonry" -framework "QuartzCore" -framework "SDWebImage" -framework "SlackTextViewController" -framework "SystemConfiguration" -framework "TencentOpenAPI" -framework "UMMobClick" -framework "UMSocialCore" -framework "UMSocialNetwork" -framework "UShareUI"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
