@@ -45,6 +45,7 @@
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.scrollView.showsVerticalScrollIndicator = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"checkUserType_backward_9x15_"] style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackClick)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"refresh"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshClick)];
     dispatch_async(queue, ^{
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
     });
@@ -132,6 +133,10 @@
 - (void)navigationBackClick {
     [self.webView goBack];
 }
+// 刷新事件
+- (void)refreshClick {
+    [self.webView reload];
+}
 
 -(void)foraward:(NSURLRequest *)request{
     NSString *URLString = [NSString stringWithFormat:@"%@",request.URL];
@@ -144,7 +149,7 @@
     }
     
     // 天猫
-    if ([URLString containsString:@"detail.m.tmall.com"]) {
+    if ([URLString containsString:@"tmall://m.tmall.com"]) {
         if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
             [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:nil];
             [MobClick event:@"detail"];
