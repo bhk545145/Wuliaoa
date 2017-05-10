@@ -23,6 +23,8 @@ target 'ShoppingGuide' do
     pod 'UMengUShare/Social/QQ'
     # 集成新浪微博(完整版25.3M)
     pod 'UMengUShare/Social/Sina'
-    #
+    # 自动对齐
     pod 'Masonry'
+    # 一个支持多选、选原图和视频的图片选择器，同时有预览、裁剪功能 http://www.cnblogs.com/tanzhenblog/p/5110981.html
+    pod 'TZImagePickerController'
 end

@@ -27,6 +27,7 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - SlackTextViewController (1.9.5)
+  - TZImagePickerController (1.7.9)
   - UMengAnalytics-NO-IDFA (4.2.5)
   - UMengUShare/Core (6.4.3):
     - UMengUShare/Network
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDWebImage (~> 3.7.2)
   - SlackTextViewController
+  - TZImagePickerController
   - UMengAnalytics-NO-IDFA
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
@@ -77,9 +79,10 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
+  TZImagePickerController: 0a8ff228d287ebdd7d485e8c42a2a932894f1fba
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UMengUShare: d39cb682598df87ebdd3c055d03d00eb0102d42c
 
-PODFILE CHECKSUM: a5e2c02b625b7b3e3cb677c856db6d785793442e
+PODFILE CHECKSUM: 90487741dac3e17589c0e6dc2a784ed85cbd487b
 
 COCOAPODS: 1.1.1

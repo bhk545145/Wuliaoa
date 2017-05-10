@@ -21,13 +21,15 @@
 #import "LHCollectionViewController.h"
 #import "LHConst.h"
 
+#import "TZImagePickerController.h"
+
 typedef enum _InputType
 {
     InputType_Text     = 0,
     InputType_Emoji    = 1,
 } InputType;
 
-@interface IWComposeViewController () <IWComposeToolbarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource>
+@interface IWComposeViewController () <IWComposeToolbarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource, TZImagePickerControllerDelegate>
 {
     AGEmojiKeyboardView *_emojiKeyboardView;
 }
@@ -321,25 +323,25 @@ typedef enum _InputType
 
 #pragma mark -获取本地图片
 -(void)acquireLocal{
-    LHGroupViewController *group = [[LHGroupViewController alloc]init];
-    group.maxChooseNumber = _selectedNumber;
     __weak IWComposeViewController *weakSelf = self;
-    group.backImageArray = ^(NSMutableArray<PHAsset *> *array){
+    if (_selectedNumber <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"最多选择9张"];
+        return;
+    }
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:_selectedNumber delegate:self];
+    
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         __strong IWComposeViewController *strongSelf = weakSelf;
-        if (array) {
-            _selectedNumber -= array.count;
-            for (int i = 0; i<array.count; i++) {
-                PHAsset *asset = array[i];
-                [[LHPhotoList sharePhotoTool]requestImageForAsset:asset size:CGSizeMake(1080, 1920) resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image, NSDictionary *info) {
-                    NSString *length  = [NSString stringWithFormat:@"%f*%f",image.size.width,image.size.height];
-                    [_localLength addObject:length];
-                    [_imageArray addObject:image];
-                    [strongSelf setSpread];
-                }];
-            }
+        _selectedNumber -= photos.count;
+        for (int i = 0; i<photos.count; i++) {
+            UIImage *image = photos[i];
+            NSString *length  = [NSString stringWithFormat:@"%f*%f",image.size.width,image.size.height];
+            [_localLength addObject:length];
+            [_imageArray addObject:image];
+            [strongSelf setSpread];
         }
-    };
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:group] animated:YES completion:nil];
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 #pragma mark -展示UI在界面

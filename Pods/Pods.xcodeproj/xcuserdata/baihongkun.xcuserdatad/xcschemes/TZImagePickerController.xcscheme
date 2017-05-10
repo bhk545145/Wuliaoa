@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3E571AFF6FE9E4948C68F04FA1E8ED80'
-               BlueprintName = 'SlackTextViewController'
+               BlueprintIdentifier = 'FF1685030CD14ADABB81D93CAE6341CA'
+               BlueprintName = 'TZImagePickerController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SlackTextViewController.framework'>
+               BuildableName = 'TZImagePickerController.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
