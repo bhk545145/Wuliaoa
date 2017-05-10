@@ -305,28 +305,37 @@
 }
 
 - (void)runShareWithType:(UMSocialPlatformType)platformType showStatus:(IWStatus *)status{
-    //分享文本
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //设置文本
-    NSString *latiaoURLstring = @"http://t.cn/RaZ38kL";
-    messageObject.text = [NSString stringWithFormat:@"%@   ——————————————分享自：辣条%@",status.content,latiaoURLstring];
-    //    //创建图片内容对象
-    //    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    //    //如果有缩略图，则设置缩略图
-    //    shareObject.thumbImage = [UIImage imageNamed:@"latiao"];
-    //    IWPhoto *imageURL = status.images[0];
-    //    [shareObject setShareImage:imageURL.url];
-    //
-    //    //分享消息对象设置分享内容对象
-    //    messageObject.shareObject = shareObject;
+    
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    NSString *descrstr = status.content;
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"辣条" descr:descrstr thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = [NSString stringWithFormat:@"http://latiao.izanpin.com/share/%@",status.id];
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {
-            IWLog(@"************Share fail with error %@*********",error);
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            [SVProgressHUD showErrorWithStatus:@"分享失败"];
         }else{
-            IWLog(@"response data is %@",data);
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
         }
+        
     }];
     
 }
