@@ -13,7 +13,9 @@
 #import "IWSettingLabelItem.h"
 #import "IWSettingGroup.h"
 #import "IWAboutMeViewController.h"
+#import "LBClearCacheTool.h"
 
+#define filePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
 @interface LYMeSettingController ()<UITableViewDataSource, UITableViewDelegate>{
     dispatch_queue_t queue;
 }
@@ -63,17 +65,24 @@
 
 //清除缓存
 - (void)removeSDImageCache{
-    [SVProgressHUD showSuccessWithStatus:@"正在清除缓存"];
+    [SVProgressHUD showWithStatus:@"正在清除缓存"];
     [[SDImageCache sharedImageCache] clearDisk];
-    [SVProgressHUD dismiss];
-    [SVProgressHUD showSuccessWithStatus:@"清除成功"];
+    BOOL isSuccess = [LBClearCacheTool clearCacheWithFilePath:[NSString stringWithFormat:@"%@/com.izanpin.latiao",filePath]];
+    if(isSuccess){
+        [SVProgressHUD showSuccessWithStatus:@"清除成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"清楚失败"];
+    }
+    
     IWLog(@"%@",[self getSDImageCacheSize]);
 }
 
 //获取缓存
 - (NSString *)getSDImageCacheSize{
-    NSUInteger sizeint = [[SDImageCache sharedImageCache] getSize];
-    NSString *SDImageCacheSize = [NSString stringWithFormat:@"%0.2fM",sizeint/1024.0/1024.0];
+    NSString *SDImageCacheSize = [LBClearCacheTool getCacheSizeWithFilePath:filePath];
     return SDImageCacheSize;
 }
 @end

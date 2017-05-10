@@ -33,7 +33,7 @@
 {
     _photo = photo;
     // 控制gifView的可见性
-    self.gifView.hidden = ![photo.thumbnailUrl hasSuffix:@"gif"];
+    self.gifView.hidden = ![photo.thumbnailUrl containsString:@"gif"];
     
     // 下载图片
     [self setImageWithURL:[NSURL URLWithString:photo.thumbnailUrl] placeholderImage:[UIImage imageWithName:@"timeline_image_placeholder"]];

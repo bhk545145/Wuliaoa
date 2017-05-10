@@ -177,7 +177,7 @@ static NSString* commitCell = @"commitCell";
         // constrainedToSize: 限制算出来的文集的宽度和高度 这里限制宽度为250个像素点
         // lineBreakMode: 换行的模式
         // 设置cell的高度
-        return  textHeight < 55 ? 55 : textHeight + 5;
+        return  textHeight + 20 < 55 ? 55 : textHeight + 35;
     }
     
 }
@@ -212,7 +212,7 @@ static NSString* commitCell = @"commitCell";
 //获取评论
 - (void)getComment{
     NSString *articleId = _statusFrame.status.id;
-    NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@/1/10",IWAPPURL,articleId];
+    NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@/1/1000",IWAPPURL,articleId];
 
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         IWLog(@"评论————————%@",responseObject[@"result"]);
@@ -268,34 +268,6 @@ static NSString* commitCell = @"commitCell";
     return img;
 }
 
-////生成随机色
-//- (UIColor *)randomColor {
-//    return [UIColor colorWithRed:drand48()
-//                           green:drand48()
-//                            blue:drand48()
-//                           alpha:drand48()];
-//}
-////生成长方形图片,颜色随机
-//- (UIImage *)randomImage {
-//    CGSize size = CGSizeMake(30, 10);
-//    UIGraphicsBeginImageContextWithOptions(size , NO, 0);
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    UIColor *fillColor = [self randomColor];
-//    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
-//    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-//    CGContextFillRect(context, rect);
-//    
-//    fillColor = [self randomColor];
-//    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
-//    CGFloat xxx = 3;
-//    rect = CGRectMake(xxx, xxx, size.width - 2 * xxx, size.height - 2 * xxx);
-//    CGContextFillRect(context, rect);
-//    
-//    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return img;
-//}
 //当前选中系列的标题图片
 - (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
     UIImage *img = [UIImage imageNamed:@"content-details_like_selected_16x16_"];

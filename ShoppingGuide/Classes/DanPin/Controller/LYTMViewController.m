@@ -19,6 +19,7 @@
 }
 
 @property (strong, nonatomic) WKWebView *webView;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 @end
 
@@ -28,28 +29,75 @@
     [super viewDidLoad];
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     self.title = @"赞品";
-    self.webView = [[WKWebView alloc]init];
+   
     [self.view addSubview:self.webView];
+    [self.view addSubview:self.progressView];
+    [self.webView addObserver:self
+                   forKeyPath:@"estimatedProgress"
+                      options:NSKeyValueObservingOptionNew
+                      context:nil];
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
-    //网页自适配
+        //网页自适配
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
     
-    self.webView.UIDelegate = self;
-    self.webView.navigationDelegate = self;
-    self.webView.backgroundColor = [UIColor whiteColor];
-    self.webView.scrollView.showsVerticalScrollIndicator = NO;
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"checkUserType_backward_9x15_"] style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackClick)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"refresh"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshClick)];
     dispatch_async(queue, ^{
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yzyp.online/index.php?r=index/wap"]]];
     });
     
+}
+
+#pragma mark- XXXXXXXXXXXXXXXKVO监听XXXXXXXXXXXXXXXXXXXX
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSString *,id> *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:@"estimatedProgress"]) {
+        self.progressView.progress = self.webView.estimatedProgress;
+        // 加载完成
+        if (self.webView.estimatedProgress  >= 1.0f ) {
+            [UIView animateWithDuration:0.25f animations:^{
+                self.progressView.alpha = 0.0f;
+                self.progressView.progress = 0.0f;
+            }];
+        }else{
+            self.progressView.alpha = 1.0f;
+        }
+    }
+}
+
+#pragma mark- XXXXXXXXXXXXXXX懒加载部分XXXXXXXXXXXXXXXXXXXX
+- (WKWebView *)webView {
+    if (!_webView) {
+        _webView = [[WKWebView alloc] init];
+        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.scrollView.showsVerticalScrollIndicator = NO;
+        _webView.scrollView.showsHorizontalScrollIndicator = NO;
+
+    }
+    return _webView;
+}
+- (UIProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[UIProgressView alloc] init];
+        _progressView.progressTintColor = MRGlobalBg;
+        _progressView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 2);
+    }
+    return _progressView;
+}
+- (void)dealloc {
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress" context:nil];
 }
 
 // 进入页面，建议在此处添加
@@ -76,7 +124,7 @@
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    [SVProgressHUD showWithStatus:@"正在加载"];
+//    [SVProgressHUD showWithStatus:@"正在加载"];
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
@@ -84,7 +132,7 @@
 }
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+//    [SVProgressHUD showSuccessWithStatus:@"加载成功"];
 }
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{

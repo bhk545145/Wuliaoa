@@ -16,6 +16,7 @@
 #import "LYActionSheetView.h"
 #import <UShareUI/UShareUI.h>
 #import "IWPhoto.h"
+#import "UIImageView+AFNetworking.h"
 
 
 @interface IWStatusToolbar()<UMSocialShareMenuViewDelegate>{
@@ -309,9 +310,15 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    NSString* thumbURL;
+    if (status.images.count) {
+        IWPhoto *photoimage = status.images[0];
+        thumbURL = photoimage.thumbnailUrl;
+    }else{
+        thumbURL = @"https://wuliaoa.bj.bcebos.com/108.png";
+    }
     NSString *descrstr = status.content;
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"辣条" descr:descrstr thumImage:thumbURL];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"辣条——无聊就来辣条吧" descr:descrstr thumImage:thumbURL];
     //设置网页地址
     shareObject.webpageUrl = [NSString stringWithFormat:@"http://latiao.izanpin.com/share/%@",status.id];
     
