@@ -29,10 +29,10 @@
         [exception raise];
 
     }
-    NSLog(@"debug");
+    IWLog(@"debug");
 //发布
 #else
-    NSLog(@"post");
+    
 #endif
 
     //获取“path”文件夹下面的所有文件
@@ -94,7 +94,6 @@
 //清除path文件夹下缓存大小
 + (BOOL)clearCacheWithFilePath:(NSString *)path
 {
-
     //拿到path路径的下一级目录的子文件夹
     NSArray *subpathArray = [fileManager contentsOfDirectoryAtPath:path error:nil];
 
@@ -104,19 +103,18 @@
 
     for (NSString *subpath in subpathArray)
     {
-        filePath =[path stringByAppendingPathComponent:subpath];
-        //删除子文件夹
-        [fileManager removeItemAtPath:filePath error:&error];
-        if (error) {
-            message = [NSString stringWithFormat:@"%@这个路径的文件夹删除失败了，请检查后重新再试",filePath];
-            return NO;
+        if (![subpath isEqualToString:@"Snapshots"]) {
+            filePath =[path stringByAppendingPathComponent:subpath];
+            //删除子文件夹
+            [fileManager removeItemAtPath:filePath error:&error];
+            if (error) {
+                message = [NSString stringWithFormat:@"%@这个路径的文件夹删除失败了，请检查后重新再试",filePath];
+                return NO;
+            }
 
-        }else {
-            message = @"成功了";
         }
-
+        
     }
-    NSLog(@"%@",message);
 
     return YES;
 

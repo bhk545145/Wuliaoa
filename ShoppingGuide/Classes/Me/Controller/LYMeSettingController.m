@@ -67,14 +67,11 @@
 - (void)removeSDImageCache{
     [SVProgressHUD showWithStatus:@"正在清除缓存"];
     [[SDImageCache sharedImageCache] clearDisk];
-    BOOL isSuccess = [LBClearCacheTool clearCacheWithFilePath:[NSString stringWithFormat:@"%@/com.izanpin.latiao",filePath]];
+    BOOL isSuccess = [LBClearCacheTool clearCacheWithFilePath:[NSString stringWithFormat:@"%@",filePath]];
     if(isSuccess){
         [SVProgressHUD showSuccessWithStatus:@"清除成功"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
     }else{
-        [SVProgressHUD showErrorWithStatus:@"清楚失败"];
+        [SVProgressHUD showErrorWithStatus:@"清除失败"];
     }
     
     IWLog(@"%@",[self getSDImageCacheSize]);
@@ -82,7 +79,7 @@
 
 //获取缓存
 - (NSString *)getSDImageCacheSize{
-    NSString *SDImageCacheSize = [LBClearCacheTool getCacheSizeWithFilePath:filePath];
+    NSString *SDImageCacheSize = [LBClearCacheTool getCacheSizeWithFilePath:[NSString stringWithFormat:@"%@",filePath]];
     return SDImageCacheSize;
 }
 @end

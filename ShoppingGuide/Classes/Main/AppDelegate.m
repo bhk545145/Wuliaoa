@@ -44,7 +44,7 @@
     [[UMSocialManager defaultManager] openLog:YES];
     
     /* 设置友盟appkey */
-    [[UMSocialManager defaultManager] setUmSocialAppkey:@"59030d3999f0c7502000168f"];
+    [[UMSocialManager defaultManager] setUmSocialAppkey:UMengAPPKEY];
     
     
     [self configUSharePlatforms];
@@ -79,11 +79,11 @@
 - (void)configUSharePlatforms
 {
     /* 设置微信的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxf17d91885336af29" appSecret:@"c38ddecf2467dfbc2bfd2241e0c1f2ce" redirectURL:@"http://mobile.umeng.com/social"];
     /*
-     * 移除相应平台的分享，如微信收藏
+     * 微信朋友圈
      */
-    //[[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wxf17d91885336af29" appSecret:@"c38ddecf2467dfbc2bfd2241e0c1f2ce" redirectURL:@"http://mobile.umeng.com/social"];
     
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
@@ -91,7 +91,7 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106060415"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
     
     /* 设置新浪的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"603429262"  appSecret:@"    250d9bf76c5804f347b5ebbf9cb01c32" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"603429262"  appSecret:@"250d9bf76c5804f347b5ebbf9cb01c32" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
     
 }
 
@@ -100,7 +100,7 @@
     /*
      * 打开图片水印
      */
-    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+    [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
     
     /*
      * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
@@ -110,7 +110,7 @@
      <true/>
      </dict>
      */
-    //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     
 }
 

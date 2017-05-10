@@ -86,6 +86,7 @@
 - (void)setPreDefinePlatforms{
     //设置用户自定义的平台
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),
+                                               @(UMSocialPlatformType_WechatTimeLine),
                                                @(UMSocialPlatformType_QQ),
                                                @(UMSocialPlatformType_Sina),
                                                ]];

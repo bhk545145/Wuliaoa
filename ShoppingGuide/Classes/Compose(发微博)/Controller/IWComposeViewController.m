@@ -106,7 +106,7 @@ typedef enum _InputType
 
 - (void)textDidChange:(NSNotification *)note
 {
-    self.navigationItem.rightBarButtonItem.enabled = self.textView.text.length != 0;
+    self.navigationItem.rightBarButtonItem.enabled = self.textView.text.length != 0 || self.imageArray.count > 0;
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)note
@@ -135,7 +135,7 @@ typedef enum _InputType
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"发无聊图";
+    self.title = @"发辣条";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStyleDone target:self action:@selector(send)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -372,7 +372,9 @@ typedef enum _InputType
         
         [self.scrollSubFrame addObject:[NSValue valueWithCGRect:photoView.frame]];
         [self.scrollSubViews addObject:photoView];
-
+    }
+    if (self.imageArray.count > 0 || self.textView.text.length != 0) {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     }
 
     
@@ -401,6 +403,10 @@ typedef enum _InputType
             }
         }];
     }];
+    if (self.imageArray.count == 0 && self.textView.text.length == 0) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
