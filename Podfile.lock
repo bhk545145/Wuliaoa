@@ -19,6 +19,7 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - LoremIpsum (1.0.0)
+  - LxGridView (1.0.0)
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - AGEmojiKeyboard
   - FMDB
   - LoremIpsum (~> 1.0)
+  - LxGridView
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -73,6 +75,7 @@ SPEC CHECKSUMS:
   AGEmojiKeyboard: d5a01a4b0de30e1f1c2a121503ac36a79c7217ab
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   LoremIpsum: 9029c55d36501b2ee0b05cc9ecda11d3a0479160
+  LxGridView: af7b9360cce8eec2bcb11aa9d3cb7b9674372b74
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
@@ -83,6 +86,6 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UMengUShare: d39cb682598df87ebdd3c055d03d00eb0102d42c
 
-PODFILE CHECKSUM: 90487741dac3e17589c0e6dc2a784ed85cbd487b
+PODFILE CHECKSUM: 6e3bf835826e41e7fd1f43ec16d73bf3a8cb03ef
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
