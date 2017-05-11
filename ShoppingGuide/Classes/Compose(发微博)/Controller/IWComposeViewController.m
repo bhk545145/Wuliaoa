@@ -40,7 +40,7 @@ typedef enum _InputType
     NSMutableArray *_selectedAssets;
     NSMutableArray *_selectedPhotos;
     BOOL _isSelectOriginalPhoto;
-    
+    NSString *_outputPath;
     CGFloat _itemWH;
     CGFloat _margin;
 }
@@ -101,7 +101,7 @@ typedef enum _InputType
     // 如不需要长按排序效果，将LxGridViewFlowLayout类改成UICollectionViewFlowLayout即可
     LxGridViewFlowLayout *layout = [[LxGridViewFlowLayout alloc] init];
     _margin = 4;
-    _itemWH = (self.view.tz_width - 2 * _margin - 4) / 3 - _margin;
+    _itemWH = (self.view.tz_width - 2 * _margin - 4) / 4 - _margin;
     layout.itemSize = CGSizeMake(_itemWH, _itemWH);
     layout.minimumInteritemSpacing = _margin;
     layout.minimumLineSpacing = _margin;
@@ -200,7 +200,7 @@ typedef enum _InputType
 //    [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+//发送无图片
 - (void)sendStatusWithoutImage
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -217,7 +217,7 @@ typedef enum _InputType
         [SVProgressHUD showErrorWithStatus:@"发送失败"];
     }];
 }
-
+//发送有图片
 - (void)sendStatusWithImage
 {
     // 1.创建请求管理对象
@@ -236,22 +236,54 @@ typedef enum _InputType
     
     // 3.发送请求
     [mgr POST:IWArticleURL parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        for (int i = 0; i<_selectedPhotos.count; i++) {
-            UIImage *image = _selectedPhotos[i];
-            NSData *data = UIImageJPEGRepresentation(image, 0.1);
-            [formData appendPartWithFileData:data name:@"images" fileName:@"image.jpg" mimeType:@"image/jpeg"];
+        //判断是图片还是视频
+        for (int j = 0; j<_selectedAssets.count; j++) {
+            id asset = _selectedAssets[j];
+            BOOL isVideo = [self imageOrVideo:asset];
+            if (isVideo) {
+                if (_outputPath == nil) {
+                    return;
+                }
+                NSData *data = [[NSData alloc]initWithContentsOfFile:_outputPath];
+                [formData appendPartWithFileData:data name:@"Video" fileName:@"Video.mp4" mimeType:@"Video/mpeg"];
+            }else{
+                UIImage *image = _selectedPhotos[j];
+                NSData *data = UIImageJPEGRepresentation(image, 0.1);
+                [formData appendPartWithFileData:data name:@"images" fileName:@"image.jpg" mimeType:@"image/jpeg"];
+            }
         }
-
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         IWLog(@"%f",uploadProgress.fractionCompleted);
         [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:@"正在上传"];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        IWLog(@"%@",[NSString stringWithFormat:@"%@", responseObject]);
         [SVProgressHUD showWithStatus:@"发送成功"];
+        [self deletePath:_outputPath];
         //通知首页刷新
         [[NSNotificationCenter defaultCenter] postNotificationName:PROBE_DEVICES_CHANGED object:nil];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD showErrorWithStatus:@"发送失败"];
+        [self deletePath:_outputPath];
     }];
+}
+//判断是图片还是视频
+- (BOOL)imageOrVideo:(id)asset{
+    BOOL isVideo = NO;
+    if ([asset isKindOfClass:[PHAsset class]]) {
+        PHAsset *phAsset = asset;
+        isVideo = phAsset.mediaType == PHAssetMediaTypeVideo;
+    } else if ([asset isKindOfClass:[ALAsset class]]) {
+        ALAsset *alAsset = asset;
+        isVideo = [[alAsset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo];
+    }
+    return isVideo;
+}
+
+- (void)deletePath:(NSString *)filePath{
+    NSFileManager *defaultManager;
+    defaultManager = [NSFileManager defaultManager];
+    NSString *documentsDirectory = NSTemporaryDirectory(); 
+    [defaultManager removeItemAtPath:documentsDirectory error:nil];
 }
 
 - (void)cancel
@@ -313,7 +345,7 @@ typedef enum _InputType
     }
 }
 
-#pragma mark --
+#pragma mark -保存照片
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -421,6 +453,7 @@ typedef enum _InputType
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
         [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
     } completion:^(BOOL finished) {
+        [self deletePath:_outputPath];
         [_collectionView reloadData];
     }];
 }
@@ -496,7 +529,6 @@ typedef enum _InputType
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TZTestCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZTestCell" forIndexPath:indexPath];
-    cell.bounds = CGRectMake(0, 0, 96, 96);
     if (_selectedPhotos.count > 0) {
         self.navigationItem.rightBarButtonItem.enabled = YES;
     }
@@ -615,7 +647,7 @@ typedef enum _InputType
      NSLog(@"视频导出到本地完成,沙盒路径为:%@",outputPath);
     // Export completed, send video here, send by outputPath or NSData
     // 导出完成，在这里写上传代码，通过路径或者通过NSData上传
-    
+         _outputPath = outputPath;
      }];
     [_collectionView reloadData];
     // _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
