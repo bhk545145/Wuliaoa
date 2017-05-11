@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LxGridView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,22 +67,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24A4AB4CD57330DBDA09EC8A14E7F4E3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>251BAD17812F7EBF6532EACF66F941C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<key>2BCBB750E29968CE2E7F5EEA6608011E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44A908A113F41DE1A7FCF8A5FAE6D55B</key>
+		<key>3E571AFF6FE9E4948C68F04FA1E8ED80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,17 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>82547F434E462184451B103DB1C6DCE0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>91710B7DF90241FB3857CCDA4E28AFE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC28E1175107ACD1ADCEF64F1FEBDF13</key>
+		<key>B3C3BBB54446EC5410CB96F30BBAC385</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,12 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D82DB13286FD7B6135554F97968EBEFE</key>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E14A62900910444707A5504D25EC98DC</key>
+		<key>FF1685030CD14ADABB81D93CAE6341CA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

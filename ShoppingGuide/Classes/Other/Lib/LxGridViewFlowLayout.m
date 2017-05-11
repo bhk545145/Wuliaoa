@@ -3,8 +3,11 @@
 //  LxGridView
 //
 
-#import "LxGridView.h"
+#import "LxGridViewFlowLayout.h"
+#import "TZTestCell.h"
+#import "UIView+Layout.h"
 
+#define stringify   __STRING
 
 static CGFloat const PRESS_TO_MOVE_MIN_DURATION = 0.1;
 static CGFloat const MIN_PRESS_TO_BEGIN_EDITING_DURATION = 0.6;
@@ -14,11 +17,17 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
     return CGPointMake(point.x + dx, point.y + dy);
 }
 
+/*
+ 此类来源于DeveloperLx的优秀开源项目：LxGridView
+ github链接：https://github.com/DeveloperLx/LxGridView
+ 我对这个类的代码做了一些修改；
+ 感谢DeveloperLx的优秀代码~
+ */
+
 @interface LxGridViewFlowLayout () <UIGestureRecognizerDelegate>
 
 @property (nonatomic,readonly) id<LxGridViewDataSource> dataSource;
 @property (nonatomic,readonly) id<LxGridViewDelegateFlowLayout> delegate;
-@property (nonatomic,assign) BOOL editing;
 
 @end
 
@@ -120,20 +129,6 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
     return (id<LxGridViewDelegateFlowLayout>)self.collectionView.delegate;
 }
 
-- (void)setEditing:(BOOL)editing
-{
-    NSCAssert([self.collectionView isKindOfClass:[LxGridView class]] || self.collectionView == nil, @"LxGridViewFlowLayout: Must use LxGridView as your collectionView class!");
-    LxGridView * gridView = (LxGridView *)self.collectionView;
-    gridView.editing = editing;
-}
-
-- (BOOL)editing
-{
-    NSCAssert([self.collectionView isKindOfClass:[LxGridView class]] || self.collectionView == nil, @"LxGridViewFlowLayout: Must use LxGridView as your collectionView class!");
-    LxGridView * gridView = (LxGridView *)self.collectionView;
-    return gridView.editing;
-}
-
 #pragma mark - override UICollectionViewLayout methods
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -184,13 +179,8 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
                 
                 _remainSecondsToBeginEditing = MIN_PRESS_TO_BEGIN_EDITING_DURATION;
             }
-            
-            if (self.editing == NO) {
-                return;
-            }
-            
+
             _movingItemIndexPath = [self.collectionView indexPathForItemAtPoint:[longPress locationInView:self.collectionView]];
-            
             if ([self.dataSource respondsToSelector:@selector(collectionView:canMoveItemAtIndexPath:)] && [self.dataSource collectionView:self.collectionView canMoveItemAtIndexPath:_movingItemIndexPath] == NO) {
                 _movingItemIndexPath = nil;
                 return;
@@ -200,40 +190,28 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
                 [self.delegate collectionView:self.collectionView layout:self willBeginDraggingItemAtIndexPath:_movingItemIndexPath];
             }
             
-            UICollectionViewCell * sourceCollectionViewCell = [self.collectionView cellForItemAtIndexPath:_movingItemIndexPath];
-            NSCAssert([sourceCollectionViewCell isKindOfClass:[LxGridViewCell class]] || sourceCollectionViewCell == nil, @"LxGridViewFlowLayout: Must use LxGridViewCell as your collectionViewCell class!");
-            LxGridViewCell * sourceGridViewCell = (LxGridViewCell *)sourceCollectionViewCell;
+            UICollectionViewCell *sourceCollectionViewCell = [self.collectionView cellForItemAtIndexPath:_movingItemIndexPath];
+            TZTestCell *sourceCell = (TZTestCell *)sourceCollectionViewCell;
             
-            _beingMovedPromptView = [[UIView alloc]initWithFrame:CGRectOffset(sourceCollectionViewCell.frame, -LxGridView_DELETE_RADIUS, -LxGridView_DELETE_RADIUS)];
+            _beingMovedPromptView = [[UIView alloc]initWithFrame:CGRectOffset(sourceCollectionViewCell.frame, -10, -10)];
+            _beingMovedPromptView.tz_width += 20;
+            _beingMovedPromptView.tz_height += 20;
             
             sourceCollectionViewCell.highlighted = YES;
-            UIView * highlightedSnapshotView = [sourceGridViewCell snapshotView];
-            highlightedSnapshotView.frame = sourceGridViewCell.bounds;
+            UIView * highlightedSnapshotView = [sourceCell snapshotView];
+            highlightedSnapshotView.frame = _beingMovedPromptView.bounds;
             highlightedSnapshotView.alpha = 1;
 
             sourceCollectionViewCell.highlighted = NO;
-            UIView * snapshotView = [sourceGridViewCell snapshotView];
-            snapshotView.frame = sourceGridViewCell.bounds;
+            UIView * snapshotView = [sourceCell snapshotView];
+            snapshotView.frame = _beingMovedPromptView.bounds;
             snapshotView.alpha = 0;
             
             [_beingMovedPromptView addSubview:snapshotView];
             [_beingMovedPromptView addSubview:highlightedSnapshotView];
             [self.collectionView addSubview:_beingMovedPromptView];
-            
-            static NSString * const kVibrateAnimation = @stringify(kVibrateAnimation);
-            static CGFloat const VIBRATE_DURATION = 0.1;
-            static CGFloat const VIBRATE_RADIAN = M_PI / 96;
-            
-            CABasicAnimation * vibrateAnimation = [CABasicAnimation animationWithKeyPath:@stringify(transform.rotation.z)];
-            vibrateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-            vibrateAnimation.fromValue = @(- VIBRATE_RADIAN);
-            vibrateAnimation.toValue = @(VIBRATE_RADIAN);
-            vibrateAnimation.autoreverses = YES;
-            vibrateAnimation.duration = VIBRATE_DURATION;
-            vibrateAnimation.repeatCount = CGFLOAT_MAX;
-            [_beingMovedPromptView.layer addAnimation:vibrateAnimation forKey:kVibrateAnimation];
-            
-            _sourceItemCollectionViewCellCenter = sourceCollectionViewCell.center;
+
+             _sourceItemCollectionViewCellCenter = sourceCollectionViewCell.center;
             
             typeof(self) __weak weakSelf = self;
             [UIView animateWithDuration:0
@@ -258,6 +236,7 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
                                      }
                                  }
                              }];
+             
             [self invalidateLayout];
         }
             break;
@@ -284,7 +263,7 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
                 _longPressGestureRecognizer.enabled = NO;
                 
                 typeof(self) __weak weakSelf = self;
-                [UIView animateWithDuration:0
+                [UIView animateWithDuration:0.2
                                       delay:0
                                     options:UIViewAnimationOptionBeginFromCurrentState
                                  animations:^{
@@ -335,6 +314,7 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
             if ((destinationIndexPath == nil) || [destinationIndexPath isEqual:sourceIndexPath]) {
                 return;
             }
+            
             if ([self.dataSource respondsToSelector:@selector(collectionView:itemAtIndexPath:canMoveToIndexPath:)] && [self.dataSource collectionView:self.collectionView itemAtIndexPath:sourceIndexPath canMoveToIndexPath:destinationIndexPath] == NO) {
                 return;
             }
@@ -349,8 +329,10 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
             [self.collectionView performBatchUpdates:^{
                 typeof(self) __strong strongSelf = weakSelf;
                 if (strongSelf) {
-                    [strongSelf.collectionView deleteItemsAtIndexPaths:@[sourceIndexPath]];
-                    [strongSelf.collectionView insertItemsAtIndexPaths:@[destinationIndexPath]];
+                    if (sourceIndexPath && destinationIndexPath) {
+                        [strongSelf.collectionView deleteItemsAtIndexPaths:@[sourceIndexPath]];
+                        [strongSelf.collectionView insertItemsAtIndexPaths:@[destinationIndexPath]];
+                    }
                 }
             } completion:^(BOOL finished) {
                 typeof(self) __strong strongSelf = weakSelf;
@@ -373,7 +355,7 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if ([_panGestureRecognizer isEqual:gestureRecognizer] && self.editing) {
+    if ([_panGestureRecognizer isEqual:gestureRecognizer]) {
         return _movingItemIndexPath != nil;
     }
     return YES;
@@ -396,8 +378,6 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
 - (void)displayLinkTriggered:(CADisplayLink *)displayLink
 {
     if (_remainSecondsToBeginEditing <= 0) {
-        
-        self.editing = YES;
         [_displayLink invalidate];
         _displayLink = nil;
     }

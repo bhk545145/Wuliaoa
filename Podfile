@@ -28,5 +28,5 @@ target 'ShoppingGuide' do
     # 一个支持多选、选原图和视频的图片选择器，同时有预览、裁剪功能 http://www.cnblogs.com/tanzhenblog/p/5110981.html
     pod 'TZImagePickerController'
     # Imitate Apple iOS system Desktop icons arrangement and interaction by inheriting UICollectionView! https://github.com/DeveloperLx/LxGridView
-    pod 'LxGridView'
+#    pod 'LxGridView'
 end

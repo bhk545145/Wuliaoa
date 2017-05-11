@@ -1,6 +1,0 @@
-framework module LxGridView {
-  umbrella header "LxGridView-umbrella.h"
-
-  export *
-  module * { export * }
-}
