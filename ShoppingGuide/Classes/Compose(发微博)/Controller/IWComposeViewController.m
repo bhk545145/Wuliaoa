@@ -244,8 +244,9 @@ typedef enum _InputType
                 if (_outputPath == nil) {
                     return;
                 }
-                NSData *data = [[NSData alloc]initWithContentsOfFile:_outputPath];
-                [formData appendPartWithFileData:data name:@"Video" fileName:@"Video.mp4" mimeType:@"Video/mpeg"];
+                NSURL *url = [NSURL fileURLWithPath:_outputPath];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                [formData appendPartWithFileData:data name:@"images" fileName:@"video1.mp4" mimeType:@"video/mpeg"];
             }else{
                 UIImage *image = _selectedPhotos[j];
                 NSData *data = UIImageJPEGRepresentation(image, 0.1);
