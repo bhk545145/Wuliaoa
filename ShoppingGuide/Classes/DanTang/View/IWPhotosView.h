@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 @interface IWPhotosView : UIView
 /**
  *  需要展示的图片(数组里面装的都是IWPhoto模型)
  */
 @property (nonatomic, strong) NSArray *photos;
+
+@property (nonatomic, strong) MPMoviePlayerViewController *playerController;
+
 
 /**
  *  根据图片的个数返回相册的最终尺寸

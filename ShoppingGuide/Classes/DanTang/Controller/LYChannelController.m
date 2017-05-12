@@ -24,7 +24,6 @@
 #import "IWAccountTool.h"
 #import "SVProgressHUD.h"
 
-
 static NSString * const HomeCell = @"HomeCell";
 
 @interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource>{
@@ -37,6 +36,7 @@ static NSString * const HomeCell = @"HomeCell";
 @property (nonatomic, copy) NSString *next_url;
 
 @property (nonatomic, strong) NSMutableArray *statusFrames;
+
 
 @end
 

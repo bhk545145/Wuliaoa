@@ -12,6 +12,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 
+
 @implementation IWPhotosView
 
 - (id)initWithFrame:(CGRect)frame
@@ -43,9 +44,14 @@
         mjphoto.srcImageView = self.subviews[i]; // 来源于哪个UIImageView
         
         IWPhoto *iwphoto = self.photos[i];
-//        NSString *photoUrl = [iwphoto.url stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        mjphoto.url = [NSURL URLWithString:iwphoto.url]; // 图片路径
-        
+        if ([iwphoto.url containsString:@"mp4"]) {
+            NSURL *url = [NSURL URLWithString:iwphoto.url];
+            self.playerController = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+//            [self presentMoviePlayerViewControllerAnimated:self.playerVc];
+            return;
+        }else{
+            mjphoto.url = [NSURL URLWithString:iwphoto.url]; // 图片路径
+        }
         [myphotos addObject:mjphoto];
     }
     
@@ -131,4 +137,6 @@
      pages = (count + size - 1)/size;
      */
 }
+
+
 @end

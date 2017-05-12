@@ -149,13 +149,18 @@
     self.contentLabel.frame = self.statusFrame.contentLabelF;
     
     // 8.配图
-    if (status.images.count) {
-        self.photosView.hidden = NO;
-        self.photosView.frame = self.statusFrame.photosViewF;
-        self.photosView.photos = status.images;
-    } else {
-        self.photosView.hidden = YES;
+    if (status.isVideo){
+        
+    }else{
+        if (status.images.count) {
+            self.photosView.hidden = NO;
+            self.photosView.frame = self.statusFrame.photosViewF;
+            self.photosView.photos = status.images;
+        } else {
+            self.photosView.hidden = YES;
+        }
     }
+    
     
     // 9.被转发微博
     IWStatus *retweetStatus = status.retweeted_status;

@@ -51,6 +51,10 @@
  *  发无聊图的设备
  */
 @property (nonatomic, copy) NSString *device;
+/**
+ *  是否是视频
+ */
+@property (nonatomic, assign) BOOL *isVideo;
 
 
 
