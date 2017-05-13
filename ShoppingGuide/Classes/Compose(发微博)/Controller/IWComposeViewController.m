@@ -56,6 +56,12 @@ typedef enum _InputType
 @end
 
 @implementation IWComposeViewController
+
+- (void)dealloc {
+    IWLog(@"%@释放了",self.class);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (UIImagePickerController *)imagePickerVc {
     if (_imagePickerVc == nil) {
         _imagePickerVc = [[UIImagePickerController alloc] init];
@@ -176,10 +182,6 @@ typedef enum _InputType
     }];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (void)setupNavBar
 {

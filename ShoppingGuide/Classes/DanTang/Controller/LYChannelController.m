@@ -24,10 +24,12 @@
 #import "IWAccountTool.h"
 #import "SVProgressHUD.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "ZFPlayer.h"
 static NSString * const HomeCell = @"HomeCell";
 
-@interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource>{
+@interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource, ZFPlayerDelegate>{
     dispatch_queue_t queue;
+    ZFPlayerView *_playerView;
 }
 
 /**
@@ -40,11 +42,12 @@ static NSString * const HomeCell = @"HomeCell";
 @property (nonatomic, strong) MPMoviePlayerViewController *playerController;
 
 
+
 @end
 
 @implementation LYChannelController
-- (void)dealloc{
-   
+- (void)dealloc {
+    IWLog(@"%@释放了",self.class);
 }
 
 - (NSMutableArray *)statusFrames
@@ -305,6 +308,19 @@ static NSString * const HomeCell = @"HomeCell";
     cell.topView.photosView.btnblock = ^(NSURL *url) {
         self.playerController = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
         [self presentMoviePlayerViewControllerAnimated:self.playerController];
+//        _playerView = [[ZFPlayerView alloc] init];
+//        // view
+//        ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+//        // model
+//        ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
+//        playerModel.fatherView = cell.topView.photosView;
+//        playerModel.videoURL = url;
+//        playerModel.title = @"";
+//        [_playerView playerControlView:controlView playerModel:playerModel];
+//        // delegate
+//        _playerView.delegate = self;
+//        // auto play the video
+//        [_playerView autoPlayTheVideo];
     };
     return cell;
 }

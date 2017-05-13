@@ -11,7 +11,7 @@
 #import "IWPhotoView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-#import "ZFPlayerView.h"
+
 
 
 @implementation IWPhotosView

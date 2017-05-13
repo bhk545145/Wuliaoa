@@ -46,9 +46,8 @@
     // 控制gifView的可见性
     self.gifView.hidden = ![photo.thumbnailUrl containsString:@"gif"];
     // 控制videoImageView的可见性
-    if ([photo.thumbnailUrl containsString:@"mp4"]) {
-        _videoImageView.hidden = NO;
-    }
+    self.videoImageView.hidden = ![photo.url containsString:@"mp4"];
+    
     
     // 下载图片
     [self setImageWithURL:[NSURL URLWithString:photo.thumbnailUrl] placeholderImage:[UIImage imageWithName:@"timeline_image_placeholder"]];

@@ -223,7 +223,9 @@ static NSString* commitCell = @"commitCell";
 
     [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
         IWLog(@"评论————————%@",responseObject[@"result"]);
-        _commentArray = [IWCommit mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        NSArray *commentArray = [IWCommit mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+         NSEnumerator *enumerator = [commentArray reverseObjectEnumerator];
+        _commentArray = (NSMutableArray*)[enumerator allObjects];
         [self getarticle];
         
     } failure:^(NSError * _Nullable error) {
