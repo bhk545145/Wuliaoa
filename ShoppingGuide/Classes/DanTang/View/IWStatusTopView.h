@@ -7,7 +7,10 @@
 //  微博cell顶部的view
 
 #import <UIKit/UIKit.h>
+#import "IWPhotosView.h"
 @class IWStatusFrame;
 @interface IWStatusTopView : UIImageView
 @property (nonatomic, strong) IWStatusFrame *statusFrame;
+/** 配图 */
+@property (nonatomic, weak) IWPhotosView *photosView;
 @end

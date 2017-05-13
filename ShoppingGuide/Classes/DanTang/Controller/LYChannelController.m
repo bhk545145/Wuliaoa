@@ -23,7 +23,7 @@
 #import "IWAccount.h"
 #import "IWAccountTool.h"
 #import "SVProgressHUD.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 static NSString * const HomeCell = @"HomeCell";
 
 @interface LYChannelController ()<UITableViewDelegate, UITableViewDataSource>{
@@ -37,10 +37,16 @@ static NSString * const HomeCell = @"HomeCell";
 
 @property (nonatomic, strong) NSMutableArray *statusFrames;
 
+@property (nonatomic, strong) MPMoviePlayerViewController *playerController;
+
 
 @end
 
 @implementation LYChannelController
+- (void)dealloc{
+   
+}
+
 - (NSMutableArray *)statusFrames
 {
     if (_statusFrames == nil) {
@@ -294,6 +300,11 @@ static NSString * const HomeCell = @"HomeCell";
             }
         });
          dispatch_resume(_timer);
+    };
+    //打开视频播放器
+    cell.topView.photosView.btnblock = ^(NSURL *url) {
+        self.playerController = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+        [self presentMoviePlayerViewControllerAnimated:self.playerController];
     };
     return cell;
 }

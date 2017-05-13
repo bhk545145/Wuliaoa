@@ -46,8 +46,10 @@ typedef enum _InputType
 }
 @property (nonatomic, weak) UITextView *textView;
 @property (nonatomic, weak) IWComposeToolbar *toolbar;
-
+//选择图片数
 @property (nonatomic, assign) NSInteger selectedNumber;
+//选择视频数
+@property (nonatomic, assign) NSInteger selectedVideoNumber;
 @property (nonatomic, assign) InputType growingInputType;
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -82,6 +84,7 @@ typedef enum _InputType
     _selectedAssets = [NSMutableArray array];
 
     _selectedNumber = 9;
+    _selectedVideoNumber = 1;
     [self setupNavBar];
     [self setupTextView];
     [self setupToolbar];
@@ -424,6 +427,10 @@ typedef enum _InputType
 
 #pragma mark -获取本地图片
 -(void)pushImagePickerController{
+    if (_selectedVideoNumber <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"视频最多选择一个"];
+        return;
+    }
     if (_selectedNumber <= 0) {
         [SVProgressHUD showErrorWithStatus:@"最多选择9张"];
         return;
@@ -449,7 +456,7 @@ typedef enum _InputType
 - (void)deleteBtnClik:(UIButton *)sender {
     [_selectedPhotos removeObjectAtIndex:sender.tag];
     [_selectedAssets removeObjectAtIndex:sender.tag];
-    
+    _selectedVideoNumber = 1;
     [_collectionView performBatchUpdates:^{
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
         [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
@@ -643,6 +650,7 @@ typedef enum _InputType
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset {
     _selectedPhotos = [NSMutableArray arrayWithArray:@[coverImage]];
     _selectedAssets = [NSMutableArray arrayWithArray:@[asset]];
+    _selectedVideoNumber = 0;
     // open this code to send video / 打开这段代码发送视频
      [[TZImageManager manager] getVideoOutputPathWithAsset:asset completion:^(NSString *outputPath) {
      NSLog(@"视频导出到本地完成,沙盒路径为:%@",outputPath);

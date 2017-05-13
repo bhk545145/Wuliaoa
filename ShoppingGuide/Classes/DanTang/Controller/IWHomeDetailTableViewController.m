@@ -26,6 +26,7 @@
 #import "MessageTextView.h"
 
 #import <LoremIpsum/LoremIpsum.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 #define DEBUG_CUSTOM_TYPING_INDICATOR 0
 #define DEBUG_CUSTOM_BOTTOM_VIEW 0
@@ -43,6 +44,7 @@ static NSString* commitCell = @"commitCell";
 @property (nonatomic, strong) NSArray *commentArray;
 @property (nonatomic, strong) UIWindow *pipWindow;
 @property (nonatomic, assign) InputType growingInputType;
+@property (nonatomic, strong) MPMoviePlayerViewController *playerController;
 @end
 
 @implementation IWHomeDetailTableViewController
@@ -148,6 +150,11 @@ static NSString* commitCell = @"commitCell";
         cell.statusFrame = _statusFrame;
         cell.statusToolbar.btnblock = ^(){
             [self getComment];
+        };
+        //打开视频播放器
+        cell.topView.photosView.btnblock = ^(NSURL *url) {
+            self.playerController = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            [self presentMoviePlayerViewControllerAnimated:self.playerController];
         };
         return cell;
     }else{

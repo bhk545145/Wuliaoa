@@ -30,7 +30,7 @@
         UIImageView *gifView = [[UIImageView alloc] initWithImage:image];
         [self addSubview:gifView];
         self.gifView = gifView;
-        
+        //添加一个播放图标
         _videoImageView = [[UIImageView alloc] init];
         _videoImageView.image = [UIImage imageNamedFromMyBundle:@"MMVideoPreviewPlay"];
         _videoImageView.contentMode = UIViewContentModeScaleAspectFill;

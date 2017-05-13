@@ -49,6 +49,8 @@ PODS:
     - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI (6.4.3):
     - UMengUShare/Core
+  - ZFPlayer (2.1.3):
+    - Masonry
 
 DEPENDENCIES:
   - AFNetworking
@@ -67,6 +69,7 @@ DEPENDENCIES:
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
   - UMengUShare/UI
+  - ZFPlayer
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -82,7 +85,8 @@ SPEC CHECKSUMS:
   TZImagePickerController: 0a8ff228d287ebdd7d485e8c42a2a932894f1fba
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UMengUShare: d39cb682598df87ebdd3c055d03d00eb0102d42c
+  ZFPlayer: 8dc82b4508fbba4ee59d0304c52e30f8b3390244
 
-PODFILE CHECKSUM: c86f331e99ae539d251f8a205d8e179e0ef42d6e
+PODFILE CHECKSUM: f36069fa1b22b88dd4e06fe3ad349e3186d93ba9
 
 COCOAPODS: 1.1.1

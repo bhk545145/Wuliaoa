@@ -11,7 +11,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "IWReweetStatusView.h"
 #import "IWStatus.h"
-#import "IWPhotosView.h"
 #import "IWPhoto.h"
 
 @interface IWStatusTopView()
@@ -19,8 +18,8 @@
 @property (nonatomic, weak) UIImageView *iconView;
 /** 会员图标 */
 @property (nonatomic, weak) UIImageView *vipView;
-/** 配图 */
-@property (nonatomic, weak) IWPhotosView *photosView;
+///** 配图 */
+//@property (nonatomic, weak) IWPhotosView *photosView;
 /** 昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
 /** 时间 */

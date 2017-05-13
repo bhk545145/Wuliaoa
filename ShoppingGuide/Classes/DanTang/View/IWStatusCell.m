@@ -14,11 +14,7 @@
 #import "IWStatusTopView.h"
 
 @interface IWStatusCell()
-/** 顶部的view */
-@property (nonatomic, weak) IWStatusTopView *topView;
 
-/** 微博的工具条 */
-//@property (nonatomic, weak) IWStatusToolbar *statusToolbar;
 @end
 
 @implementation IWStatusCell

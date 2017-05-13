@@ -11,6 +11,7 @@
 #import "IWPhotoView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "ZFPlayerView.h"
 
 
 @implementation IWPhotosView
@@ -46,8 +47,7 @@
         IWPhoto *iwphoto = self.photos[i];
         if ([iwphoto.url containsString:@"mp4"]) {
             NSURL *url = [NSURL URLWithString:iwphoto.url];
-            self.playerController = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
-//            [self presentMoviePlayerViewControllerAnimated:self.playerVc];
+            _btnblock(url);
             return;
         }else{
             mjphoto.url = [NSURL URLWithString:iwphoto.url]; // 图片路径
