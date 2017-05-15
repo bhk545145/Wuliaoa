@@ -8,6 +8,7 @@
 
 #import "LYMineHeaderView.h"
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import "LYNetworkTool.h"
 #import "IWAccount.h"
 #import "IWAccountTool.h"
@@ -55,7 +56,8 @@
     IWAccount *account = [IWAccountTool account];
     if(account) {
         NSString *imageUrl = account.avatar;
-        [self.iconButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
+        //耗时操作，普通方法会导致卡顿
+        [self.iconButton sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
         NSString *name = account.nickname;
         self.nameLabel.text = name;
     }else {

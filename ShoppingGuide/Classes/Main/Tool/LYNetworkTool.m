@@ -185,6 +185,6 @@ static id _instance;
         failure(error);
     }];
     
-    [SVProgressHUD dismiss];
+//    [SVProgressHUD dismiss];
 }
 @end

@@ -107,25 +107,22 @@
 }
 
 - (IBAction)loginIn:(UIButton *)sender {
-    if (_ispassword) {
-        [self passwordLogin];
-    }else{
-        [self CodeLogin];
-    }
-
-   
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(queue, ^{
+        [SVProgressHUD showWithStatus:@"正在登入"];
+        _ispassword ? [weakSelf passwordLogin]:[weakSelf CodeLogin];
+    });
+    
 }
 
 //验证码登录
 - (void)CodeLogin{
     __weak typeof(self) weakSelf = self;
     
-    [SVProgressHUD showWithStatus:@"正在登入"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
     params[@"code"] = self.pwd.text;
     params[@"device"] = [IWWeiboTool iphoneType];
-    dispatch_async(queue, ^{
         [[LYNetworkTool sharedNetworkTool] loginPost:IWCodeLoginURl parameters:params success:^(id  _Nullable responseObject) {
             IWLog(@"登录信息——————%@",responseObject);
             int isLongin = [responseObject[@"status"] intValue];
@@ -138,7 +135,6 @@
                 //友盟账号登入统计
                 [MobClick profileSignInWithPUID:account.phone];
                 // 发送通知
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"LYLoginNotification" object:nil];
                 [IWWeiboTool chooseTabBarController];
                 // 退出登录界面
@@ -152,18 +148,15 @@
             
             [SVProgressHUD showErrorWithStatus:@"登录失败"];
         }];
-    });
 }
 //密码登录
 - (void)passwordLogin{
     __weak typeof(self) weakSelf = self;
     
-    [SVProgressHUD showWithStatus:@"正在登入"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"phone"] = self.phoneNum.text;
     params[@"password"] = self.pwd.text;
     params[@"device"] = [IWWeiboTool iphoneType];
-    dispatch_async(queue, ^{
         [[LYNetworkTool sharedNetworkTool] loginPost:IWLoginURl parameters:params success:^(id  _Nullable responseObject) {
             IWLog(@"登录信息——————%@",responseObject);
             int isLongin = [responseObject[@"status"] intValue];
@@ -187,7 +180,6 @@
             
             [SVProgressHUD showErrorWithStatus:@"登录失败"];
         }];
-    });
 }
 
 - (void)cancel:(UIBarButtonItem *)item {
