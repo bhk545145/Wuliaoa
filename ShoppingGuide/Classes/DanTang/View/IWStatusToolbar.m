@@ -316,10 +316,11 @@
         IWPhoto *photoimage = status.images[0];
         thumbURL = photoimage.thumbnailUrl;
     }else{
-        thumbURL = @"https://wuliaoa.bj.bcebos.com/108.png";
+        thumbURL = @"http://storage.izanpin.com/108.jpg";
     }
-    NSString *descrstr = status.content;
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"辣条——无聊就来辣条吧" descr:descrstr thumImage:thumbURL];
+    NSString *descrstr = [status.content isEqualToString:@""]?@"分享自 [辣条]":status.content;
+    NSString *titlestr = [NSString stringWithFormat:@"【辣条】%@",status.content];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:titlestr descr:descrstr thumImage:thumbURL];
     //设置网页地址
     shareObject.webpageUrl = [NSString stringWithFormat:@"http://latiao.izanpin.com/share/%@",status.id];
     
