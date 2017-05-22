@@ -13,6 +13,7 @@ typedef enum {
     channesIDTypeAll,
     channesIDTypePICTURE,
     channesIDTypeJOKE,
+    channesIDTypeRandom,
     channesIDTypeauthorId
 }   channesIDType;
 

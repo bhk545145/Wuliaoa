@@ -111,7 +111,13 @@ static NSString * const HomeCell = @"HomeCell";
                 return @{@"images" : [IWPhoto class]};
             }];
             // 将字典数组转为模型数组(里面放的就是IWStatus模型)
-            NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+            NSArray *statusArray = [NSArray array];
+            if (self.channesID == channesIDTypeRandom) {
+                statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            }else{
+                statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+            }
+            
             // 创建frame模型对象
             NSMutableArray *statusFrameArray = [NSMutableArray array];
             for (IWStatus *status in statusArray) {
@@ -192,8 +198,11 @@ static NSString * const HomeCell = @"HomeCell";
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=PICTURE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
         }else if(self.channesID == channesIDTypeJOKE){
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?type=JOKE&sinceId=%@",IWArticleURL,params[@"sinceid"]];
-        }else{
+        }else if(self.channesID == channesIDTypeauthorId){
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?authorId=%@",IWArticleURL,account.id];
+        }else if(self.channesID == channesIDTypeRandom){
+            OldURLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
+            
         }
         [self loadItemInfo:OldURLString withType:2];
     }
@@ -220,8 +229,10 @@ static NSString * const HomeCell = @"HomeCell";
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=PICTURE",IWArticleURL,params[@"sinceid"]];
         }else if(self.channesID == channesIDTypeJOKE) {
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&type=JOKE",IWArticleURL,params[@"sinceid"]];
-        }else{
+        }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&authorId=%@",IWArticleURL,params[@"sinceid"],account.id];
+        }else if(self.channesID == channesIDTypeRandom){
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
         }
         [self loadInfo];
     }else{
@@ -231,8 +242,10 @@ static NSString * const HomeCell = @"HomeCell";
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=PICTURE",IWArticleURL,params[@"count"]];
         }else if(self.channesID == channesIDTypeJOKE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?type=JOKE",IWArticleURL,params[@"count"]];
-        }else{
+        }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?authorId=%@",IWArticleURL,params[@"count"],account.id];
+        }else if(self.channesID == channesIDTypeRandom){
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
         }
     }
     [self loadItemInfo:URLString withType:0];
@@ -260,8 +273,10 @@ static NSString * const HomeCell = @"HomeCell";
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=PICTURE",IWArticleURL,params[@"count"],params[@"maxId"]];
         }else if(self.channesID == channesIDTypeJOKE){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&type=JOKE",IWArticleURL,params[@"count"],params[@"maxId"]];
-        }else{
+        }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&authorId=%@",IWArticleURL,params[@"count"],params[@"maxId"],account.id];
+        }else if(self.channesID == channesIDTypeRandom){
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
         }
         [self loadItemInfo:URLString withType:1];
     }else{

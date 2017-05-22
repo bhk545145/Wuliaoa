@@ -87,9 +87,14 @@
     __weak typeof(self)weakSelf = self;
     NSArray *dictArray = @[
                            @{
+                               @"id":@3,
+                               @"editable":@103,
+                               @"name" : @"推荐"
+                               },
+                           @{
                                @"id":@0,
                                @"editable":@100,
-                               @"name" : @"推荐"
+                               @"name" : @"最新"
                                },
                            @{
                                @"id":@1,
