@@ -240,11 +240,12 @@
                 dispatch_async(queue, ^{
                     [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                         IWLog(@"%@",responseObject);
+                        _btnblock(_status);
                     } failure:^(NSError * _Nullable error) {
                         IWLog(@"%@",error);
                     }];
                 });
-                _btnblock();
+                
                 break;
             }
             case 103:{
@@ -255,12 +256,12 @@
                 dispatch_async(queue, ^{
                     [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
                         IWLog(@"%@",responseObject);
-                        
+                        _btnblock(_status);
                     } failure:^(NSError * _Nullable error) {
                         IWLog(@"%@",error);
                     }];
                 });
-                _btnblock();
+                
                 break;
             }
             case 104:{

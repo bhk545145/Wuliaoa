@@ -149,6 +149,8 @@
 		08FE66861D77D80D000DB820 /* LYCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE66851D77D80D000DB820 /* LYCategoryController.m */; };
 		08FE66891D77D818000DB820 /* LYMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE66881D77D818000DB820 /* LYMeController.m */; };
 		3C1DF8401E8013E3002A6439 /* IWCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF83F1E8013E3002A6439 /* IWCommit.m */; };
+		3C6C54A51ED725CC007C047D /* IWFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C54A31ED725CC007C047D /* IWFeedbackViewController.m */; };
+		3C6C54A61ED725CC007C047D /* IWFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6C54A41ED725CC007C047D /* IWFeedbackViewController.xib */; };
 		B45B895D227E8B41D064EFB9 /* Pods_ShoppingGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3977483A887A76A36EFF2A07 /* Pods_ShoppingGuide.framework */; };
 /* End PBXBuildFile section */
 
@@ -420,6 +422,9 @@
 		3977483A887A76A36EFF2A07 /* Pods_ShoppingGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShoppingGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1DF83E1E8013E3002A6439 /* IWCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWCommit.h; sourceTree = "<group>"; };
 		3C1DF83F1E8013E3002A6439 /* IWCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWCommit.m; sourceTree = "<group>"; };
+		3C6C54A21ED725CC007C047D /* IWFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWFeedbackViewController.h; sourceTree = "<group>"; };
+		3C6C54A31ED725CC007C047D /* IWFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWFeedbackViewController.m; sourceTree = "<group>"; };
+		3C6C54A41ED725CC007C047D /* IWFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IWFeedbackViewController.xib; sourceTree = "<group>"; };
 		871FDB9828E0BEA5E9092749 /* Pods-ShoppingGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingGuide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingGuide/Pods-ShoppingGuide.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1081,6 +1086,9 @@
 				02FE7F811EAA04C00011EA45 /* IWAboutMeViewController.h */,
 				02FE7F821EAA04C00011EA45 /* IWAboutMeViewController.m */,
 				02FE7F831EAA04C00011EA45 /* IWAboutMeViewController.xib */,
+				3C6C54A21ED725CC007C047D /* IWFeedbackViewController.h */,
+				3C6C54A31ED725CC007C047D /* IWFeedbackViewController.m */,
+				3C6C54A41ED725CC007C047D /* IWFeedbackViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1203,6 +1211,7 @@
 				02A196411EB1C49600FEC1CB /* yw_1222.jpg in Resources */,
 				08372CC21D8F9D7400284199 /* LYDetailCollectionViewCell.xib in Resources */,
 				025BA1F51E811E8E0010D7FB /* IWCommitCell.xib in Resources */,
+				3C6C54A61ED725CC007C047D /* IWFeedbackViewController.xib in Resources */,
 				02A6830C1E7BBA40008824B2 /* SVProgressHUD.bundle in Resources */,
 				08DFCD7D1D902AE100DEAF3E /* LYDetailChoiceButtonView.xib in Resources */,
 				0857ADB81D7AD205007BA264 /* LYItemCell.xib in Resources */,
@@ -1318,6 +1327,7 @@
 				3C1DF8401E8013E3002A6439 /* IWCommit.m in Sources */,
 				02FE7F5B1EA9EDFC0011EA45 /* IWSettingViewController.m in Sources */,
 				02A682FF1E7BBA40008824B2 /* LHPhotoList.m in Sources */,
+				3C6C54A51ED725CC007C047D /* IWFeedbackViewController.m in Sources */,
 				08967C3F1D7E95DF00123932 /* LYActionSheetView.m in Sources */,
 				02FE7F731EA9EE340011EA45 /* IWSettingItem.m in Sources */,
 				02FE7F7D1EA9EE6C0011EA45 /* IWSettingCell.m in Sources */,

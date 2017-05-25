@@ -201,7 +201,8 @@ static NSString * const HomeCell = @"HomeCell";
         }else if(self.channesID == channesIDTypeauthorId){
             OldURLString = [NSString stringWithFormat:@"%@/timeline/1/100?authorId=%@",IWArticleURL,account.id];
         }else if(self.channesID == channesIDTypeRandom){
-            OldURLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
+            return;
+//            OldURLString = [NSString stringWithFormat:@"%@/timeline/1/1000?sinceId=%@",IWArticleURL,params[@"sinceid"]];
             
         }
         [self loadItemInfo:OldURLString withType:2];
@@ -301,23 +302,9 @@ static NSString * const HomeCell = @"HomeCell";
     
     // 2.传递frame模型
     cell.statusFrame = self.statusFrames[indexPath.row];
-    cell.statusToolbar.btnblock = ^(){
-        __block int timeout=2;
-        dispatch_queue_t timequeue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,timequeue);
-        dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-        dispatch_source_set_event_handler(_timer, ^{
-            if(timeout<=0){ //倒计时结束，关闭
-                dispatch_source_cancel(_timer);
-            }else{
-                [self loadInfo];
-                int seconds = timeout % 59;
-                NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
-                IWLog(@"%@",strTime);
-                timeout--;
-            }
-        });
-         dispatch_resume(_timer);
+    cell.statusToolbar.btnblock = ^(IWStatus *status){
+//        [self loadInfo];
+        [self getarticle:status];
     };
     //打开视频播放器
     cell.topView.photosView.btnblock = ^(NSURL *url) {
@@ -338,6 +325,37 @@ static NSString * const HomeCell = @"HomeCell";
 //        [_playerView autoPlayTheVideo];
     };
     return cell;
+}
+
+//根据id获取最新辣条
+- (void)getarticle:(IWStatus *)status{
+    IWStatusFrame *statusFrame = [[IWStatusFrame alloc] init];
+    statusFrame.status = status;
+    NSString *articleId = statusFrame.status.id;
+    NSString *URLString = [NSString stringWithFormat:@"%@/%@",IWArticleURL,articleId];
+    [[LYNetworkTool sharedNetworkTool] loadDataInfo:URLString parameters:nil success:^(id  _Nullable responseObject) {
+        IWLog(@"最新辣条————————%@",responseObject);
+        // Tell MJExtension what type model will be contained in IWPhoto.
+        [IWStatus mj_setupObjectClassInArray:^NSDictionary *{
+            return @{@"images" : [IWPhoto class]};
+        }];
+        // 将字典数组转为模型数组(里面放的就是IWStatus模型)
+        NSArray *responseObjectArray = [NSArray arrayWithObject:responseObject];
+        NSArray *statusArray = [IWStatus mj_objectArrayWithKeyValuesArray:responseObjectArray];
+        // 创建frame模型对象
+        for (IWStatus *status in statusArray) {
+            // 传递微博模型数据
+            statusFrame.status.likeCount = status.likeCount;
+            statusFrame.status.hateCount = status.hateCount;
+            statusFrame.status.commentCount = status.commentCount;
+            
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+    
 }
 
 #pragma mark - 代理方法

@@ -14,6 +14,7 @@
 #import "IWSettingGroup.h"
 #import "IWAboutMeViewController.h"
 #import "LBClearCacheTool.h"
+#import "IWFeedbackViewController.h"
 
 #define filePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
 @interface LYMeSettingController ()<UITableViewDataSource, UITableViewDelegate>{
@@ -34,6 +35,7 @@
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     [self setupGroup0];
     [self setupGroup1];
+    [self setupGroup2];
     
 }
 
@@ -54,6 +56,14 @@
 }
 
 - (void)setupGroup1
+{
+    IWSettingGroup *group = [self addGroup];
+    
+    IWSettingArrowItem *aboutMe = [IWSettingArrowItem itemWithIcon:@"draft" title:@"意见反馈" destVcClass:[IWFeedbackViewController class]];
+    group.items = @[aboutMe];
+}
+
+- (void)setupGroup2
 {
     IWSettingGroup *group = [self addGroup];
     

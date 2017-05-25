@@ -10,6 +10,6 @@
 @class IWStatus;
 @interface IWStatusToolbar : UIImageView
 @property (nonatomic, strong) IWStatus *status;
-typedef void (^IWStatusToolbarbtnBlock)();
+typedef void (^IWStatusToolbarbtnBlock)(IWStatus *status);
 @property IWStatusToolbarbtnBlock btnblock;
 @end

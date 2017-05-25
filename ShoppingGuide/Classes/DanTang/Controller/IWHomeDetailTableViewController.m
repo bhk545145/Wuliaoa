@@ -148,7 +148,7 @@ static NSString* commitCell = @"commitCell";
         
         // 2.传递frame模型
         cell.statusFrame = _statusFrame;
-        cell.statusToolbar.btnblock = ^(){
+        cell.statusToolbar.btnblock = ^(IWStatus *status){
             [self getComment];
         };
         //打开视频播放器
