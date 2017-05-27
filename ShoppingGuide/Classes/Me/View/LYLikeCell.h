@@ -13,7 +13,7 @@
 
 @interface LYLikeCell : UITableViewCell
 
-@property (nonatomic, strong) LYItem *item;
+@property (nonatomic, strong) NSString *item;
 
 @property (nonatomic, strong) NSString *status;
 

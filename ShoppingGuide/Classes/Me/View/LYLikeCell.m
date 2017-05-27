@@ -21,11 +21,11 @@
 
 @implementation LYLikeCell
 
-- (void)setItem:(LYItem *)item {
+- (void)setItem:(NSString *)item {
     _item = item;
     
-    self.title.text = item.title;
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:item.cover_image_url]];
+    self.title.text = item;
+//    [self.imageV sd_setImageWithURL:[NSURL URLWithString:item.cover_image_url]];
 }
 
 - (void)setStatus:(NSString *)status {

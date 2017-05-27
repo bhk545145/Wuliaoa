@@ -92,8 +92,6 @@
                                                ]];
     //设置分享面板的显示和隐藏的代理回调
     [UMSocialUIManager setShareMenuViewDelegate:self];
-    
-    
 }
 
 /**

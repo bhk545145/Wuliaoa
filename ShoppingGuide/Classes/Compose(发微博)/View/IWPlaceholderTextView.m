@@ -22,6 +22,17 @@
     }
     return self;
 }
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // 1.通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextViewTextDidChangeNotification object:self];
+        
+        // 2.默认颜色
+        _placeholderColor = [UIColor grayColor];
+    }
+    return self;
+}
 
 - (void)textDidChange:(NSNotification *)note
 {

@@ -220,6 +220,7 @@ static NSString * const HomeCell = @"HomeCell";
     params[@"count"] = @10;
     static NSString *URLString;
     IWAccount *account = [IWAccountTool account];
+    NSString *userId = account.id ? account.id : @"";
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = self.statusFrames[0];
         // 加载ID比since_id大的辣条
@@ -233,7 +234,7 @@ static NSString * const HomeCell = @"HomeCell";
         }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/100?sinceId=%@&authorId=%@",IWArticleURL,params[@"sinceid"],account.id];
         }else if(self.channesID == channesIDTypeRandom){
-            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,userId];
         }
         [self loadInfo];
     }else{
@@ -246,7 +247,7 @@ static NSString * const HomeCell = @"HomeCell";
         }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?authorId=%@",IWArticleURL,params[@"count"],account.id];
         }else if(self.channesID == channesIDTypeRandom){
-            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,userId];
         }
     }
     [self loadItemInfo:URLString withType:0];
@@ -262,6 +263,7 @@ static NSString * const HomeCell = @"HomeCell";
     params[@"count"] = @20;
     static NSString *URLString;
     IWAccount *account = [IWAccountTool account];
+    NSString *userId = account.id ? account.id : @"";
     if (self.statusFrames.count) {
         IWStatusFrame *statusFrame = [self.statusFrames lastObject];
         // 加载ID <= max_id的辣条
@@ -277,7 +279,7 @@ static NSString * const HomeCell = @"HomeCell";
         }else if(self.channesID == channesIDTypeauthorId){
             URLString = [NSString stringWithFormat:@"%@/timeline/1/%@?maxId=%@&authorId=%@",IWArticleURL,params[@"count"],params[@"maxId"],account.id];
         }else if(self.channesID == channesIDTypeRandom){
-            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,account.id];
+            URLString = [NSString stringWithFormat:@"%@/random/week?size=10&userId=%@",IWArticleURL,userId];
         }
         [self loadItemInfo:URLString withType:1];
     }else{

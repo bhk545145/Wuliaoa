@@ -29,9 +29,10 @@
 #import "LYChannelController.h"
 #import "SVProgressHUD.h"
 #import "UMMobClick/MobClick.h"
+#import <UShareUI/UShareUI.h>
 
 
-@interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate>{
+@interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate, UMSocialShareMenuViewDelegate>{
     dispatch_queue_t queue;
 }
 
@@ -69,6 +70,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     queue = dispatch_queue_create("latiaoQueue", DISPATCH_QUEUE_CONCURRENT);
     self.tableView.backgroundColor = IWColor(220, 220, 220);
     [self setupTableView];
+    [self setPreDefinePlatforms];
     // 注册登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LYLoginNotification" object:nil];
 //    // 注册点赞专题的通知
@@ -178,29 +180,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
 - (void)loadLikeLoad {
     __weak typeof(self) weakSelf = self;
     weakSelf.products = [NSArray arrayWithObjects:@"我的辣条", nil];
-//    IWAccount *account = [IWAccountTool account];
-//    // 喜欢的商品
-//    NSString *tailURL = [NSString stringWithFormat:@"/timeline/1/100?authorId=%@",account.id];
-//    NSString *productURL = [IWArticleURL stringByAppendingString:tailURL];
-//    [[LYNetworkTool sharedNetworkTool] loadDataInfo:productURL parameters:nil success:^(id  _Nullable responseObject) {
-//        NSArray *products = [IWStatus mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-//        weakSelf.products = products;
-//        // 刷新表格数据
-//        [weakSelf.tableView reloadData];
-//    } failure:^(NSError * _Nullable error) {
-//        
-//    }];
-    
-    // 喜欢的专题
-//    NSString *themeURL = @"http://api.dantangapp.com/v1/users/me/post_likes?limit=20&offset=0";
-//    [[LYNetworkTool sharedNetworkTool] loadDataInfo:themeURL parameters:nil success:^(id  _Nullable responseObject) {
-//        NSArray *themes = [LYItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"posts"]];
-//        weakSelf.themes = themes;
-//        // 刷新表格数据
-//        [weakSelf.tableView reloadData];
-//    } failure:^(NSError * _Nullable error) {
-//        
-//    }];
+    weakSelf.themes = [NSArray arrayWithObjects:@"分享赞品",nil];
 }
 
 - (void)headerSettingClick:(UIButton *)btn{
@@ -335,7 +315,7 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     if(self.type == 0) {
         return 41;
     }else {
-        return 60;
+        return 41;
     }
 }
 
@@ -374,13 +354,67 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
         }
         
     }else {
-//        LYDetailController *vc = [[LYDetailController alloc] init];
-//        vc.item = self.themes[indexPath.row];
-//        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row == 0) {
+            [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+            [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRadius;
+            [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+                //在回调里面获得点击的
+                [self runShareWithType:platformType];
+            }];
+
+        }
     }
 }
 
+- (void)runShareWithType:(UMSocialPlatformType)platformType{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    NSString* thumbURL = @"http://storage.izanpin.com/108.jpg";
 
+    NSString *descrstr = @"分享自 [辣条]";
+    NSString *titlestr = [NSString stringWithFormat:@"【辣条】赞品"];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:titlestr descr:descrstr thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = [NSString stringWithFormat:@"http://www.yzyp.online"];
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            [SVProgressHUD showErrorWithStatus:@"分享失败"];
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+        }
+        
+    }];
+    
+}
+
+
+- (void)setPreDefinePlatforms{
+    //设置用户自定义的平台
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),
+                                               @(UMSocialPlatformType_WechatTimeLine),
+                                               @(UMSocialPlatformType_QQ),
+                                               @(UMSocialPlatformType_Sina),
+                                               ]];
+    //设置分享面板的显示和隐藏的代理回调
+    [UMSocialUIManager setShareMenuViewDelegate:self];
+}
 
 
 #pragma mark - <LYMineChoiceBarDelegate>

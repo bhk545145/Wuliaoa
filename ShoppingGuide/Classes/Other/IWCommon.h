@@ -3,10 +3,13 @@
  */
 #define IWAPPURL @"http://latiao.izanpin.com/api"
 #define IWArticleURL @"http://latiao.izanpin.com/api/article"
+#define IWFeedbackURL @"http://latiao.izanpin.com/api/feedback"
 #define IWUserURL @"http://latiao.izanpin.com/api/user/"
 #define IWLoginURl @"http://latiao.izanpin.com/api/user/login"
 #define IWCodeLoginURl @"http://latiao.izanpin.com/api/user/smsLogin"
 #define IWoauthLogin @"http://latiao.izanpin.com/api/user/oauthLogin"
+
+#define appid 1223259711
 
 #define PROBE_DEVICES_CHANGED @"probechanged"
 // 弱引用

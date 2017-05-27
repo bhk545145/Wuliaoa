@@ -36,6 +36,7 @@
     [self setupGroup0];
     [self setupGroup1];
     [self setupGroup2];
+    [self setupGroup3];
     
 }
 
@@ -64,6 +65,18 @@
 }
 
 - (void)setupGroup2
+{
+    IWSettingGroup *group = [self addGroup];
+    
+    IWSettingLabelItem *score = [IWSettingLabelItem itemWithIcon:@"card" title:@"给我们评分"];
+    score.option = ^{
+        NSString *str = [NSString stringWithFormat:@"http://itunes.apple.com/us/app/id%d",appid];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    };
+    group.items = @[score];
+}
+
+- (void)setupGroup3
 {
     IWSettingGroup *group = [self addGroup];
     

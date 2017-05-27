@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IWFeedbackViewController">
             <connections>
+                <outlet property="feedbackTextView" destination="iC1-uj-gle" id="e8A-zG-9di"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" bounces="NO" indicatorStyle="white" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iC1-uj-gle">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" bounces="NO" indicatorStyle="white" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iC1-uj-gle" customClass="IWPlaceholderTextView">
                     <rect key="frame" x="0.0" y="74" width="375" height="235"/>
                     <color key="backgroundColor" red="0.95996768023683621" green="0.95996768023683621" blue="0.95996768023683621" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>

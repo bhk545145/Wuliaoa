@@ -10,11 +10,11 @@ typedef enum {
 } LYLoadType;
 
 typedef enum {
-    channesIDTypeAll,
-    channesIDTypePICTURE,
-    channesIDTypeJOKE,
-    channesIDTypeRandom,
-    channesIDTypeauthorId
+    channesIDTypeAll,   //最新
+    channesIDTypePICTURE, //无聊图
+    channesIDTypeJOKE,  //段子
+    channesIDTypeRandom,    //推荐（随机）
+    channesIDTypeauthorId //我的辣条
 }   channesIDType;
 
 // 圆角半径
