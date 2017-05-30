@@ -16,6 +16,8 @@
 #import "IWAccount.h"
 #import "SVProgressHUD.h"
 #import "UMMobClick/MobClick.h"
+#import "LYLoginViewController.h"
+#import "MRNavigationController.h"
 
 #define scrollViewInsetHeight self.view.mr_height - 100 - self.tabBarController.tabBar.mr_height
 
@@ -242,6 +244,16 @@
         [self.navigationController pushViewController:compose animated:YES];
     }else{
         [SVProgressHUD showErrorWithStatus:@"请先登录！"];
+        LYLoginViewController *loginVc = [[LYLoginViewController alloc] init];
+        loginVc.block = ^(LYUser *user) {
+            
+            
+            // 登录成功重新请求数据以及刷新视图
+            
+        };
+        
+        MRNavigationController *loginNav = [[MRNavigationController alloc] initWithRootViewController:loginVc];
+        [self.navigationController presentViewController:loginNav animated:YES completion:nil];
     }
     
 }

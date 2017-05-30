@@ -12,6 +12,8 @@
 #import "IWStatusCell.h"
 #import "IWCommitCell.h"
 #import "IWStatusToolbar.h"
+#import "LYLoginViewController.h"
+#import "MRNavigationController.h"
 
 #import "LYNetworkTool.h"
 #import "IWAccount.h"
@@ -200,14 +202,28 @@ static NSString* commitCell = @"commitCell";
     params[@"content"] = self.textView.text;
     NSString *articleId = _statusFrame.status.id;
     NSString *URLString = [NSString stringWithFormat:@"%@/comment/%@",IWAPPURL,articleId];
+    if (account.id) {
+        [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
+            [self getComment];
+            [self.textView resignFirstResponder];
+        } failure:^(NSError * _Nullable error) {
+            [self.textView resignFirstResponder];
+            [SVProgressHUD showErrorWithStatus:@"发送失败"];
+        }];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"请先登录！"];
+        LYLoginViewController *loginVc = [[LYLoginViewController alloc] init];
+        loginVc.block = ^(LYUser *user) {
+            
+            
+            // 登录成功重新请求数据以及刷新视图
 
-    [[LYNetworkTool sharedNetworkTool] loadDataInfoPost:URLString parameters:params success:^(id  _Nullable responseObject) {
-        [self getComment];
-        [self.textView resignFirstResponder];
-    } failure:^(NSError * _Nullable error) {
-        [self.textView resignFirstResponder];
-        [SVProgressHUD showErrorWithStatus:@"发送失败"];
-    }];
+        };
+        
+        MRNavigationController *loginNav = [[MRNavigationController alloc] initWithRootViewController:loginVc];
+        [self.navigationController presentViewController:loginNav animated:YES completion:nil];
+    }
+    
     [super didPressRightButton:sender];
 }
 
