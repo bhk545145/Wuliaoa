@@ -31,6 +31,8 @@
 #import "UMMobClick/MobClick.h"
 #import <UShareUI/UShareUI.h>
 
+#import "SPKitExample.h"
+#import "SPUtil.h"
 
 @interface LYMeController ()<UITableViewDataSource, UITableViewDelegate, LYMineHeaderDelegate, LYMineChoiceBarDelegate, UMSocialShareMenuViewDelegate>{
     dispatch_queue_t queue;
@@ -228,8 +230,8 @@ static NSString * const likeThemeCellID = @"likeThemeCellID";
     }else {
         LYLoginViewController *loginVc = [[LYLoginViewController alloc] init];
         loginVc.block = ^(LYUser *user) {
-
-
+            //退出登入
+            [[SPKitExample sharedInstance] callThisBeforeISVAccountLogout];
             // 登录成功重新请求数据以及刷新视图
             [weakSelf loadLikeLoad];
             [weakSelf inspectStatus];

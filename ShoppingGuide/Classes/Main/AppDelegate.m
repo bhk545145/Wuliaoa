@@ -11,6 +11,7 @@
 #import "UMMobClick/MobClick.h"
 #import <UMSocialCore/UMSocialCore.h>
 
+#import "SPKitExample.h"
 @interface AppDelegate ()
 
 @end
@@ -46,6 +47,8 @@
     /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:UMengAPPKEY];
     
+    // YWSDK快速接入接口，程序启动后调用这个接口
+    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
     
     [self configUSharePlatforms];
     
